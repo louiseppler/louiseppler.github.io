@@ -1,222 +1,226 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>My Sketch</title>
+		<title>Descriptive Statistics</title>
     <script type="text/javascript" src="processing.js"></script>
 	</head>
 	<body>
-		<script type="application/processing">
-    Points points = new Points();
-    int tx = 250;
-    int ty = 250;
-    float f = 50;
+			<h1>Descriptive Statistics</h1>
+			<p>Press field to add points </p>
+			<p>Blue = Mean ; Green = Standart Deviation</p>
 
-    void setup() {
-      size(500,500);
-    }
+			<script type="application/processing">
+	    Points points = new Points();
+	    int tx = 250;
+	    int ty = 250;
+	    float f = 50;
 
-    void draw() {
-      translate(tx,ty);
-      background(255);
-      drawAxis();
-      points.draw();
-      points.drawMean();
-      if(mousePressed) {
-        mouse();
-      }
-    }
+	    void setup() {
+	      size(500,500);
+	    }
 
-    void drawAxis() {
-      stroke(0);
-      line(0,-height,0,height);
-      line(width,0,-width,0);
+	    void draw() {
+	      translate(tx,ty);
+	      background(240);
+	      drawAxis();
+	      points.draw();
+	      points.drawMean();
+	      if(mousePressed) {
+	        mouse();
+	      }
+	    }
 
-      for(int i = -int(width/f); i < width/f; i++) {
-       line(i*f,-5,i*f,5);
-       line(-5,i*f,5,i*f);
-      }
-    }
+	    void drawAxis() {
+	      stroke(0);
+	      line(0,-height,0,height);
+	      line(width,0,-width,0);
 
-    void mousePressed() {
-      if(keyCode == SHIFT) {
-        println("Selecting point");
-        points.getPoint();
-      }
-      else if(key == 'm') {}
-      else {
-        points.mousePressed();
-      }
-    }
+	      for(int i = -int(width/f); i < width/f; i++) {
+	       line(i*f,-5,i*f,5);
+	       line(-5,i*f,5,i*f);
+	      }
+	    }
 
-    void keyPressed() {
-      if(key == 's') {
-        points.getStandartDeviation();
-      }
-    }
+	    void mousePressed() {
+	      if(keyCode == SHIFT) {
+	        println("Selecting point");
+	        points.getPoint();
+	      }
+	      else if(key == 'm') {}
+	      else {
+	        points.mousePressed();
+	      }
+	    }
 
-    void mouse() {
-      if(key == 'm') {
-        points.move();
-      }
-    }
+	    void keyPressed() {
+	      if(key == 's') {
+	        points.getStandartDeviation();
+	      }
+	    }
 
-    public class Point {
-      float x;
-      float y;
+	    void mouse() {
+	      if(key == 'm') {
+	        points.move();
+	      }
+	    }
 
-      Point(int x, int y) {
-        this.x = (x-tx+0.0)/f;
-        this.y = -(y-ty+0.0)/f;
-        println("New point: "+this.x+" "+this.y);
-      }
+	    public class Point {
+	      float x;
+	      float y;
 
-      void draw(int s) {
-        ellipse(x*f,-y*f,s,s);
-      }
+	      Point(int x, int y) {
+	        this.x = (x-tx+0.0)/f;
+	        this.y = -(y-ty+0.0)/f;
+	        println("New point: "+this.x+" "+this.y);
+	      }
 
-      void move(int x, int y) {
-        this.x = (x-tx+0.0)/f;
-        this.y = -(y-ty+0.0)/f;
-      }
+	      void draw(int s) {
+	        ellipse(x*f,-y*f,s,s);
+	      }
 
-      float distance(int x, int y) {
-        float xx = (x-tx+0.0)/f;
-        float yy = -(y-ty+0.0)/f;
-        return abs(this.x-xx)+abs(this.y-yy);
-      }
+	      void move(int x, int y) {
+	        this.x = (x-tx+0.0)/f;
+	        this.y = -(y-ty+0.0)/f;
+	      }
 
-    }
+	      float distance(int x, int y) {
+	        float xx = (x-tx+0.0)/f;
+	        float yy = -(y-ty+0.0)/f;
+	        return abs(this.x-xx)+abs(this.y-yy);
+	      }
 
-    public class Points {
+	    }
 
-      int j = -1;
+	    public class Points {
 
-      float meanX; float meanY;
-      float stdX; float stdY;
-      float covariance;
-      float cfc;
+	      int j = -1;
 
-      Point[] points;
-      int n = 0;
+	      float meanX; float meanY;
+	      float stdX; float stdY;
+	      float covariance;
+	      float cfc;
 
-      Points() {
-        points = new Point[64];
-      }
+	      Point[] points;
+	      int n = 0;
 
-      void draw() {
-        for(int i = 0; i < n; i++) {
-          if(i == j){
-          fill(255,0,0);
-          }
-          else {
-           fill(0);
-          }
-          points[i].draw(10);
-        }
-      }
+	      Points() {
+	        points = new Point[64];
+	      }
 
-      void mousePressed() {
-        print("");
-        print("");
-        print("");
-        if(n >= points.length) {
-          println("ERROR: out of range");
-          return;
-        }
+	      void draw() {
+	        for(int i = 0; i < n; i++) {
+	          if(i == j){
+	          fill(255,0,0);
+	          }
+	          else {
+	           fill(0);
+	          }
+	          points[i].draw(10);
+	        }
+	      }
 
-        points[n] = new Point(mouseX,mouseY);
+	      void mousePressed() {
+	        print("");
+	        print("");
+	        if(n >= points.length) {
+	          println("ERROR: too many points added");
+	          return;
+	        }
 
-        n++;
-        calc();
-      }
+	        points[n] = new Point(mouseX,mouseY);
 
-      void move() {
-        points[j].move(mouseX,mouseY);
-        calc();
-      }
+	        n++;
+	        calc();
+	      }
 
-      void getPoint() {
-        float min = width*height*10;//a big number...
-        int jloc = 0;
+	      void move() {
+	        points[j].move(mouseX,mouseY);
+	        calc();
+	      }
 
-        for(int i = 0; i < n; i++) {
-          float m = points[i].distance(mouseX,mouseY);
-          if(m < min) {
-            jloc = i;
-            min = m;
-          }
-        }
+	      void getPoint() {
+	        float min = width*height*10;//a big number...
+	        int jloc = 0;
 
-        j = jloc;
-        println("new point is: "+j);
-      }
+	        for(int i = 0; i < n; i++) {
+	          float m = points[i].distance(mouseX,mouseY);
+	          if(m < min) {
+	            jloc = i;
+	            min = m;
+	          }
+	        }
 
-      void calc() {
-        getMean();
-        getStandartDeviation();
-        getCovariance();
-        getCfC();
-      }
+	        j = jloc;
+	        println("new point is: "+j);
+	      }
 
-      void getMean() {
-        float sx = 0;
-        float sy = 0;
-        for(int i = 0; i < n; i++) {
-           sx += points[i].x;
-           sy += points[i].y;
-        }
-        meanX = sx/(n-0.0);
-        meanY = sy/(n-0.0);
-      }
+	      void calc() {
+	        getMean();
+	        getStandartDeviation();
+	        getCovariance();
+	        getCfC();
+	      }
 
-      void getStandartDeviation() {
-        float sx = 0;
-        float sy = 0;
+	      void getMean() {
+	        float sx = 0;
+	        float sy = 0;
+	        for(int i = 0; i < n; i++) {
+	           sx += points[i].x;
+	           sy += points[i].y;
+	        }
+	        meanX = sx/(n-0.0);
+	        meanY = sy/(n-0.0);
+	      }
 
-        for(int i = 0; i < n; i++) {
-           sx += pow(points[i].x-meanX,2);
-           sy += pow(points[i].y-meanY,2);
-        }
+	      void getStandartDeviation() {
+	        float sx = 0;
+	        float sy = 0;
 
-        stdX = sqrt(sx/n);
-        stdY = sqrt(sy/n);
+	        for(int i = 0; i < n; i++) {
+	           sx += pow(points[i].x-meanX,2);
+	           sy += pow(points[i].y-meanY,2);
+	        }
 
-        println("Standart Deviation      X: " + stdX);
-        println("                        Y: " + stdY);
-      }
+	        stdX = sqrt(sx/n);
+	        stdY = sqrt(sy/n);
 
-      void getCovariance() {
-        float s = 0;
-        for(int i = 0; i < n; i++) {
-           s += (points[i].x-meanX) * (points[i].y-meanY);
-        }
+	        println("Standart Deviation      X: " + stdX);
+	        println("                        Y: " + stdY);
+	      }
+
+	      void getCovariance() {
+	        float s = 0;
+	        for(int i = 0; i < n; i++) {
+	           s += (points[i].x-meanX) * (points[i].y-meanY);
+	        }
 
 
-        covariance = s/n;
-        println("Covariance:              " + covariance);
-      }
+	        covariance = s/n;
+	        println("Covariance:              " + covariance);
+	      }
 
-      void getCfC() { //Coefficient of correlation
-        cfc = covariance/stdX/stdY;
-        println("Coefficient of correlation : " + cfc);
+	      void getCfC() { //Coefficient of correlation
+	        cfc = covariance/stdX/stdY;
+	        println("Coefficient of correlation : " + cfc);
+					println("------------------------------------------------------")
 
-      }
+	      }
 
-      void drawMean() {
-        stroke(0,0,255);
-        line(meanX*f,-height,meanX*f,height);
-        line(width,meanY*-f,-width,meanY*-f);
+	      void drawMean() {
+	        stroke(0,0,255);
+	        line(meanX*f,-height,meanX*f,height);
+	        line(width,meanY*-f,-width,meanY*-f);
 
-        strokeWeight(5);
-        stroke(0,128,0);
-         line(meanX*f,meanY*-f+stdY*-f,meanX*f,meanY*-f);
-        line(meanX*f+stdX*f,meanY*-f,meanX*f,meanY*-f);
-        strokeWeight(1);
+	        strokeWeight(5);
+	        stroke(0,128,0);
+	         line(meanX*f,meanY*-f+stdY*-f,meanX*f,meanY*-f);
+	        line(meanX*f+stdX*f,meanY*-f,meanX*f,meanY*-f);
+	        strokeWeight(1);
 
-      }
-    }
+	      }
+	    }
 
-		</script>
+			</script>
 		<canvas> </canvas>
 	</body>
 </html>
