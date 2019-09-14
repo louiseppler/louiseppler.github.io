@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Golden Ratio</title>
+    <script type="text/javascript" src="processing.js"></script>
+	</head>
+	<body>
+			<h1>Golden Ratio</h1>
+			<p>Inspired by <a href="https://youtu.be/sj8Sg8qnjOg">this video</a></p>
+			<p>Right half to increase, Left to decrease ; Top slow, Bottom fast</p>
+			<p>Golden Ratio=1.61803 ; 1/Golden Ratio=0.61803</p>
+			<script type="application/processing">
+			void setup() { size(750,750); }
+
+	float value = 0.0;
+
+	void draw() {
+	   points();
+
+	   text(nf(value,1,5),50,50);
+
+	   if(mousePressed) {
+	     float v = float(mouseY)/height*0.0005;
+	       if(mouseX < width/2) {
+	           value -= v;
+	       }
+	       else if(mouseX > width/2) {
+	           value += v;
+	       }
+	   }
+	}
+
+	void points() {
+	   background(255);
+	   //noStroke();
+	   fill(0);
+	   float cx = width/2;  float cy = height/2;
+	   float s = 1; float step = PI*value*2;
+
+	   for(int i = 0; i < 500; i++) {
+	       float y = sin(step*i);
+	       float x = cos(step*i);
+
+	       ellipse(cx+i*s*x,cy+i*s*y,s*4,s*4);
+
+	   }
+	}
+
+	double number = 0;
+	int decimal = 0;
+
+	void keyPressed() {
+
+	  char[] numbers = {'0','1','2','3','4','5','6','7','8','9'};
+	  for(int i = 0; i < numbers.length; i++) {
+	    if(key == numbers[i]) {
+	      if(decimal == 0) {
+	        number *= 10;
+	        number += i;
+	      }
+	      else {
+	        decimal *= 10;
+	        number += float(i)/decimal;
+	      }
+	      print(numbers[i]);
+	    }
+	  }
+	  if(key == '.') {
+	    print(".");
+	    decimal = 1;
+	  }
+	  if(keyCode == ENTER) {
+	    println();
+	    println("Setting number");
+	    println(number);
+	    value = (float)number;
+
+	    number = 0;
+	    decimal = 0;
+	  }
+
+	}
+			</script>
+		<canvas> </canvas>
+	</body>
+</html>

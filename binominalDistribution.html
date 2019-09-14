@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Binominal Distribution</title>
+    <script type="text/javascript" src="processing.js"></script>
+	</head>
+	<body>
+			<h1>Binominal Distribution</h1>
+			<p>Shows a plot of (nCk)*p^n*(1-p)^(n-k) or k form 0 to n</p>
+			<p>Press corners to set n and p</p>
+
+			<script type="application/processing">
+			long[][] pas;
+
+int n = 0;
+float p = 0;
+
+void setup() {
+  getPascal(7);
+  size(500,500);
+}
+
+void draw() {
+  background(255);
+  textSize(25);
+  fill(0);
+  textAlign(CENTER);
+  if(n < 1) {
+    text("n - 1", width*0.25,height*0.25);
+    text("n + 1", width*0.75,height*0.25);
+		text("p - 0.01", width*0.25,height*0.75);
+		text("p + 0.01", width*0.75,height*0.75);
+
+  }
+  else {
+    drawGraphics();
+  }
+
+  fill(0);
+  text("n = " + n + "   p = " + nf(p,1,2),width*0.5,height-12.5);
+
+  if(mousePressed) {
+   if(mouseY > height/2) {
+     if(mouseX > width/2) {
+       p += 0.01;
+     }
+     else{
+       p -= 0.01;
+     }
+
+     if(p < 0) {p = 0;}
+     if(p > 1) {p = 1;}
+   }
+  }
+}
+
+void drawGraphics() {
+  line(0,height-50,width,height-50);
+
+  fill(255);
+  stroke(0);
+  float s = width/(n+1.0);
+  for(int k = 0; k <= n; k++) {
+    float p2 = pas[n][k]*pow(p,k)*pow(1-p,n-k);
+    float p3 = p2*(height-50);
+    rect(k*s, height-50-p3, s, p3);
+  }
+
+}
+
+void mousePressed() {
+  if(mouseY < height/2) {
+    if(mouseX > width/2) {
+      n++;
+    }
+    else{
+      n--;
+    }
+  }
+  else {
+    //if(mouseX > width/2) {
+    //  k++;
+    //}
+    //else{
+    //  k--;
+    //}
+
+    //p = mouseX/(width+0.0);
+  }
+
+  getPascal(n+1);
+
+}
+
+void getPascal(int n) {
+  if(n < 2) {return;}
+  pas = new long[n][n];
+
+  pas[0][0] = 1;
+  pas[1][0] = 1;
+  pas[1][1] = 1;
+
+
+  int c = 0; //count, replaces append
+  for (int i = 2; i < n; ++i) {
+    c = 0;
+    pas[i][c] = 1; c++;
+    for(int j = 1; j < i; j++) {
+      pas[i][c] = (pas[i-1][j]+pas[i-1][j-1]); c++;
+    }
+    pas[i][c] = (1);
+  }
+
+
+  //for (int i = 0; i < n; ++i)
+  //{
+  //  for (int j = 0; j < pas[i].length; ++j) {
+  //    print(pas[i][j] + " ");
+  //  }
+  // println();
+  //}
+}
+			</script>
+		<canvas> </canvas>
+	</body>
+</html>

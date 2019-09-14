@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dice</title>
+    <script type="text/javascript" src="processing.js"></script>
+	</head>
+	<body>
+			<h1>Dice</h1>
+			<p>Press to roll; Enter number to set maximum</p>
+			<script type="application/processing">
+			float rn = 0;
+float time = 0;
+int x = 6;
+int a;
+int ps;
+
+void setup(){
+ size(500,500);
+ a = width/4;
+ ps = width/32*3;
+ frameRate(12);
+
+}
+
+void draw(){
+   if(mousePressed){
+   time = random(12)+4;
+   time = time+12;
+  }
+  if(time > 0){
+    time--;
+    rn = random(x);
+  }
+  background(255);
+  fill(0);
+  rect(a,a,a*2,a*2);
+  fill(255);
+  rect(a+a/8,a+a/8,a*2-a/4,a*2-a/4);
+  fill(0);
+  if(rn < 1 && rn >= 0 || rn < 9 && rn >= 8){
+    ellipse(a*2,a*2,ps,ps);
+  }
+  if(rn < 2 && rn >= 1){
+        ellipse(a+a/2,a+a/2,ps,ps);
+    ellipse(a*2+a/2,a*2+a/2,ps,ps);
+  }
+  if(rn < 3 && rn >= 2){
+    ellipse(a*2,a*2,ps,ps);
+    ellipse(a+a/2,a+a/2,ps,ps);
+    ellipse(a*2+a/2,a*2+a/2,ps,ps);
+  }
+  if(rn < 4 && rn >= 3){
+        ellipse(a+a/2,a+a/2,ps,ps);
+    ellipse(a*2+a/2,a*2+a/2,ps,ps);
+    ellipse(a*2+a/2,a+a/2,ps,ps);
+    ellipse(a+a/2,a*2+a/2,ps,ps);
+  }
+  if(rn < 5 && rn >= 4){
+    ellipse(a*2,a*2,ps,ps);
+    ellipse(a+a/2,a+a/2,ps,ps);
+    ellipse(a*2+a/2,a*2+a/2,ps,ps);
+    ellipse(a*2+a/2,a+a/2,ps,ps);
+    ellipse(a+a/2,a*2+a/2,ps,ps);
+  }
+  if(rn < 6 && rn >= 5){
+    ellipse(a+a/2,a+a/2,ps,ps);
+    ellipse(a*2+a/2,a*2+a/2,ps,ps);
+    ellipse(a*2+a/2,a+a/2,ps,ps);
+    ellipse(a+a/2,a*2+a/2,ps,ps);
+    ellipse(a*2,a*2+a/2,ps,ps);
+    ellipse(a*2,a+a/2,ps,ps);
+  }
+  if(rn < 7 && rn >= 6){
+    ellipse(a*2,a*2,ps,ps);
+    ellipse(a+a/2,a+a/2,ps,ps);
+    ellipse(a*2+a/2,a*2+a/2,ps,ps);
+    ellipse(a*2+a/2,a+a/2,ps,ps);
+    ellipse(a+a/2,a*2+a/2,ps,ps);
+    ellipse(a*2,a*2+a/2,ps,ps);
+    ellipse(a*2,a+a/2,ps,ps);
+  }
+  if(rn < 8 && rn >= 7 ||rn < 9 && rn >= 8){
+    ellipse(a+a/2,a+a/2,ps,ps);
+    ellipse(a*2+a/2,a*2+a/2,ps,ps);
+    ellipse(a*2+a/2,a*2,ps,ps);
+    ellipse(a*2+a/2,a+a/2,ps,ps);
+    ellipse(a+a/2,a*2+a/2,ps,ps);
+    ellipse(a+a/2,a*2,ps,ps);
+    ellipse(a*2,a*2+a/2,ps,ps);
+    ellipse(a*2,a+a/2,ps,ps);
+  }
+  //if(rn < 9 && rn >= 8){8 + 1}
+
+  textSize(ps);
+  textAlign(CENTER);
+  fill(0);
+  text(x,width/2,ps);
+
+}
+
+void keyPressed(){
+ if(key == '1'){
+  x = 1;
+ }
+  if(key == '2'){
+  x = 2;
+ }
+  if(key == '3'){
+  x = 3;
+ }
+  if(key == '4'){
+  x = 4;
+ }
+  if(key == '5'){
+  x = 5;
+ }
+  if(key == '6'){
+  x = 6;
+ }
+  if(key == '7'){
+  x = 7;
+ }
+   if(key == '8'){
+  x = 8;
+ }
+   if(key == '9'){
+  x = 9;
+ }
+if(keyCode == ENTER){
+   time = random(8)+4;
+   time = time+12;
+  }
+}
+			</script>
+		<canvas> </canvas>
+	</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clock</title>
+    <script type="text/javascript" src="processing.js"></script>
+	</head>
+	<body bgcolor="000000">
+			<script type="application/processing">
+			int ts = 0;
+int fps = 0;
+int ss = 0;
+int sfps = 0; //start fps
+
+int a;
+int b;
+
+float secondfps = 0;
+float seconddone = 0;
+float donefps = 0;
+
+void setup(){
+  size(500,500);
+  a = width/6;
+  b = width/2;
+  //frameRate(200);
+}
+void draw(){
+  background(0);
+  done();
+  timeFPS();
+  time();
+  FPS();
+
+  //text(fps,10,10);
+}
+
+void timeFPS(){
+  secondfps = secondfps + PI/30/(fps/2);
+
+  if(second() != ss){
+  secondfps = 0;
+  }
+}
+
+void time(){
+  //seconds
+  fill(255,0,0);
+  arc(b, b, a*5, a*5, -PI/2+seconddone, -PI/2+PI/30*second()+secondfps/2);
+  //minutes
+  fill(0,0,0);
+  ellipse(b, b, a*4+a/8, a*4+a/8);
+  fill(0,0,255);
+  arc(b, b, a*4, a*4, -PI/2, -PI/2+PI/30*minute());
+  //hour
+  fill(0,0,0);
+  ellipse(b, b, a*3+a/8, a*3+a/8);
+  fill(0,255,0);
+  if(hour() < 12){
+    arc(b,b, a*3, a*3, -PI/2, -PI/2+PI/6*hour());
+  }
+  /*else{
+    arc(b, b, a*3, a*3, -PI/2, -PI/2+PI/6*(hour()-12));
+  }*/
+  else{
+    arc(b, b, a*3, a*3, -PI/2+PI/6*(hour()-12), PI*1.5);
+
+  }
+  //day
+  fill(0,0,0);
+  ellipse(b, b, a*2+a/8, a*2+a/8);
+  fill(255,255,0);
+  if(month() == 1 || month() == 3 || month() == 5 || month() == 7 || month() == 8 || month() == 10 || month() == 12){
+    arc(b, b, a*2, a*2, -PI/2, -PI/2+PI/(31/2)*day());
+  }
+  if(month() == 4 || month() == 6 || month() == 1 || month() == 1 || month() == 9 || month() == 11){
+    arc(b, b, a*2, a*2, -PI/2, -PI/2+PI/15*day());
+  }
+  if(month() == 2){
+    arc(b, b, a*2, a*2, -PI/2, -PI/2+PI/14*day());
+  }
+  //month
+  fill(0,0,0);
+  ellipse(b, b, a+a/8, a+a/8);
+  fill(255,128,0);
+  arc(b, b, a, a, -PI/2, -PI/2+PI/6*month());
+
+}
+//________________________________________________________________
+void done() {
+  donefps = donefps + PI/(fps/2);
+  if(second() == 59){
+    seconddone = PI/(fps/2)+donefps;
+  }
+  else{
+   seconddone = 0;
+   donefps = 0;
+  }
+
+}
+void FPS() {
+  ts++;
+  if(sfps == 0){
+    ss = second();
+    sfps = 1;
+  }
+  if(second() != ss){
+    fps = ts;
+    ts = 0;
+    sfps = 0;
+  }
+
+}
+			</script>
+		<canvas> </canvas>
+	</body>
+</html>
