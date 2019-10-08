@@ -26,10 +26,15 @@ void draw() {
   fill(0);
   textAlign(CENTER);
   if(n < 1) {
-    text("n - 1", width*0.25,height*0.25);
-    text("n + 1", width*0.75,height*0.25);
-		text("p - 0.01", width*0.25,height*0.75);
-		text("p + 0.01", width*0.75,height*0.75);
+    text("n - 10", width*1/8,height*0.25);
+    text("n + 10", width*7/8,height*0.25);
+
+    text("n - 1", width*3/8,height*0.25);
+    text("n + 1", width*5/8,height*0.25);
+
+
+    text("p --", width*0.25,height*0.75);
+    text("p ++", width*0.75,height*0.75);
 
   }
   else {
@@ -37,44 +42,56 @@ void draw() {
   }
 
   fill(0);
-  text("n = " + n + "   p = " + nf(p,1,2),width*0.5,height-12.5);
+  text("n = " + n + "   p = " + nf(p,0,3),width*0.5,height-12.5);
 
   if(mousePressed) {
-   if(mouseY > height/2) {
-     if(mouseX > width/2) {
-       p += 0.01;
-     }
-     else{
-       p -= 0.01;
-     }
+    if(mouseY > height/2) {
+      if(mouseX > width/2) {
+        p += 0.005;
+      }
+      else{
+        p -= 0.005;
+      }
 
-     if(p < 0) {p = 0;}
-     if(p > 1) {p = 1;}
-   }
+      if(p < 0) {p = 0;}
+      if(p > 1) {p = 1;}
+    }
   }
 }
 
 void drawGraphics() {
   line(0,height-50,width,height-50);
 
+  double sum = 0;
+
   fill(255);
   stroke(0);
   float s = width/(n+1.0);
   for(int k = 0; k <= n; k++) {
-    float p2 = pas[n][k]*pow(p,k)*pow(1-p,n-k);
-    float p3 = p2*(height-50);
-    rect(k*s, height-50-p3, s, p3);
+    double p2 = (double)pas[n][k]*(double)(pow(p,k)*pow(1-p,n-k));
+    double p3 = p2*(double)(height-50);
+
+    sum += p2;
+
+    if(sum < 0.05) {fill(196);}else{fill(255);}
+    rect(k*s, height-50-(float)p3, s, (float)p3);
   }
 
 }
 
 void mousePressed() {
   if(mouseY < height/2) {
-    if(mouseX > width/2) {
-      n++;
+    if(mouseX < 1/float(4)*width) {
+      n -= 10;
     }
-    else{
-      n--;
+    else if(mouseX < 2/float(4)*width) {
+      n -= 1;
+    }
+    else if(mouseX < 3/float(4)*width) {
+      n += 1;
+    }
+    else {
+      n += 10;
     }
   }
   else {
@@ -84,6 +101,7 @@ void mousePressed() {
     //else{
     //  k--;
     //}
+
 
     //p = mouseX/(width+0.0);
   }
