@@ -1,0 +1,25 @@
+body {
+  margin: 0px;
+}
+
+table.navbar{
+  position: fixed;
+  z-index: 999;
+  background-color: #cccccc;
+  padding: 0px;
+  margin: 0px;
+}
+
+td{
+  text-align: center;
+  padding: 8px;
+  background-color: #cccccc;
+}
+
+p{
+  margin: 0px;
+}
+
+h4{
+  margin: 0px;
+}
