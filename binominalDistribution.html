@@ -12,132 +12,167 @@
 			<script type="application/processing">
 			long[][] pas;
 
-int n = 0;
-float p = 0;
+			int n = 0;
+			float p = 0;
+			int gap = 75;
 
-void setup() {
-  getPascal(7);
-  size(500,500);
-}
+			void setup() {
+			  getPascal(7);
+			  size(500,500);
+			}
 
-void draw() {
-  background(255);
-  textSize(25);
-  fill(0);
-  textAlign(CENTER);
-  if(n < 1) {
-    text("n - 10", width*1/8,height*0.25);
-    text("n + 10", width*7/8,height*0.25);
+			void draw() {
+			  background(255);
+			  fill(0);
+			  textAlign(CENTER);
+			  if(n < 1) {
+					text("n - 10", width*1/8,height*0.25);
+				  text("n + 10", width*7/8,height*0.25);
 
-    text("n - 1", width*3/8,height*0.25);
-    text("n + 1", width*5/8,height*0.25);
-
-
-    text("p --", width*0.25,height*0.75);
-    text("p ++", width*0.75,height*0.75);
-
-  }
-  else {
-    drawGraphics();
-  }
-
-  fill(0);
-  text("n = " + n + "   p = " + nf(p,0,3),width*0.5,height-12.5);
-
-  if(mousePressed) {
-    if(mouseY > height/2) {
-      if(mouseX > width/2) {
-        p += 0.005;
-      }
-      else{
-        p -= 0.005;
-      }
-
-      if(p < 0) {p = 0;}
-      if(p > 1) {p = 1;}
-    }
-  }
-}
-
-void drawGraphics() {
-  line(0,height-50,width,height-50);
-
-  double sum = 0;
-
-  fill(255);
-  stroke(0);
-  float s = width/(n+1.0);
-  for(int k = 0; k <= n; k++) {
-    double p2 = (double)pas[n][k]*(double)(pow(p,k)*pow(1-p,n-k));
-    double p3 = p2*(double)(height-50);
-
-    sum += p2;
-
-    if(sum < 0.05) {fill(196);}else{fill(255);}
-    rect(k*s, height-50-(float)p3, s, (float)p3);
-  }
-
-}
-
-void mousePressed() {
-  if(mouseY < height/2) {
-    if(mouseX < 1/float(4)*width) {
-      n -= 10;
-    }
-    else if(mouseX < 2/float(4)*width) {
-      n -= 1;
-    }
-    else if(mouseX < 3/float(4)*width) {
-      n += 1;
-    }
-    else {
-      n += 10;
-    }
-  }
-  else {
-    //if(mouseX > width/2) {
-    //  k++;
-    //}
-    //else{
-    //  k--;
-    //}
+				  text("n - 1", width*3/8,height*0.25);
+				  text("n + 1", width*5/8,height*0.25);
 
 
-    //p = mouseX/(width+0.0);
-  }
+			 	  text("p-0.005", width*1/8,height*0.75);
+			 	  text("p+0.005", width*7/8,height*0.75);
 
-  getPascal(n+1);
+			 	  text("p --", width*3/8,height*0.75);
+			 	  text("p ++", width*5/8,height*0.75);
 
-}
+			  }
+			  else {
+			    drawGraphics();
+			  }
 
-void getPascal(int n) {
-  if(n < 2) {return;}
-  pas = new long[n][n];
+			  fill(0);
+			  textSize(25);
+			  text("n = " + n + "   p = " + nf(p,0,3),width*0.5,height-12.5);
 
-  pas[0][0] = 1;
-  pas[1][0] = 1;
-  pas[1][1] = 1;
+			  if(mousePressed) {
+			    if(mouseY > height/2) {
+			      if(mouseX > width/2) {
+			        if(mouseX < width*0.75) {
+			          p += 0.005;
+			        }
+			      }
+			      else{
+			        if(mouseX > width*0.25) {
+			          p -= 0.005;
+			        }
+			      }
+
+			      if(p < 0) {p = 0;}
+			      if(p > 1) {p = 1;}
+			    }
+			  }
+			}
+
+			void drawGraphics() {
+			  line(0,height-gap,width,height-gap);
+
+			  double sum = 0;
+
+			  int s0 = 0;
+			  int s1 = 0;
+			  int s2 = 0;
+			  int s3 = 0;
+
+			  fill(255);
+			  stroke(0);
+			  float s = width/(n+1.0);
+			  for(int k = 0; k <= n; k++) {
+			    double p2 = (double)pas[n][k]*(double)(pow(p,k)*pow(1-p,n-k));
+			    double p3 = p2*(double)(height-gap);
+
+			    sum += p2;
+
+			    if(sum <= 0.05) {s0 = k;}
+
+			    if(sum <= 0.025) {s1 = k;}
+			    if(1-sum+p2 > 0.025) {s2 = k+1;}
+
+			    if(1-sum+p2 > 0.05) {s3 = k+1;}
+
+			    if(sum < 0.05) {fill(196);}else{fill(255);}
+			    rect(k*s, height-gap-(float)p3, s, (float)p3);
+			  }
+
+			  fill(128); textSize(13); textAlign(CENTER);
+			  text("[0,"+str(s0)+"]", width*0.25, height-gap+25);
+			  text("[0,"+str(s1)+"] & ["+str(s2)+","+str(n)+"]", width*0.5, height-gap+25);
+			  text("["+str(s3)+","+str(n)+"]", width*0.75, height-gap+25);
+
+			}
+
+			void mousePressed() {
+			  if(mouseY < height/2) {
+			    if(mouseX < 1/float(4)*width) {
+			      n -= 10;
+			    }
+			    else if(mouseX < 2/float(4)*width) {
+			      n -= 1;
+			    }
+			    else if(mouseX < 3/float(4)*width) {
+			      n += 1;
+			    }
+			    else {
+			      n += 10;
+			    }
+			  }
+			  else {
+			    //if(mouseX > width/2) {
+			    //  k++;
+			    //}
+			    //else{
+			    //  k--;
+			    //}
+
+			    if(mouseX < 1/float(4)*width) {
+			      p -= 0.005;
+			    }
+			    else if(mouseX < 2/float(4)*width) {
+			    }
+			    else if(mouseX < 3/float(4)*width) {
+			    }
+			    else {
+			      p += 0.005;
+			    }
+
+			    //p = mouseX/(width+0.0);
+			  }
+
+			  getPascal(n+1);
+
+			}
+
+			void getPascal(int n) {
+			  if(n < 2) {return;}
+			  pas = new long[n][n];
+
+			  pas[0][0] = 1;
+			  pas[1][0] = 1;
+			  pas[1][1] = 1;
 
 
-  int c = 0; //count, replaces append
-  for (int i = 2; i < n; ++i) {
-    c = 0;
-    pas[i][c] = 1; c++;
-    for(int j = 1; j < i; j++) {
-      pas[i][c] = (pas[i-1][j]+pas[i-1][j-1]); c++;
-    }
-    pas[i][c] = (1);
-  }
+			  int c = 0; //count, replaces append
+			  for (int i = 2; i < n; ++i) {
+			    c = 0;
+			    pas[i][c] = 1; c++;
+			    for(int j = 1; j < i; j++) {
+			      pas[i][c] = (pas[i-1][j]+pas[i-1][j-1]); c++;
+			    }
+			    pas[i][c] = (1);
+			  }
 
 
-  //for (int i = 0; i < n; ++i)
-  //{
-  //  for (int j = 0; j < pas[i].length; ++j) {
-  //    print(pas[i][j] + " ");
-  //  }
-  // println();
-  //}
-}
+			  //for (int i = 0; i < n; ++i)
+			  //{
+			  //  for (int j = 0; j < pas[i].length; ++j) {
+			  //    print(pas[i][j] + " ");
+			  //  }
+			  // println();
+			  //}
+			}
 			</script>
 		<canvas> </canvas>
 	</body>
