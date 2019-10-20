@@ -1,0 +1,53 @@
+body {
+  margin: 0px;
+}
+
+table.navbar{
+  position: fixed;
+  z-index: 999;
+  background-color: #cccccc;
+  padding: 0px;
+  margin: 0px;
+  align-items: center;
+}
+
+table.inner{
+  padding: 0px;
+  margin: 0px;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+}
+
+td{
+  text-align: center;
+  padding: 8px;
+  background-color: #cccccc;
+}
+
+th{
+  background-color: #cccccc;
+  padding: 8px;
+  align-items: center;
+  align-self: center;
+}
+
+th.outer{
+  /*padding: 0px;*/
+  margin: 0px;
+  align-items: center;
+  align-content: center;
+  align-self: center;  
+}
+
+th.inner{
+  background-color: #aaaaaa;
+}
+
+p{
+  margin: 0px;
+}
+
+h4{
+  margin: 0px;
+}

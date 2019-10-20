@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>Physics Overview</title>
+      <link href="styles.css" rel="stylesheet"/>
+      <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="vue-app">
+      <p color="#ff0000">This siite is under development and may contain mistakes</p>
+      <table>
+        <tr>
+          <th><p>Origin</p></th>
+          <th><input v-model="originTF"></th>
+        </tr>
+        <tr>
+          <th><p>X Axis</p></th>
+          <th><input v-model="axisTFs[0]"></th>
+        </tr>
+        <tr>
+          <th><p>Y Axis</p></th>
+          <th><input v-model="axisTFs[1]"></th>
+        </tr>
+        <tr>
+          <th><p>Z Axis</p></th>
+          <th><input v-model="axisTFs[2]"></th>
+          <th><button v-on:click="toggleZAxis()"> {{ zAxisActive ? "turn off" : "turn on" }} </button></th>
+        </tr>
+        <tr>
+          <th><p>W Axis</p></th>
+          <th><input v-model="axisTFs[3]"></th>
+          <th><button v-on:click="toggleWAxis()"> {{ wAxisActive ? "turn off" : "turn on" }} </button></th>
+        </tr>
+      </table>
+      <button v-on:click="toggleShowAll()"> {{showAll ? "Shrink z and w axis" : "Extend z and w axis"}} </button>
+      <button v-on:click="calculate()"> Calculate </button>
+
+      <h3> {{ units[current].name }} </h3>
+      <p> [{{ units[current].letter }}] = 1{{ units[current].unit }} : {{ units[current].unitStr }} </p>
+
+      <!-- https://stackoverflow.com/questions/45977778/bind-multidimensional-array-with-vuejs -->
+      <table>
+        <tr v-for="(row, x) in display">
+          <th class="outer" v-for="(col, y) in row">
+            <table class="inner">
+              <tr v-for="(row2,z) in col">
+                <th class="inner" v-for="(col2,w) in row2" v-on:click="changeTo(col2)">
+                  <p> {{getDisplay(col2)}} </p>
+                </th>
+              </thr>
+            </table>
+            <!-- <input v-model="display[i][j]" type="text" /> -->
+          </th>
+        </tr>
+      </table>
+
+    </div>
+  </body>
+
+
+
+  <script src="app.js"></script>
+
+</html>
