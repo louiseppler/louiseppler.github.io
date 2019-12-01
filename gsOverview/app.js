@@ -4,6 +4,7 @@ new Vue({
       GS: false,
       GS1: true,
       GS2: true,
+      GS3: true,
       Sci: true,
       Lit: true,
       descriptions: true,
@@ -14,11 +15,13 @@ new Vue({
           this.GS = false;
           this.GS1 = true;
           this.GS2 = true;
+          this.GS3 = true;
         }
         else {
           this.GS = true;
           this.GS1 = false;
           this.GS2 = false;
+          this.GS3 = false;
         }
       },
       toggleSci: function() {
