@@ -1,0 +1,62 @@
+table.start{
+  color: #ffffff;
+}
+table.start:hover{
+  color: #000000;
+}
+a:visited{
+  text-decoration: none;
+  color: #000000;
+}
+a:link{
+  color: #000000;
+  text-decoration: none;
+}
+a:hover{
+  color: #ffffff;
+}
+/*  =========================
+      End Top - Start Page
+    ==========================*/
+body{
+    background: #aaaaff;
+}
+h1{
+  color: #ff0000;
+  text-align: center;
+  font-size: 64px;
+}
+h2{
+  color: #00aa00;
+  font-size: 35px;
+}
+h4{
+  font-size: 25px;
+  color: #CD2626;
+}
+ul{
+  color: #008B8B;
+  font-size: 15px;
+}
+h5{
+  color: #660066;
+  font-size: 30px;
+  text-decoration: underline;
+}
+h5:hover{
+  color: #990099;
+}
+#li:hover{
+#  font-size: 25px;
+#}
+table.server{
+  text-align: left;
+  font-size: 30px;
+}
+thead.server{
+    text-decoration:underline;
+    color: #12ad56;
+}
+tbody.server{
+  color: #461947;
+}
