@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<audio id="myAudio">
+  <source src="1_1.m4a">
+  Your browser does not support the audio element.
+</audio>
+
+<p>Click the buttons to play or pause the audio.</p>
+
+<button onclick="playAudio()" type="button">Play Audio</button>
+<button onclick="pauseAudio()" type="button">Pause Audio</button>
+
+<script>
+var x = document.getElementById("myAudio");
+
+function playAudio() {
+  var today = new Date();
+
+  var starttime = 10000;
+
+  var delay = 1030; //change this value to fit right time
+
+
+  var delta = starttime - (today.getTime() % starttime)
+
+  console.log("plaing audio in seconds",(delta + delay)/1000,);
+  //x.play();
+  setTimeout(function(){ }, delta + delay);
+}
+
+function pauseAudio() {
+  x.pause();
+}
+</script>
+
+</body>
+</html>

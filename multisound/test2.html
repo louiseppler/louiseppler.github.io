@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<audio id="sync">
+  <source src="sync.m4a">
+  Your browser does not support the audio element.
+</audio>
+<audio id="track1">
+  <source src="1_1.m4a">
+  Your browser does not support the audio element.
+</audio>
+<audio id="track2">
+  <source src="1_2.m4a">
+  Your browser does not support the audio element.
+</audio>
+
+<button onclick="playAudioSync()" type="button">Sync</button>
+<button onclick="playAudio1()" type="button">Track 1</button>
+<button onclick="playAudio2()" type="button">Track 2</button>
+
+
+<button onclick="pauseAudio()" type="button">Pause Audio</button>
+<p></p>
+Starttime: <input type="text" id="startTF" value="10">
+<p></p>
+Delay: <input type="text" id="delayTF" value="0">
+
+
+
+
+<script>
+var s = document.getElementById("sync");
+var t1 = document.getElementById("track1");
+var t2 = document.getElementById("track2");
+
+
+
+function playAudioSync() {
+  var today = new Date();
+
+  var starttime = parseInt(document.getElementById("startTF").value)*1000;
+
+  var delay = parseInt(document.getElementById("delayTF").value);
+
+  var delta = starttime - (today.getTime() % starttime)
+
+  console.log("plaing audio in seconds",(delta + delay)/1000,);
+
+  setTimeout(function(){ s.play(); }, delta + delay);
+}
+
+function playAudio1() {
+  var today = new Date();
+
+  var starttime = parseInt(document.getElementById("startTF").value)*1000;
+
+  var delay = parseInt(document.getElementById("delayTF").value);
+
+  var delta = starttime - (today.getTime() % starttime)
+
+  console.log("plaing audio in seconds",(delta + delay)/1000,);
+
+  setTimeout(function(){ t1.play(); }, delta + delay);
+}
+
+function playAudio2() {
+  var today = new Date();
+
+  var starttime = parseInt(document.getElementById("startTF").value)*1000;
+
+  var delay = parseInt(document.getElementById("delayTF").value);
+
+  var delta = starttime - (today.getTime() % starttime)
+
+  console.log("plaing audio in seconds",(delta + delay)/1000,);
+
+  setTimeout(function(){ t2.play(); }, delta + delay);
+}
+
+function pauseAudio() {
+  s.pause();
+  t1.pause();
+  t2.pause();
+}
+</script>
+
+</body>
+</html>
