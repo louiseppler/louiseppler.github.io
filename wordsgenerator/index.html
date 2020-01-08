@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>Word Generator</title>
+      <link href="styles.css" rel="stylesheet"/>
+      <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="vue-app">
+      <div v-if="started">
+      <h1>Score: {{count}}</h1>
+      <h1>–––––––––––––––––––––––––</h1>
+      <h1 v-on:click="pressed1()"> {{word1}} </h2>
+      <h1 v-on:click="pressed2()"> {{word2}} </h2>
+      <h1 v-on:click="pressed3()"> {{word3}} </h2>
+      <h1 v-on:click="pressed4()"> {{word4}} </h2>
+      <h1 v-on:click="pressed5()"> {{word5}} </h2>
+
+    </div>
+    <div v-if="!started">
+      <h1 v-on:click="start()"> Start </h1>
+    </div>
+  </div>
+  </body>
+
+  <script src="app.js"></script>
+
+</html>
