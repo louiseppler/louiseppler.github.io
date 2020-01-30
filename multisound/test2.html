@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-<audio id="sync">
+<h1> Version #0002</h1>
+<audio id="sync" preload="metadata">
   <source src="sync.m4a">
   Your browser does not support the audio element.
 </audio>
-<audio id="track1">
+<audio id="track1"  preload="metadata">
   <source src="1_1.m4a">
   Your browser does not support the audio element.
 </audio>
-<audio id="track2">
+<audio id="track2"  preload="metadata">
   <source src="1_2.m4a">
   Your browser does not support the audio element.
 </audio>
@@ -25,6 +25,8 @@
 Starttime: <input type="text" id="startTF" value="10">
 <p></p>
 Delay: <input type="text" id="delayTF" value="0">
+<p></p>
+Shift: <input type="text" id="shiftTF" value="0">
 
 
 
@@ -35,47 +37,72 @@ var t1 = document.getElementById("track1");
 var t2 = document.getElementById("track2");
 
 
-
-function playAudioSync() {
+function getDelay() {
   var today = new Date();
 
-  var starttime = parseInt(document.getElementById("startTF").value)*1000;
+  var shift = parseInt(document.getElementById("startTF").value);
+
+  var starttime = parseInt(document.getElementById("startTF").value)*1000-shift;
 
   var delay = parseInt(document.getElementById("delayTF").value);
 
-  var delta = starttime - (today.getTime() % starttime)
+  var delta = starttime - (today.getTime() % starttime);
 
-  console.log("plaing audio in seconds",(delta + delay)/1000,);
+  console.log("delay of seconds",(delta + delay)/1000,);
 
-  setTimeout(function(){ s.play(); }, delta + delay);
+  return (delta + delay);
+
+}
+
+function playAudioSync() {
+  // var today = new Date();
+  //
+  // var shift = parseInt(document.getElementById("startTF").value);
+  //
+  // var starttime = parseInt(document.getElementById("startTF").value)*1000-shift;
+  //
+  // var delay = parseInt(document.getElementById("delayTF").value);
+  //
+  // var delta = starttime - (today.getTime() % starttime);
+  //
+  // console.log("plaing audio in seconds",(delta + delay)/1000,);
+
+  var d = getDelay();
+  setTimeout(function(){ s.play(); console.log(d); }, d+0);
 }
 
 function playAudio1() {
-  var today = new Date();
+  // var today = new Date();
+  //
+  // var starttime = parseInt(document.getElementById("startTF").value)*1000;
+  //
+  // var delay = parseInt(document.getElementById("delayTF").value);
+  //
+  // var delta = starttime - (today.getTime() % starttime)
+  //
+  // console.log("plaing audio in seconds",(delta + delay)/1000,);
+  //
+  // setTimeout(function(){ t1.play(); }, delta + delay);
 
-  var starttime = parseInt(document.getElementById("startTF").value)*1000;
-
-  var delay = parseInt(document.getElementById("delayTF").value);
-
-  var delta = starttime - (today.getTime() % starttime)
-
-  console.log("plaing audio in seconds",(delta + delay)/1000,);
-
-  setTimeout(function(){ t1.play(); }, delta + delay);
+  var d = getDelay();
+  setTimeout(function(){ t1.play(); console.log(d); }, d+0);
 }
 
 function playAudio2() {
-  var today = new Date();
+  // var today = new Date();
+  //
+  // var starttime = parseInt(document.getElementById("startTF").value)*1000;
+  //
+  // var delay = parseInt(document.getElementById("delayTF").value);
+  //
+  // var delta = starttime - (today.getTime() % starttime)
+  //
+  // console.log("plaing audio in seconds",(delta + delay)/1000,);
+  //
+  // setTimeout(function(){ t2.play(); }, delta + delay);
 
-  var starttime = parseInt(document.getElementById("startTF").value)*1000;
-
-  var delay = parseInt(document.getElementById("delayTF").value);
-
-  var delta = starttime - (today.getTime() % starttime)
-
-  console.log("plaing audio in seconds",(delta + delay)/1000,);
-
-  setTimeout(function(){ t2.play(); }, delta + delay);
+  var d = getDelay();
+  setTimeout(function(){ t2.play(); console.log(d); }, d+0);
 }
 
 function pauseAudio() {
