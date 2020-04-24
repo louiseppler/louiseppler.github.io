@@ -7,6 +7,7 @@ new Vue({
       GS3: true,
       Sci: true,
       Lit: true,
+      GSD: false, //GS Detail
       descriptions: true,
     },
     methods: {
@@ -23,6 +24,9 @@ new Vue({
           this.GS2 = false;
           this.GS3 = false;
         }
+      },
+      toggleDetails: function() {
+        this.GSD = !this.GSD;
       },
       toggleSci: function() {
         this.Sci = !this.Sci;

@@ -11,10 +11,11 @@
       <!-- <button v-on:click="pressed()">Hide title </button> -->
       <table class="navbar">
         <tr>
-          <td><button v-on:click="toggleGS()">Toggle History </button></td>
-          <td><button v-on:click="toggleSci()">Toggle Science </button></td>
-          <td><button v-on:click="toggleLit()">Toggle Literature </button></td>
-          <td><button v-on:click="toggleDescription()">Toggle Descriptions </button></td>
+          <td><button v-on:click="toggleGS()">{{ GS ? "Expand History" : "Minimise History"}}</button></td>
+          <!-- <td><button v-on:click="toggleDetails()">{{ GSD ? "Collapse Details" : "Expand Detials"}} </button></td> -->
+          <td><button v-on:click="toggleSci()">{{ Sci ? "Hide Science" : "Show Science"}}</button></td>
+          <td><button v-on:click="toggleLit()">{{ Lit ? "Hide Literatur" : "Show Literatur"}}</button></td>
+          <td><button v-on:click="toggleDescription()">{{ descriptions ? "Hide Descriptions" : "Show Descriptions" }}</button></td>
 
         </tr>
       </table>
@@ -24,264 +25,286 @@
       <!-- <h1 v-if="bool1">Overview</h1> -->
 
       <table>
-
         <tr>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="GS3"> <p>1200 - 1400</p> <h4>Mongolian dominace</h4> </div></td>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<td> <div v-if="GS1"> <p>1430</p> <h4>Buchdruck</h4> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1430</p> <h4>Buchdruck</h4> </div></td>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="GS3"> <p>1497</p> <h4>Start Serfdom</h4> <p v-if="descriptions">Collective Resonsibility; No free movement</p> </div></td>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1494</p> <h4>Erstes Literarische Werk</h4> <p v-if="descriptions">Narrenschiff, Sebastion Brant</p> </div></td>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1500 - 1600</p> <h4>Renaissance</h4> </div></td>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1517 - 1618</p> <h4>Reformation</h4> <p v-if="descriptions">Luther</p> </div></td>
-		<td> <div v-if="GS1"> <p>1517 - 1618</p> <h4>Reformation</h4> <p v-if="descriptions">Luther</p> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1517 - 1618</p> <h4>Reformation</h4> <p v-if="descriptions">Luther</p> </div></td>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1600 - 1720</p> <h4>Barock</h4> </div></td>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1607</p> <h4>First Settlement in US</h4> <p v-if="descriptions">Virginia</p> </div></td>
-		<th></th>
-		<td> <div v-if="GS2"> <p>1607</p> <h4>First Settlement in US</h4> <p v-if="descriptions">Virginia</p> </div></td>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1605</p> <h4>Aufklärung</h4> </div></td>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1618 - 1648</p> <h4>Dreissigjähriger Krieg</h4> </div></td>
-		<td> <div v-if="GS1"> <p>1618 - 1648</p> <h4>Dreissigjähriger Krieg</h4> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<td> <div v-if="GS1"> <p>1638 - 1715</p> <h4>Louis XIV</h4> </div></td>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Sci"> <p>1634 - 1727</p> <h4>Isaac Newton</h4> </div></td>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<td> <div v-if="GS1"> <p>1689 - 1755</p> <h4>Montesqieu</h4> <p v-if="descriptions">Macht führt zu missbrauch</p> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<td> <div v-if="GS1"> <p>1700 - 1800</p> <h4>Colbertismus / Merkantilismus</h4> <p v-if="descriptions">Herrscher mehr geld - Manufakturen im land</p> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<td> <div v-if="GS1"> <p>1710 - 1774</p> <h4>Louis XV  </h4> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1720 - 1790</p> <h4>Aufklärung</h4> </div></td>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1730 - 1790</p> <h4>Absolutismus</h4> </div></td>
-	</tr>
-	<tr>
-		<th></th>
-		<td> <div v-if="GS1"> <p>1762</p> <h4>Rousseau</h4> <p v-if="descriptions">Macht nicht teilbar</p> </div></td>
-		<td> <div v-if="GS2"> <p>1756 - 1763</p> <h4>French Indian War</h4> <p v-if="descriptions">Canada, Mississippi -> GB (from France)</p> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<td> <div v-if="GS1"> <p>1769 - 1821</p> <h4>Napoleon</h4> </div></td>
-		<td> <div v-if="GS2"> <p>1763 - 1776</p> <h4>Imerial Control</h4> <p v-if="descriptions">No Settlements, Taxes, ...</p> </div></td>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1765 - 1790</p> <h4>Sturm und Drang</h4> </div></td>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<td> <div v-if="GS2"> <p>1773</p> <h4>Bosten Tea Party</h4> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1776</p> <h4>US Declaration of Independance</h4> </div></td>
-		<td> <div v-if="GS1"> <p>1776</p> <h4>Industrielle Revolution</h4> <p v-if="descriptions">James Watt</p> </div></td>
-		<td> <div v-if="GS2"> <p>1774</p> <h4>First Contential Contress</h4> <p v-if="descriptions">(Philadelphia)</p> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<td> <div v-if="GS2"> <p>1776</p> <h4>US Declaration of Independance</h4> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<td> <div v-if="GS2"> <p>1776 - 1783</p> <h4>War of Idependane</h4> <p v-if="descriptions">(Canada Stayed Loyal)</p> </div></td>
-		<th></th>
-		<td> <div v-if="Sci"> <p>1776</p> <h4>James Watt</h4> <p v-if="descriptions">Dampfmaschine</p> </div></td>
-		<td> <div v-if="Lit"> <p>1786 - 1810</p> <h4>Weimarer  Klassik</h4> </div></td>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1787</p> <h4>American Constitution</h4> <p v-if="descriptions">George Wahington as 1. President</p> </div></td>
-		<th></th>
-		<td> <div v-if="GS2"> <p>1787</p> <h4>American Constitution</h4> <p v-if="descriptions">George Wahington as 1. President</p> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1789</p> <h4>Französische Revolution</h4> </div></td>
-		<td> <div v-if="GS1"> <p>1789</p> <h4>Französische Revolution</h4> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1789 - 1835</p> <h4>Romantik</h4> </div></td>
-	</tr>
-	<tr>
-		<th></th>
-		<td> <div v-if="GS1"> <p>1799</p> <h4>Französische Revolution</h4> </div></td>
-		<td> <div v-if="GS2"> <p>1801 - 1809</p> <h4>Thomas Jefferson</h4> <p v-if="descriptions">3. President</p> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<td> <div v-if="GS2"> <p>1803</p> <h4>Louisiana Purchase</h4> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1814</p> <h4>Wiener Kongress</h4> <p v-if="descriptions">Aufteilung Europa - Gründung CH</p> </div></td>
-		<td> <div v-if="GS1"> <p>1814</p> <h4>Wiener Kongress</h4> <p v-if="descriptions">Aufteilung Europa - Gründung CH</p> </div></td>
-		<td> <div v-if="GS2"> <p>1812 - 1814</p> <h4>Anglo American War</h4> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<td> <div v-if="GS2"> <p>1820 - 1857</p> <h4>Missouri Compromise</h4> <p v-if="descriptions">(Segregation), #salve owning = #savle free states</p> </div></td>
-		<th></th>
-		<td> <div v-if="Sci"> <p>1822 - 1884</p> <h4>Mendel</h4> <p v-if="descriptions">Genetik - Blütenfarbe</p> </div></td>
-		<th></th>
-	</tr>
-	<tr>
-		<th></th>
-		<td> <div v-if="GS1"> <p>1848</p> <h4>Neuer Bundesstaat CH</h4> </div></td>
-		<td> <div v-if="GS2"> <p>1856 - 1914</p> <h4>Industrialisation</h4> </div></td>
-		<td> <div v-if="GS3"> <p>1853 - 1856</p> <h4>Crimean War</h4> <p v-if="descriptions">Aboloition of serfdom</p> </div></td>
-		<td> <div v-if="Sci"> <p>1847 - 1931</p> <h4>Thomas Edison</h4> </div></td>
-		<td> <div v-if="Lit"> <p>1848 - 1890</p> <h4>Realismus</h4> </div></td>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1861 - 1865</p> <h4>US Civil War</h4> <p v-if="descriptions">North vs South; Slaves</p> </div></td>
-		<th></th>
-		<td> <div v-if="GS2"> <p>1861 - 1865</p> <h4>Civil War</h4> <p v-if="descriptions">North vs South; Slaves</p> </div></td>
-		<th></th>
-		<td> <div v-if="Sci"> <p>1866 - 1945</p> <h4>Morgan</h4> <p v-if="descriptions">Genetik - Packet</p> </div></td>
-		<th></th>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1870 - 1914</p> <h4>Imerialismus/Nationalismus</h4> </div></td>
-		<td> <div v-if="GS1"> <p>1870 - 1914</p> <h4>Imerialismus/Nationalismus</h4> </div></td>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Sci"> <p>1879 - 1955</p> <h4>Albert Einstein</h4> </div></td>
-		<td> <div v-if="Lit"> <p>1880 - 1900</p> <h4>Naturalismus</h4> </div></td>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<td> <div v-if="GS2"> <p>1898</p> <h4>Spanish American War</h4> <p v-if="descriptions">US gets Philippines</p> </div></td>
-		<th></th>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1890 - 1920</p> <h4>Moderne</h4> </div></td>
-	</tr>
-	<tr>
-		<th></th>
-		<th></th>
-		<th></th>
-		<td> <div v-if="GS3"> <p>1904</p> <h4>Tuschima battle</h4> <p v-if="descriptions">-> Urge for modernisation</p> </div></td>
-		<th></th>
-		<th></th>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1914 - 1918</p> <h4>Erster Weltkrieg</h4> </div></td>
-		<td> <div v-if="GS1"> <p>1914 - 1918</p> <h4>Erster Weltkrieg</h4> </div></td>
-		<th></th>
-		<td> <div v-if="GS3"> <p>1905</p> <h4>DUMA - Consitution</h4> <p v-if="descriptions">Strikes</p> </div></td>
-		<th></th>
-		<td> <div v-if="Lit"> <p>1910 - 1925</p> <h4>Expressionismus</h4> </div></td>
-	</tr>
-	<tr>
-		<td> <div v-if="GS"> <p>1939 - 1945</p> <h4>Zweiter Weltkrieg</h4> </div></td>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="GS3"> <div> <p>1200 - 1400</p> <h4>Mongolian dominace</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1430</p> <h4>Buchdruck</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1430</p> <h4>Buchdruck</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="GS3"> <div> <p>1497</p> <h4>Start Serfdom</h4> <p v-if="descriptions">Collective Resonsibility; No free movement</p> </div></td>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1494</p> <h4>Erstes Literarische Werk</h4> <p v-if="descriptions">Narrenschiff, Sebastion Brant</p> </div></td>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1500 - 1600</p> <h4>Renaissance</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1517 - 1618</p> <h4>Reformation</h4> <p v-if="descriptions">Luther</p> </div></td>
+      		<td  v-if="GS1"> <div> <p>1517 - 1618</p> <h4>Reformation</h4> <p v-if="descriptions">Luther</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1517 - 1618</p> <h4>Reformation</h4> <p v-if="descriptions">Luther</p> </div></td>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1600 - 1720</p> <h4>Barock</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1607</p> <h4>First Settlement in US</h4> <p v-if="descriptions">Virginia</p> </div></td>
+      		<th></th>
+      		<td  v-if="GS2"> <div> <p>1607</p> <h4>First Settlement in US</h4> <p v-if="descriptions">Virginia</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1605</p> <h4>Aufklärung</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1618 - 1648</p> <h4>Dreissigjähriger Krieg</h4> </div></td>
+      		<td  v-if="GS1"> <div> <p>1618 - 1648</p> <h4>Dreissigjähriger Krieg</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1638 - 1715</p> <h4>Louis XIV</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Sci"> <div> <p>1634 - 1727</p> <h4>Isaac Newton</h4> </div></td>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1689 - 1755</p> <h4>Montesqieu</h4> <p v-if="descriptions">Macht führt zu missbrauch</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1700 - 1800</p> <h4>Colbertismus / Merkantilismus</h4> <p v-if="descriptions">Herrscher mehr geld - Manufakturen im land</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1710 - 1774</p> <h4>Louis XV  </h4> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1720 - 1790</p> <h4>Aufklärung</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1730 - 1790</p> <h4>Absolutismus</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1762</p> <h4>Rousseau</h4> <p v-if="descriptions">Macht nicht teilbar</p> </div></td>
+      		<td  v-if="GS2"> <div> <p>1756 - 1763</p> <h4>French Indian War</h4> <p v-if="descriptions">Canada, Mississippi -> GB (from France)</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<td  v-if="GS2"> <div> <p>1763 - 1776</p> <h4>Imerial Control</h4> <p v-if="descriptions">No Settlements, Taxes, Trades (Boston Tea Party)</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1765 - 1790</p> <h4>Sturm und Drang</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1776</p> <h4>US Declaration of Independance</h4> </div></td>
+      		<td  v-if="GS1"> <div> <p>1776</p> <h4>Industrielle Revolution</h4> <p v-if="descriptions">James Watt</p> </div></td>
+      		<td  v-if="GS2"> <div> <p>1776</p> <h4>US Declaration of Independance</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<td  v-if="GS2"> <div> <p>1776 - 1783</p> <h4>War of Idependane</h4> <p v-if="descriptions">(Canada Stayed Loyal)</p> </div></td>
+      		<th></th>
+      		<td  v-if="Sci"> <div> <p>1776</p> <h4>James Watt</h4> <p v-if="descriptions">Dampfmaschine</p> </div></td>
+      		<td  v-if="Lit"> <div> <p>1786 - 1810</p> <h4>Weimarer  Klassik</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1787</p> <h4>American Constitution</h4> <p v-if="descriptions">George Wahington as 1. President</p> </div></td>
+      		<th></th>
+      		<td  v-if="GS2"> <div> <p>1787</p> <h4>American Constitution</h4> <p v-if="descriptions">George Wahington as 1. President</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1789</p> <h4>Französische Revolution</h4> </div></td>
+      		<td  v-if="GS1"> <div> <p>1789</p> <h4>Französische Revolution</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1789 - 1835</p> <h4>Romantik</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1791</p> <h4>Erste Verfassung Frankreich</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1800 - 1821</p> <h4>Napoleon</h4> </div></td>
+      		<td  v-if="GS2"> <div> <p>1801 - 1809</p> <h4>Thomas Jefferson</h4> <p v-if="descriptions">3. President</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<td  v-if="GS2"> <div> <p>1803</p> <h4>Louisiana Purchase</h4> <p v-if="descriptions">Anglo American War?, Indian Revomal Act</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1814</p> <h4>Wiener Kongress</h4> <p v-if="descriptions">Aufteilung Europa - Gründung CH</p> </div></td>
+      		<td  v-if="GS1"> <div> <p>1814</p> <h4>Wiener Kongress</h4> <p v-if="descriptions">Aufteilung Europa - Gründung CH</p> </div></td>
+      		<td  v-if="GS2"> <div> <p>1820 - 1857</p> <h4>Missouri Compromise</h4> <p v-if="descriptions">(Segregation), #salve owning = #savle free states</p> </div></td>
+      		<th></th>
+      		<td  v-if="Sci"> <div> <p>1822 - 1884</p> <h4>Mendel</h4> <p v-if="descriptions">Genetik - Blütenfarbe</p> </div></td>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1848</p> <h4>Neuer Bundesstaat CH</h4> </div></td>
+      		<td  v-if="GS2"> <div> <p>1856 - 1914</p> <h4>Industrialisation</h4> </div></td>
+      		<td  v-if="GS3"> <div> <p>1853 - 1856</p> <h4>Crimean War</h4> <p v-if="descriptions">Aboloition of serfdom</p> </div></td>
+      		<td  v-if="Sci"> <div> <p>1847 - 1931</p> <h4>Thomas Edison</h4> </div></td>
+      		<td  v-if="Lit"> <div> <p>1848 - 1890</p> <h4>Realismus</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1861 - 1865</p> <h4>US Civil War</h4> <p v-if="descriptions">North vs South; Slaves</p> </div></td>
+      		<th></th>
+      		<td  v-if="GS2"> <div> <p>1861 - 1865</p> <h4>Civil War</h4> <p v-if="descriptions">North vs South; Slaves</p> </div></td>
+      		<th></th>
+      		<td  v-if="Sci"> <div> <p>1866 - 1945</p> <h4>Morgan</h4> <p v-if="descriptions">Genetik - Packet</p> </div></td>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1870 - 1914</p> <h4>Imerialismus/Nationalismus</h4> </div></td>
+      		<td  v-if="GS1"> <div> <p>1870 - 1914</p> <h4>Imerialismus/Nationalismus</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Sci"> <div> <p>1879 - 1955</p> <h4>Albert Einstein</h4> </div></td>
+      		<td  v-if="Lit"> <div> <p>1880 - 1900</p> <h4>Naturalismus</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<td  v-if="GS2"> <div> <p>1898</p> <h4>Spanish American War</h4> <p v-if="descriptions">US gets Philippines</p> </div></td>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1890 - 1920</p> <h4>Moderne</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="GS3"> <div> <p>1904</p> <h4>Tuschima battle</h4> <p v-if="descriptions">-> Urge for modernisation</p> </div></td>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1914 - 1918</p> <h4>World War I</h4> </div></td>
+      		<td  v-if="GS1"> <div> <p>1914 - 1918</p> <h4>World War I</h4> </div></td>
+      		<th></th>
+      		<td  v-if="GS3"> <div> <p>1905 - 1914</p> <h4>DUMA - Consitution</h4> <p v-if="descriptions">Strikes</p> </div></td>
+      		<th></th>
+      		<td  v-if="Lit"> <div> <p>1910 - 1925</p> <h4>Expressionismus</h4> </div></td>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<th></th>
+      		<th></th>
+      		<td  v-if="GS3"> <div> <p>1917</p> <h4>Dual Government</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1918 - 1933</p> <h4>Weimar Republic</h4> </div></td>
+      		<th></th>
+      		<td  v-if="GS3"> <div> <p>1917</p> <h4>February/Octover Revolution</h4> <p v-if="descriptions">Rise of Lenin</p> </div></td>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1923</p> <h4>Hyperinflation</h4> <p v-if="descriptions">in Weimer Republic</p> </div></td>
+      		<th></th>
+      		<td  v-if="GS3"> <div> <p>1919 - 1922</p> <h4>War of Communism</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<th v-if="GS" ></th>
+      		<td  v-if="GS1"> <div> <p>1934</p> <h4>Hitlers Raise To Power</h4> <p v-if="descriptions">Gleichschaltung</p> </div></td>
+      		<th></th>
+      		<td  v-if="GS3"> <div> <p>1928 - 1991</p> <h4>Planed Economy</h4> <p v-if="descriptions">Stalin – Five Year Plans</p> </div></td>
+      		<th></th>
+      		<th></th>
+      	</tr>
+      	<tr>
+      		<td  v-if="GS"> <div> <p>1939 - 1945</p> <h4>World War II</h4> </div></td>
+      		<td  v-if="GS1"> <div> <p>1939 - 1945</p> <h4>World War II</h4> </div></td>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      		<th></th>
+      	</tr>
       </table>
     </div>
   </body>
