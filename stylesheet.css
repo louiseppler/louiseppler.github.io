@@ -49,8 +49,7 @@ img.home {
 
 
 img.icon {
-  /*max-width: 25%;*/
-  max-height: 15%;
+  width: 96px;
 }
 
 table {
