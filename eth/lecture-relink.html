@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>Lecutre Relink</title>
+      <!-- <link href="styles.css" rel="stylesheet"/> -->
+      <style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+      </style>
+  </head>
+  <body>
+    <h1> Lecture Relink – Loading...</h1>
+    <!-- <p> Loading... </p> -->
+    <p> Relinking will work automatically from xx:00 to xx:59 if a lecutre is upcoming</p>
+    <script>
+
+      var d = new Date();
+      var n = d.getTime();
+
+      var hour = d.getHours()
+      var min = d.getMinutes()
+      var day = d.getDay()
+
+      console.log(hour);
+      console.log(min);
+      console.log(day);
+
+                    // 8      9       10      11      12      13      14      15      16      17
+      var lessons = [["",     "",     "",     "",     "",     "",     "",     "",     "",     "",    ],
+                     ["",     "",     "EP",   "EP",   "DM",   "DM",   "",     "",     "",     "",    ],
+                     ["",     "",     "LA1",  "LA1",  "DM",   "DM",   "",     "",     "",     "",    ],
+                     ["",     "",     "",     "",     "",     "",     "AD",   "AD",   "AD",   "",    ],
+                     ["EP",   "EP",   "LA2",  "LA2",  "",     "",     "",     "",     "",     "",    ], ];
+
+      var links = {//"EP":"https://video.ethz.ch/live/lectures/zentrum/ml/ml-d-28/blackboard.html",
+                   "EP":"https://ethz.zoom.us/j/91613399654",
+                   "DM":"https://video.ethz.ch/live/lectures/zentrum/hg/hg-e-7/blackboard.html",
+                   "LA1":"https://video.ethz.ch/live/lectures/zentrum/hg/hg-f-1/blackboard.html",
+                   "LA1":"https://video.ethz.ch/live/lectures/zentrum/hg/hg-e-7/blackboard.html",
+                   "AD":"https://video.ethz.ch/live/lectures/zentrum/ml/ml-d-28/blackboard.html", };
+
+
+      if(1 <= day && day < 6 && 8 <= hour && hour < 18) {
+        var lesson = lessons[day-1][hour-8]
+        if(lesson != "") {
+          window.open(links[lesson],"_self");
+        }
+      }
+
+    </script>
+  </body>
+
+</html>
