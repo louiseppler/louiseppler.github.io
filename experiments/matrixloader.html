@@ -15,8 +15,8 @@
   <title>Louloups - Experimental Programs</title>
 
   <!-- Bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link type="../text/css" rel="stylesheet" href="stylesheet.css"/>
     </head>
     <!-- check on http://getbootstrap.com/components/ -->
     <!-- ============================================================================================ -->
@@ -24,10 +24,10 @@
       <nav class="navbar navbar-dark bg-dark fixed-top">
         <ul class="nav justify-content-center">
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
+            <a class="nav-link active" href="../index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="apps.html">Apps</a>
+            <a class="nav-link" href="../apps.html">Apps</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://www.instagram.com/_louloups_/">Photography</a>
@@ -37,32 +37,36 @@
 
     <div class="jumbotron maxWidth horizontal-center">
       <hr class="my-4">
-      <p class="display-4 homelink"> Experimental Programs </p>
-      <hr class="my-4">
-      <ul>
-        <li><a href="experiments/2dStatistics.html"> 2d Statistics </a></li>
-        <li><a href="experiments/binominalDistribution.html"> Binominal Distribution </a></li>
-        <li><a href="experiments/goldenRatio.html"> Golden Ratio</a> </li>
-        <li><a href="experiments/matrixloader.html"> Wolframalpha Matrix Entry Page </a> </li>
-      </ul>
+      <p class="display-4 homelink"> Wolframalpha Matrix Entry </p>
 
-      <ul>
-        <li><a href="experiments/dice.html"> Dice </a></li>
-        <li><a href="experiments/clock.html"> Clock </a></li>
-      </ul>
-      <ul>
-        <li><a href="experiments/wordgenerator/index.html"> Random Words </a></li>
-      </ul>
-      <ul>
-        <li><a href="experiments/gsOverview/index.html"> History Overview </a></li>
-        <li><a href="experiments/phOverview/index.html"> Physics Units (Beta) </a></li>
-      </ul>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="1 2 3 4 5 6 7 8 9 -> {{1,2,3},{4,5,6},{7,8,9}}" aria-label="Recipient's username" aria-describedby="button-addon2" id="textfield" onkeydown="checkkey()">
+        <button class="btn btn-outline-secondary" type="button" onclick="load()">Load</button>
+      </div>
+      <p></p>
+      <p> Enter only the numbers seperated by a space to load a 2x2 or 3x3 matrix in wolframalpha.</p>
+      <hr class="my-4">
     </div>
 
+    <script>
+
+      function checkkey() {
+        if(event.keyCode == 13) {
+           load();
+         }
+      };
+
+      function load() {
+        var inputStr = document.getElementById("textfield").value;
+        console.log(inputStr);
+        var link = "matrix.html?matrix=" + inputStr;
+        window.open(link,"_self");
+      }
+    </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </body>
 </html>
