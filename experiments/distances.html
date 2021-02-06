@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <!-- Tuorial link: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Drawing_graphics -->
+  <head>
+      <meta charset="utf-8">
+      <title>Heights / Distances</title>
+      <style>
+        canvas {
+          position: absolute;
+          z-index: -1;
+        }
+        p {
+          font-family: "Arial";
+        }
+        p.floating1 {
+          position:absolute;
+          z-index: 0;
+        }
+      </style>
+  </head>
+  <body>
+    <div>
+      <canvas>
+        <p> This siite uses canvases and your browers does not support them </p>
+      </canvas>
+      <p class="floating"> Move your mouse to zoom in/out | Zoom is exponential, Drawing is linear</p>
+    </div>
+
+    <script src="animation1.js"></script>
+
+  </body>
+
+</html>
