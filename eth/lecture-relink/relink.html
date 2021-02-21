@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>Lecture Relink</title>
+      <!-- <link href="styles.css" rel="stylesheet"/> -->
+      <style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+        a {
+          color: black;
+        }
+      </style>
+  </head>
+  <body>
+    <br>
+    <h1> Lecture Relink – Loading...</h1>
+    <br>
+    <p> Relinking will work automatically from quarter-to XX if a lecture is upcoming </p>
+    <p> <a href="index.html"> Home </a> | <a href="edit.html"> Edit </a>
+    <script>
+
+      console.log("bla");
+
+      var data = localStorage.getItem('eth/lectureLinks1');
+      var links = data.split("\n");
+
+      var d = new Date();
+      var n = d.getTime();
+
+      var hour = d.getHours()
+      var min = d.getMinutes()
+      var day = d.getDay()
+
+      console.log(hour);
+      console.log(min);
+      console.log(day);
+
+      if(min >= 45) {hour += 1;}
+
+      if(1 <= day && day < 6 && 8 <= hour && hour < 18) { //checks if is weekday and workhour
+
+        var line = links[(day-1)*11 + (hour-7) + 1];  //*11, number of lines per week; +1 for extra space on top of link data
+        var link = line.substring(3); //remove hour number from link (e.g. "08:")
+        if(link != "" && link != " ") {
+          window.open(link,"_self");
+        }
+
+      }
+
+    </script>
+  </body>
+
+</html>
