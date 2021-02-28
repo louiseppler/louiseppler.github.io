@@ -34,6 +34,16 @@
       var data = localStorage.getItem('eth/lectureLinks1');
       var links = data.split("\n");
 
+      //for seconds links
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const shiftStr = urlParams.get('shift');
+      var shift = 0
+      if(shiftStr != null) {
+        shift = parseInt(shiftStr);
+        console.log("have shift of " + shift);
+      }
+
       var d = new Date();
       var n = d.getTime();
 
@@ -45,16 +55,17 @@
       console.log(min);
       console.log(day);
 
-      var shift = 1;
+      var shiftD = 1;
       if(links[0] == "MONDAY") {
-        shift = 0;
+        shiftD = 0;
       }
 
       if(min >= 45) {hour += 1;}
+      hour -= shift;
 
       if(1 <= day && day < 6 && 8 <= hour && hour < 18) { //checks if is weekday and workhour
 
-        var line = links[(day-1)*11 + (hour-7) + shift];  //*11, number of lines per week; +1 for extra space on top of link data
+        var line = links[(day-1)*11 + (hour-7) + shiftD];  //*11, number of lines per week; +1 for extra space on top of link data
         var link = line.substring(3); //remove hour number from link (e.g. "08:")
         if(link != "" && link != " ") {
           window.open(link,"_self");
