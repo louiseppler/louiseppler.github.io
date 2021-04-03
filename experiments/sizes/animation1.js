@@ -11,7 +11,7 @@ let curY;
 let pressed = false;
 
 
-let tempY = 0;
+let tempY = 0.0;
 
 document.onmousemove = function(e) {
   curX = (window.Event) ? e.pageX : e.clientX +
@@ -31,6 +31,7 @@ let ticking = false;
 canvas.onwheel = scrollinput;
 
 function scrollinput(event) {
+  event.preventDefault();
   tempY -= event.deltaY;
 }
 
@@ -74,11 +75,8 @@ function drawScale() {
   ctx.fillStyle = 'rgba(0,0,0,1)';;
   ctx.font = '48px Arial';
   ctx.textAlign = "left";
-  ctx.fillText(' ' + scaleText(scale), 10, 60);
+  ctx.fillText(' ' + /*scaleText(scale) + */scale, 10, 60);
   ctx.fillRect(10, 10,1,height*0.1);
-
-
-
 }
 
 //===========================================================================================
@@ -130,6 +128,23 @@ function drawLineH(name, name2, h, hide) {
   }
 }
 
+function drawInterval(name, name2, h) {
+  const pixels = toPixels(h);
+
+  if(0 < pixels && pixels < width) {
+    const textSize = pixels/10;
+
+    ctx.fillStyle = 'rgba(0,0,0,1)';
+    ctx.textAlign = "center";
+    ctx.font = textSize + 'px Arial';
+    ctx.fillText(name + " - " + name2, width*0.5, height*0.5-textSize*0.25-pixels/20);
+
+    ctx.fillRect(width*0.5-pixels/2, height*0.5, pixels, 1);
+    ctx.fillRect(width*0.5-pixels/2, height*0.5-pixels/10/2, 1, pixels/10);
+    ctx.fillRect(width*0.5+pixels/2, height*0.5-pixels/10/2, 1, pixels/10)
+  }
+}
+
 function drawInfo() {
   if(scale > 10000000000) {
     ctx.fillStyle = 'rgba(0,0,0,1)';
@@ -146,10 +161,30 @@ function loop() {
   ctx.fillStyle = 'rgba(255,255,255,1)';
   ctx.fillRect(0,0,width,height);
 
-  //drawScale();
+  drawScale();
   drawEarth();
 
+  drawInterval("","1 Decimeter",0.1);
+  drawInterval("","1 Millimeter",0.001);
+  drawInterval("","3 Millimeter",3e-3);
+  drawInterval("","1 Mikrometer",1e-6);
+
+  drawInterval("Electron","1e-18",1e-18);
+  drawInterval("Proton","0.85 fm",0.85e-15);
+  drawInterval("Electron-Proton distance", "5.29e-11", 5.29e-11);
+  drawInterval("Water Molecule","3e-10 nm", 3e-10);
+  drawInterval("DNA Size","2.5 nm", 2.5e-9);
+  drawInterval("Virus","100 nm", 100e-9);
+  drawInterval("Blue Light Wavelength", "500 nm", 500e-9);
+  drawInterval("CellSize", "5 μm", 5e-6);
+  drawInterval("Humain Hair","70 μm");
+  drawInterval("Sugar","0.6mm", 0.6e-3);
+  drawInterval("Ant","2.5 cm", 25e-3);
+
+  drawInterval("","1 meter",1);
+
   drawLine("","100m",100);
+
 
   drawLine("Tallest Pyramide","146.5 m",146.5);
   drawLine("Eiffle Tower","324 m",324);
@@ -169,6 +204,9 @@ function loop() {
 
   drawLine("Mars","79 Gm",  -79000000000)
   drawLine("Jupiter","631 Gm",  969000000000)
+
+
+
 
   //drawInfo();
 

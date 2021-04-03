@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <!-- Tuorial link: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Drawing_graphics -->
+  <head>
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Trainviewer</title>
+
+    <link href="/Users/louiseppler/127/_Libraries/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link type="text/css" rel="stylesheet" href="stylesheet.css"/> -->
+
+    <style>
+    table {
+      table-layout: fixed ;
+      width: 100% ;
+
+    }
+    tr {
+      border: 1px solid black;
+    }
+    tr.normal {
+      border: 0px solid black;
+    }
+    td {
+
+      width: 25% ;
+      text-align: center;
+    }
+    </style>
+
+  </head>
+  <body>
+    <h1 align="center"> Negrellisteg Züge </h1>
+    <p align="center"> Züge von Gleis 41/42 &amp 31/32 aufgelistet aber nicht sichtbar von der Brücke. Alle Angaben ohne Gewähr </p>
+    <hr color="black">
+    <table>
+      <tr class="normal">
+        <td> <p align="left">Zollstrasse </p></td>
+        <td> <p> Zürich HB <p> </td>
+        <td> <p align="right">Europaallee </p> </td>
+      </tr>
+    </table>
+    <table width="100%">
+      <tr>
+      </tr>
+      <tr class="normal">
+        <td></td>
+        <td colspan="2">31-34</td>
+        <td>18</td>
+        <td>17</td>
+        <td>16</td>
+        <td>15</td>
+        <td>14</td>
+        <td>13</td>
+        <td>12</td>
+        <td>11</td>
+        <td>10</td>
+        <td>9</td>
+        <td>8</td>
+        <td>7</td>
+        <td>6</td>
+        <td>5</td>
+        <td>4</td>
+        <td>3</td>
+        <td colspan="2">41-44</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <div id="main">
+    </div>
+
+    <script src="script.js"></script>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/Users/louiseppler/127/_Libraries/js/bootstrap.min.js"></script>
+  </body>
+
+</html>
