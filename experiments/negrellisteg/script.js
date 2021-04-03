@@ -31,7 +31,7 @@ var getJSON = function(url, callback) {
 
 
 
-getJSON('http://transport.opendata.ch/v1/stationboard?id=8503000&limit=20',
+getJSON('https://transport.opendata.ch/v1/stationboard?id=8503000&limit=20',
 function(err, data) {
   if (err !== null) {
     //alert('Something went wrong: ' + err);
@@ -41,7 +41,7 @@ function(err, data) {
   }
 });
 
-getJSON('http://transport.opendata.ch/v1/stationboard?id=8503000&limit=20&type=arrival',
+getJSON('https://transport.opendata.ch/v1/stationboard?id=8503000&limit=20&type=arrival',
 function(err, data) {
   if (err !== null) {
     //alert('Something went wrong: ' + err);
