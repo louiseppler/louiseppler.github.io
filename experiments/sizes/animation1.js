@@ -169,10 +169,12 @@ function loop() {
   drawInterval("","3 Millimeter",3e-3);
   drawInterval("","1 Mikrometer",1e-6);
 
+ drawInterval("Transistorsize","10 nm",10e-9);
+ 
   drawInterval("Electron","1e-18",1e-18);
   drawInterval("Proton","0.85 fm",0.85e-15);
   drawInterval("Electron-Proton distance", "5.29e-11", 5.29e-11);
-  drawInterval("Water Molecule","3e-10 nm", 3e-10);
+  drawInterval("Water Molecule","3e-10", 3e-10);
   drawInterval("DNA Size","2.5 nm", 2.5e-9);
   drawInterval("Virus","100 nm", 100e-9);
   drawInterval("Blue Light Wavelength", "500 nm", 500e-9);
