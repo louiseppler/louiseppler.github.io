@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script>
+    function startTime() {
+        var now = new Date();
+
+        var d = new Date();
+        var x = Math.pow(2,31)-0-now.valueOf()/1000;
+        d.setSeconds(d.getSeconds() + x);
+        var y2038 = d;
+
+        var str3 = getTime(31, new Date());
+
+
+        var strTmp = Math.floor(now.valueOf()/1000).toString(2);
+        if(strTmp.charAt(0) === "1") { //terrible attemp to solve the 2038 problem (and will only work once)
+          strTmp = " " + strTmp;
+        }
+
+        var bit1 = 4;
+        var bit2 = 28;
+
+        for(var i = 5; i < 30; i++) {
+          if(strTmp.charAt(31-i) === "0") {
+            bit1 = i;
+            i = 100; //end loop
+          }
+        }
+
+        for(var i = 30; i > 0; i--) {
+          if(strTmp.charAt(31-i) === "0") {
+            bit2 = i;
+            i = -1; //end loop
+          }
+        }
+
+
+        var dateStr1 = getTime(bit1, new Date());
+        var dateStr2 = getTime(bit2, new Date());
+
+
+        var str = ""
+        var tableStr = "";
+
+
+        tableStr += "<h3>" + y2038 + "</h3>";
+        tableStr += "<p><a href=\"https://en.wikipedia.org/wiki/Year_2038_problem\"> More Info</a></p>"
+        tableStr += "<p>&nbsp;</p>"
+        tableStr += "<hr>"
+        tableStr += "<p>&nbsp;</p>"
+
+
+        //&emsp; very ungly I know...
+        tableStr += "<p text-align=\"left\">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; flips on " + dateStr1 + "</p>";
+
+        //Start of Table
+        tableStr += "<table><tr>"
+
+        //Display line at top
+        tableStr += "<tr>";
+        for(var i = 0; i < 33; i++) {
+          if(31-i == bit1) {
+            tableStr += "<td>|</td>";
+          }
+          else {
+            tableStr += "<td></td>";
+          }
+        }
+        tableStr += "</tr>";
+
+        //Display Main Number
+        tableStr += "<tr>";
+        for (var i = 0; i < strTmp.length; i++) {
+          str += strTmp.charAt(i) + "\n";
+          tableStr += "<td class=\"bit\">" + strTmp.charAt(i) + "</td>";
+        }
+        tableStr += "</tr>";
+
+
+        //Display Line at bottom
+        tableStr += "<tr>";
+        for(var i = 0; i < 33; i++) {
+          if(31-i == bit2) {
+            tableStr += "<td>|</td>";
+          }
+          else {
+            tableStr += "<td></td>";
+          }
+        }
+        tableStr += "</tr>";
+
+        //end of table
+        tableStr += "</td></table>";
+
+        //&emsp; very ungly I know...
+        tableStr += "<p> flips on " + dateStr2 + "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p>";
+        tableStr += "<p>&nbsp;</p>"
+        tableStr += "31st bit flips on " + str3 + "</p>";
+
+        document.getElementById('mainText').innerHTML = "<h1>" +  tableStr + "</h1>";
+
+        var t = setTimeout(startTime, 500);
+    }
+
+    function getTime(bit, now) {
+      var nowB = Math.floor(now.valueOf()/1000);
+
+      var changeB = ( (nowB >> bit) + 1) << bit;
+
+      console.log(nowB);
+      console.log((nowB >> bit));
+      console.log((nowB >> bit) + 1);
+      console.log(changeB);
+
+      console.log("");
+      console.log(now.getSeconds() + (changeB-nowB));
+
+      console.log(Math.pow(2,31)-1);
+
+      now.setSeconds(now.getSeconds() + (changeB-nowB));
+      return now;
+    }
+
+  </script>
+  <style>
+    td {
+      text-align: center;
+    }
+    .bit{
+      font-size: 32px;
+    }
+    p {
+      margin: 0px;
+    }
+    a {
+      color: black;
+    }
+  </style>
+  </head>
+  <body onload="startTime()">
+    <!--   border: 1px solid black; -->
+    <center>
+      <div id="mainText"></div>
+    </center>
+
+  </body>
+</html>
