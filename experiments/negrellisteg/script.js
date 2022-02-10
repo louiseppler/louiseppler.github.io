@@ -29,9 +29,30 @@ var getJSON = function(url, callback) {
     xhr.send();
 };
 
+//var d = new Date();
+datatimeString = ""
 
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1;//January is 0!`
+var hh = today.getHours();
+var min = today.getMinutes();
 
-getJSON('https://transport.opendata.ch/v1/stationboard?id=8503000&limit=20',
+var yyyy = today.getFullYear();
+if(dd<10){dd='0'+dd}
+if(mm<10){mm='0'+mm}
+if(hh<10) {hh='0'+hh}
+if(min<10) {min='0'+min}
+//var today = mm+'/'+dd+'/'+yyyy;
+
+var datatimeString = "&datetime=2022-02-10%2012:26"
+datatimeString = "&datetime="+yyyy+"-"+mm+"-"+dd+"%20"+hh+min;
+
+console.log("datetime string:"+datatimeString);
+
+//https://transport.opendata.ch/v1/stationboard?id=8503000&limit=20&datetime2022-02-10%2011:22
+
+getJSON('https://transport.opendata.ch/v1/stationboard?id=8503000&limit=20' + datatimeString,
 function(err, data) {
   if (err !== null) {
     //alert('Something went wrong: ' + err);
@@ -41,7 +62,7 @@ function(err, data) {
   }
 });
 
-getJSON('https://transport.opendata.ch/v1/stationboard?id=8503000&limit=20&type=arrival',
+getJSON('https://transport.opendata.ch/v1/stationboard?id=8503000&limit=20&type=arrival' +  datatimeString,
 function(err, data) {
   if (err !== null) {
     //alert('Something went wrong: ' + err);
