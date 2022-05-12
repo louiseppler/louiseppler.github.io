@@ -4,23 +4,39 @@
       <meta charset="utf-8">
       <title>Physics Overview</title>
       <link href="styles.css" rel="stylesheet"/>
-      <script src="https://unpkg.com/vue"></script>
+      <!-- <script src="https://unpkg.com/vue"></script> -->
+      <script src="https://unpkg.com/vue@3"></script>
   </head>
   <body>
-    <div id="vue-app">
-      <p color="#ff0000">This siite is under development and may contain mistakes</p>
+    <div id="vue-app" class="top">
+      <div class="maxW">
+      <h2>Physics Units 4d Plot</h2>
+      <p color="#ff0000">This site is under development and may contain mistakes.</p>
+      <p>The basic idea here is to plot a bunch of units based on the <a href="https://en.wikipedia.org/wiki/SI_base_unit">SI base units</a> (with using Coulomb instead of Ampere). These are then arranged in a 4d plot. The outer table represents the first two dimensions (Distance and 1/Time). The inner table represents further two dimensions (Charge, Weight).</a></p>
+      <p><br>Created: October 2019</p>
+      </div>
+      <center>
+      <hr>
+      <p class="subtitle1">&nbsp;</p>
+
       <table>
         <tr>
           <th><p>Origin</p></th>
           <th><input v-model="originTF"></th>
+          <th></th>
+
         </tr>
         <tr>
           <th><p>X Axis</p></th>
           <th><input v-model="axisTFs[0]"></th>
+          <th></th>
+
         </tr>
         <tr>
           <th><p>Y Axis</p></th>
           <th><input v-model="axisTFs[1]"></th>
+          <th></th>
+
         </tr>
         <tr>
           <th><p>Z Axis</p></th>
@@ -34,10 +50,14 @@
         </tr>
       </table>
       <button v-on:click="toggleShowAll()"> {{showAll ? "Shrink z and w axis" : "Extend z and w axis"}} </button>
-      <button v-on:click="calculate()"> Calculate </button>
+      <p>&nbsp;</p>
+      <button v-on:click="calculate()">Compute Table </button>
 
-      <h3> {{ units[current].name }} </h3>
-      <p> [{{ units[current].letter }}] = 1{{ units[current].unit }} : {{ units[current].unitStr }} </p>
+
+      <p>&nbsp;</p>
+      <p class="title1"> {{ units[current].name }} </p>
+      <p class="subtitle1"> [{{ units[current].letter }}] = 1{{ units[current].unit }} : {{ units[current].unitStr }} </p>
+      <p>&nbsp;</p>
 
       <!-- https://stackoverflow.com/questions/45977778/bind-multidimensional-array-with-vuejs -->
       <table>
@@ -54,7 +74,7 @@
           </th>
         </tr>
       </table>
-
+    </center>
     </div>
   </body>
 

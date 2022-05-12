@@ -2,6 +2,17 @@ body {
   margin: 0px;
 }
 
+div.top {
+  margin-left: 50px;
+  margin-right: 50px;
+
+}
+
+div.maxW {
+  max-width: 750px;
+  margin: auto;
+}
+
 table.navbar{
   position: fixed;
   z-index: 999;
@@ -50,4 +61,12 @@ p{
 
 h4{
   margin: 0px;
+}
+
+p.title1 {
+  font-size: 4em;
+}
+
+p.subtitle1 {
+  font-size: 1.5em;
 }

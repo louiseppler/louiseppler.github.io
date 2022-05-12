@@ -1,6 +1,15 @@
-new Vue({
+const { createApp } = Vue
+
+
+//new Vue({
+createApp({
     el:'#vue-app',
-    data: {
+    //data: {
+    mounted() {
+      this.calculate();
+    },
+    data() {
+      return {
       units: [
         { name: "*", letter: "*", formula: [0,0,0,0], formulaStr: "m^0*s^0*kg^0*c^0", unit: " ", unitStr: "*", },
         { name: "Distance", letter: "d", formula: [1,0,0,0], formulaStr: "m^1*s^0*kg^0*c^0", unit: "m", unitStr: "meter", },
@@ -36,6 +45,7 @@ new Vue({
         wAxisActive: true,
         current: 0,
         showAll: false,
+                }
     },
     methods: {
       calculate: function() {
@@ -189,5 +199,5 @@ new Vue({
       toggleShowAll: function() {
         this.showAll = !this.showAll
       }
-    }
-});
+    },
+}).mount('#vue-app');

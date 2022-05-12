@@ -1,0 +1,9 @@
+div.maxW {
+  max-width: 750px;
+  margin-left: 0px;
+}
+
+p.noMargin {
+  padding: 0px;
+  margin: 0px;
+}
