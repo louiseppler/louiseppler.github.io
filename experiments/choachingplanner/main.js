@@ -338,7 +338,7 @@ function showExamples() {
   document.getElementById('Times').value =
   "14:00-14:15\n14:15-14:30\n14:30-14:45\n14:45-15:00";
   document.getElementById('Rooms').value =
-  "Room 42\nRoom 43\nRoom44\nBreak";
+  "Room 42\nRoom 43\nRoom44";
 }
 
 function newTab() {
