@@ -1,7 +1,37 @@
-table, th, td {
-  border: 1px solid;
+table {
+  border-collapse: collapse;
 }
 
 td {
   padding: 10px;
+  border: 1px solid;
+}
+
+div.maxWidth {
+  max-width: 1000px;
+  margin: auto;
+}
+
+table.formatting {
+  width: 100%;
+  border: none;
+}
+
+td.textarea {
+  height: 200px;
+  border: none;
+  align-content: center;
+}
+
+td.noborder {
+  border: none;
+}
+
+textarea {
+  height: 100%;
+  width: 100%;
+}
+
+p.center {
+  text-align: center;
 }
