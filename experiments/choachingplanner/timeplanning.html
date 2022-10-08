@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <script>
+  /*window.addEventListener('beforeunload', function (e) {
+           e.preventDefault();
+           e.returnValue = '';
+       });*/
+  </script>
+
+  <title>Louloups - Experimental Programs</title>
+
+  <link rel="stylesheet" href="style.css">
+
+
+
+
+  <!-- Bootstrap -->
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link type="../../text/css" rel="stylesheet" href="stylesheet.css"/>
+    </head>
+    <!-- check on http://getbootstrap.com/components/ -->
+    <!-- ============================================================================================ -->
+    <body>
+
+    <div class="jumbotron maxWidth horizontal-center">
+      <hr class="my-4">
+      <p class="display-4 homelink"> Time Slot Planning </p>
+      <p>Generate the times for your meetings automatically here. Then copy and paste them back.
+      <br>Leave fields empty if break time or long break is not needed.</p>
+      <hr>
+
+      <p>Start Time: <input type="text" id="startTime" placeholder="formatting: 14:15 or 14.15"></p>
+      <p>Duration: <input type="text" id="durationTime" placeholder="4" class="small">minutes</p>
+      <p>Break Time: <input type="text" id="breakTime" placeholder="1" class="small">minutes</p>
+      <p>Long Break of <input type="text" id="longBreak" placeholder="10" class="small"> minutes every <input type="text" id="longBreak2" placeholder="10" class="small"> meetings </p>
+      <p>Formatting
+        <select name="formatting" id="format-select">
+          <option value="a2"> 14:15 - 15:20</option>
+          <option value="a1"> 14:15</option>
+          <option value="b2"> 14.15h - 14.20h </option>
+          <option value="b1"> 14.15h</option>
+          <option value="c2"> 2:15 PM - 2:20 PM</option>
+          <option value="c1"> 2:15 PM</option>
+      </select>
+
+      </p>
+
+
+      <hr>
+      <center>
+          <button onclick="calculate()">Compute Times</button>
+          <p></p>
+          <!-- <textarea type="text" id="outputText" placeholder="" height="10em"></textarea> -->
+          <div id="outputDiv">
+          </div>
+          <p></p>
+          <button onclick="copyResult()"> Copy Result</button>
+          <button onclick="computeEntries()"> Compute More Entries </button>
+          <div id="copiedDiv"></div>
+
+      </center>
+
+
+
+    </div>
+
+    <script src="main2.js"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+  </body>
+</html>

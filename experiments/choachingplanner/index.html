@@ -86,12 +86,18 @@
             <input type="text" id="SeparatorTxt" placeholder="default: and">
             </p>
         </td>
-        <td class="noborder"></td>
+        <td class="noborder">
+          <p>Generate Automatically with<br>
+          <a href="./timeplanning.html" target="_blank">Time Slot Planner</a></p>
+
+        </td>
         <td class="noborder">
           <p>Break Title<br>
           <input type="text" id="BreakTxt" placeholder="default: Break">
         </tr>
       </table>
+
+
       <hr>
       <center>
       <button onclick="calculate()"> Compute Table </button>
@@ -108,7 +114,8 @@
     <p>If you want to edit the table in excel/google sheets, press copy table content and then paste in your spreadsheet editor.</p>
     <!-- <p>View the table in a new tab. Then you can print the page to get the table as a pdf.</p> -->
     <button type="button" name="button" onclick="newTab()">View Table in new Tab</button>
-    <button type="button" name="button" onclick="copyData()">Copy Table Content</button>    <div id="copiedDiv"></div>
+    <button type="button" name="button" onclick="copyData()">Copy Table Content</button>
+       <div id="copiedDiv"></div>
     <br>
     <p>Note: This page might be useful for other events. For example a sports game. Instead of people, use teams and instead for rooms use field 1, 2 etc.</p>
     </div>

@@ -35,3 +35,7 @@ textarea {
 p.center {
   text-align: center;
 }
+
+input.small {
+  width: 40px;
+}

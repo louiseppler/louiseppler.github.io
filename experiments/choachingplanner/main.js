@@ -337,9 +337,9 @@ function showExamples() {
   document.getElementById('Names').value =
   "Alice\nBob\nCharlie\nDave\nEve\nFelix\nGian\nHilbert\nIda\nJan";
   document.getElementById('Times').value =
-  "14:00-14:15\n14:15-14:30\n14:30-14:45\n14:45-15:00";
+  "14:15 - 14:19\n14:20 - 14:24\n14:25 - 14:29\n14:30 - 14:34\n14:35 - 14:39\n14:40 - 14:44\n14:55 - 14:59\n15:00 - 15:04\n15:05 - 15:09\n15:10 - 15:14\n15:15 - 15:19\n15:20 - 15:24";
   document.getElementById('Rooms').value =
-  "Room 42\nRoom 43\nRoom44\nRoom45";
+  "Room 42\nRoom 43\nRoom 44\nRoom 45";
 
   document.getElementById('inputValue').value = 10;
   document.getElementById('limitValue').value = 4;
@@ -358,6 +358,10 @@ function newTab() {
   var tab = window.open('about:blank', '_blank');
   tab.document.write(str); // where 'html' is a variable containing your HTML
   tab.document.close();
+}
+
+function individualList() {
+
 }
 
 function copyData() {
