@@ -37,34 +37,34 @@
     <div class="jumbotron maxWidth horizontal-center">
       <hr class="my-4">
       <p class="display-4 homelink"> Meeting Scheduler </p>
-      <p>Note: This page might be useful for other events. For example a sportsgame. Instead of people use teams and instead for rooms use field 1, 2 etc. </p>
-      <p>This website will help you plan meetings where every person has an individual meeting with every other person. In addition you can also limit the number meetings that happen in parallel. This option is useful if you have a limited number of rooms available. <br> The Algorithm is designed in a way that the necessary breaks are spread evenly per person. Limiting the number of meetings happening in parallel will result in more breaks.</p>
+      <p>This website will help you plan meetings where each person has an individual meeting with every other person. In addition, you can also choose the number meetings that happen in parallel. This option is useful if you have a limited number of rooms available.</p>
 
+      <p><a href="#" onclick="javascript:showExamples()">Show an Example</a></p>
       <p>Number of Participants:
       <input type="text" id="inputValue" placeholder="for example 7">
-      <button onclick="calculate()"> Calculate </button>
+      <button onclick="calculate()"> Compute Table </button>
       </p>
       <hr class="my-4">
       <p class=""><strong>Advanced Options</strong></p>
       <p>Number of mettings in parallel:
       <input type="text" id="limitValue"  placeholder="Leave empty if not needed">
-      </p>
+      <br>(Limiting the number of meetings happening in parallel will result in some people having a break.)</p>
       <p>
       <input type="checkbox" id="breakValue" checked>
       Show Break
       </p>
       <p>
       <input type="checkbox" id="spredValue" checked>
-      Spread evenly
-      <br>In some cases it can happen that there is only one meeting at the end. This option prevents this by moving the breaks.</p>
+      Prevent breaks at end
+      <br>In some cases it can happen that there is only one active meeting at the end. This option prevents this by spreading the breaks out.</p>
       <input type="checkbox" id="splitCells">
       Two Cells per Meeting
-      <br>This allows for more flexible formatting in a spreadsheet editor.</p>
+      <br>After exporting, this allows for more flexible formatting in a spreadsheet editor</p>
 
 
       <hr class="my-4">
       <p class=""><strong>Formatting Options</strong></p>
-      <p>Enter each attribute seperaed by a new line. Leave empty to use defaults. (<a href="#" onclick="javascript:showExamples()">Show Example</a>)</p>
+      <p>Enter each attribute seperaed by a new line. Leave empty to use defaults.</p>
       <table class="formatting">
         <tr>
           <td class="textarea">
@@ -92,7 +92,10 @@
           <input type="text" id="BreakTxt" placeholder="default: Break">
         </tr>
       </table>
-
+      <hr>
+      <center>
+      <button onclick="calculate()"> Compute Table </button>
+      </center>
 
 
     </div>
@@ -106,6 +109,8 @@
     <!-- <p>View the table in a new tab. Then you can print the page to get the table as a pdf.</p> -->
     <button type="button" name="button" onclick="newTab()">View Table in new Tab</button>
     <button type="button" name="button" onclick="copyData()">Copy Table Content</button>    <div id="copiedDiv"></div>
+    <br>
+    <p>Note: This page might be useful for other events. For example a sports game. Instead of people, use teams and instead for rooms use field 1, 2 etc.</p>
     </div>
 
     <script src="main.js"></script>

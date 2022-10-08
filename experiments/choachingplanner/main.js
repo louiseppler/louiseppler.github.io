@@ -33,6 +33,7 @@ function calculate() {
   }
   else if(n2 > 25){
     showInNewTab = true;
+    div.innerHTML = "Table opend in new tab."
   }
 
   if(limitValue.value != "") {
@@ -334,11 +335,14 @@ function showExamples() {
   }
 
   document.getElementById('Names').value =
-  "Alice\nBob\nCharlie";
+  "Alice\nBob\nCharlie\nDave\nEve\nFelix\nGian\nHilbert\nIda\nJan";
   document.getElementById('Times').value =
   "14:00-14:15\n14:15-14:30\n14:30-14:45\n14:45-15:00";
   document.getElementById('Rooms').value =
-  "Room 42\nRoom 43\nRoom44";
+  "Room 42\nRoom 43\nRoom44\nRoom45";
+
+  document.getElementById('inputValue').value = 10;
+  document.getElementById('limitValue').value = 4;
 }
 
 function newTab() {
