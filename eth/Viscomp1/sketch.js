@@ -3,6 +3,10 @@ const s1 = ( sketch ) => {
   let slider;
   let input;
 
+  var u = 2;
+  var v = 1;
+
+
   sketch.setup = () => {
     sketch.createCanvas(500,500);
     sketch.noStroke();
@@ -10,11 +14,12 @@ const s1 = ( sketch ) => {
   };
 
   sketch.draw = () => {
-    if(!mouseInSketch(sketch)) return;
+    //if(!mouseInSketch(sketch)) return;
+    if(mouseInSketch(sketch)) {
 
-
-    var u = sketch.mouseX/(sketch.width +0.0)*10-5;
-    var v = sketch.mouseY/(sketch.height +0.0)*10-5;
+      u = sketch.mouseX/(sketch.width +0.0)*10-5;
+       v = sketch.mouseY/(sketch.height +0.0)*10-5;
+    }
 
      var s = 5; //drawing size
      for(var x = 0; x < sketch.width; x += s) {

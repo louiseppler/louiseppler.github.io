@@ -3,6 +3,12 @@ var mx = 0;
 var my = 0;
 var scale = 0;
 
+var mxB = 0;
+var myB = 0;
+
+var inSketchA = false;
+var inSketchB = false;
+
 function changeScale() {
  scale = 1-scale;
  if(scale == 0) {
@@ -38,8 +44,27 @@ const s1 = ( sketch ) => {
       sketch.ellipse(dots[i].mx, dots[i].my, 10, 10);
     }
 
-    if(!mouseInSketch(sketch)) {return;}
+    if(inSketchB) {
+      var a = ((sketch.width-mxB)/sketch.width*2-1);
+      var b = ((myB)/sketch.width*2-1);
 
+      if(scale == 1) {
+        a *= 4;
+        //b = 4;
+      }
+
+      var y1 = (a*-1+b +1)*sketch.height/2;
+      var y2 = (a*1+b +1)*sketch.height/2;
+
+      sketch.stroke(0,128,128);
+      sketch.strokeWeight(3);
+      sketch.line(0,y1,sketch.width,y2);
+      sketch.noStroke();
+    }
+
+    inSketchA = false;
+    if(!mouseInSketch(sketch)) {return;}
+    inSketchA = true;
 
     mx = sketch.mouseX;
     my = sketch.mouseY;
@@ -75,17 +100,28 @@ const s1 = ( sketch ) => {
 
   function drawRandomLine() {
 
-    const mx1 = Math.random()*sketch.width;
-    const my1 = Math.random()*sketch.height;
+    go = true;
 
-    const mx2 = Math.random()*sketch.width;
-    const my2 = Math.random()*sketch.height;
+    while(go) {
+      const mx1 = Math.random()*sketch.width;
+      const my1 = Math.random()*sketch.height;
 
-    for(var i = 0; i < 10; i++) {
-        var mx = mx1+(mx2-mx1)/10*i;
-        var my = my1+(my2-my1)/10*i;
+      const mx2 = Math.random()*sketch.width;
+      const my2 = Math.random()*sketch.height;
 
-        dots.push({mx: mx, my: my});
+      var d = getDist(mx1,my1,mx2,my2); //distance
+      var a = (my2-my1)/(mx2-mx1); //angle
+
+      if(d > 200*200 && a < 2 && a > -2) { //if line doesn't match try again
+
+        go = false;
+        for(var i = 0; i < 10; i++) {
+            var mx = mx1+(mx2-mx1)/10*i;
+            var my = my1+(my2-my1)/10*i;
+
+            dots.push({mx: mx, my: my});
+        }
+      }
     }
 
 
@@ -123,8 +159,17 @@ const s2 = ( sketch ) => {
       drawLine(2*dot.mx/sketch.width-1, 2*dot.my/sketch.height-1, mx, my);
     }
 
-    sketch.stroke(128,0,128);
-    drawLine(2*mx/sketch.width-1, 2*my/sketch.height-1, mx, my);
+    if(inSketchA) {
+      sketch.stroke(128,0,128);
+      drawLine(2*mx/sketch.width-1, 2*my/sketch.height-1, mx, my);
+    }
+
+    inSketchB = false;
+    if(!mouseInSketch(sketch)) return;
+    inSketchB = true;
+
+    mxB = sketch.mouseX;
+    myB = sketch.mouseY;
   }
 
   function drawLine(a ,b) {
