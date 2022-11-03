@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <center>
+    <br>
+    <h1>Fourier Transformation</h1>
+    <hr>
+    This sketch does a inverse fourier transform (from frequency domain to time domain). <br>
+    Enter the amplitues with your mouse in the left sketch. Enter frequency while holding down shift. <br>
+
+    <hr>
+    <td><input type="button" id="btn1" value="Change Resolution"></td>
+    <td><input type="button" id="btn2" value="Change Display Mode"></td>
+    <td><input type="button" id="btn3" value="Reset"></td>
+    <table>
+      <tr>
+        <td><h3>Frequency Domain</h3></td>
+        <td><h3>Time Domain<h3></td>
+      </tr>
+    <tr>
+    <td><div id="p5sketch1">
+    </div></td>
+    <td><div id="p5sketch2">
+    </div></td>
+    </tr>
+
+    </table>
+
+
+  </center>
+  </body>
+</html>
