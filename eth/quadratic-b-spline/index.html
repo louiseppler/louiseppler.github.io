@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <center>
+      <p>.</p>
+    <h1>Quadratic B-Spline</h1>
+    <p>We define three points here. Then we do two linear interpolation between these points to get two new ones. Then we do an other linear interpolation between the two new points. <br>
+    Use the slider to change the vlaue of the linear interpolation. Using all these points we get a curve.</p>
+    <div id="inputFields">
+      <input type="range" min="0" max="100" id="slider1">
+      <input type="button" id="button1" value="stop">
+    </div>
+    <hr>
+    <div id="p5sketch1">
+    </div>
+  </center>
+  </body>
+</html>
