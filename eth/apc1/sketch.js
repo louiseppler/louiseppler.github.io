@@ -19,6 +19,8 @@ function changeScale() {
  }
 }
 
+var drawRandomLineHelper;
+
 function drawRandomLine() {
   s1.drawRandomLine();
 }
@@ -34,10 +36,13 @@ const s1 = ( sketch ) => {
 
     btn1 = document.getElementById("button1");
     btn1.onclick = drawRandomLine;
+    drawRandomLineHelper = drawRandomLine;
+
+    document.getElementById("button2").onclick = resetDrawing;
   };
 
   sketch.draw = () => {
-    sketch.background(224)
+    sketch.background(224);
 
     sketch.fill(0);
     for(var i = 0; i < dots.length; i++) {
@@ -61,6 +66,8 @@ const s1 = ( sketch ) => {
       sketch.line(0,y1,sketch.width,y2);
       sketch.noStroke();
     }
+    displayInfoLabel();
+
 
     inSketchA = false;
     if(!mouseInSketch(sketch)) {return;}
@@ -68,6 +75,7 @@ const s1 = ( sketch ) => {
 
     mx = sketch.mouseX;
     my = sketch.mouseY;
+
 
     if(sketch.mouseIsPressed && dragging) {
       if(Math.abs(dots[dots.length-1].mx-sketch.mouseX)+Math.abs(dots[dots.length-1].my-sketch.mouseY) > 25) {
@@ -92,6 +100,37 @@ const s1 = ( sketch ) => {
       dots.push({mx: sketch.mouseX, my:sketch.mouseY});
       dragging = true;
     }
+  }
+
+  function displayInfoLabel() {
+    var str = "-";
+    if(inSketchA) {
+      const a = 2*mx/sketch.width-1;
+      const b = 2*my/sketch.height-1;
+      var a2 = a;
+      if(scale == 1) {a2 = a*4;}
+      str = "&nbsp;&nbsp;("+ sketch.nf(a,1,2) +","+sketch.nf(b,1,2)+") &nbsp;&rarr; &nbsp;  f(x)=" + sketch.nf(-a2,1,2) + "x+"+sketch.nf(b,1,2);
+    }
+    if(inSketchB) {
+      str = "B";
+
+      //duplicate code
+      var a = ((sketch.width-mxB)/sketch.width*2-1);
+      var b = ((myB)/sketch.width*2-1);
+
+      if(scale == 1) {
+        a *= 4;
+        //b = 4;
+      }
+
+      str = "f(x) = " + sketch.nf(-a,1,2)+"x+"+ sketch.nf(b,1,2) + " &nbsp;&larr; &nbsp;  ("+ sketch.nf(a,1,2) +","+sketch.nf(b,1,2)+")&nbsp;&nbsp;";
+    }
+
+    document.getElementById("infoLabel").innerHTML = str;
+  }
+
+  function resetDrawing() {
+    dots = [];
   }
 
   function getDist(x1, y1, x2, y2) {
@@ -155,12 +194,14 @@ const s2 = ( sketch ) => {
 
     sketch.stroke(0,128);
     sketch.strokeWeight(3);
+    sketch.ellipse(0,0,0,0);
     for(const dot of dots) {
       drawLine(2*dot.mx/sketch.width-1, 2*dot.my/sketch.height-1, mx, my);
     }
 
     if(inSketchA) {
       sketch.stroke(128,0,128);
+      sketch.ellipse(0,0,0,0);
       drawLine(2*mx/sketch.width-1, 2*my/sketch.height-1, mx, my);
     }
 

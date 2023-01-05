@@ -34,7 +34,10 @@ const s1 = ( sketch ) => {
 
 
   sketch.setup = () => {
+
     sketch.createCanvas(700,500);
+
+    sketch.textAlign(sketch.CENTER);
 
     button1();
 
@@ -92,6 +95,8 @@ const s1 = ( sketch ) => {
       sketch.ellipse(dots[i].x,dots[i].y,10,10);
     }
 
+    drawAxis();
+
 
     if(mouseInSketch(sketch) && sketch.mouseIsPressed) {
       var minDotIndex = 0;
@@ -114,6 +119,30 @@ const s1 = ( sketch ) => {
 
 
   };
+
+  function drawAxis() {
+    var w = sketch.width;
+    var h = sketch.height;
+
+    sketch.fill(96);
+    sketch.noStroke();
+    sketch.text("y",10,12);
+    sketch.text("x",w-10,h-7);
+
+    sketch.stroke(96);
+    sketch.strokeWeight(1);
+
+    //axis + arrow
+    sketch.line(10,17,10,h);
+    sketch.line(7,22,10,17);
+    sketch.line(13,22,10,17);
+
+    //axis + arrow
+    sketch.line(0,h-10, w-15, h-10);
+    sketch.line(w-20,h-13,w-15, h-10);
+    sketch.line(w-20,h-7,w-15, h-10);
+
+  }
 
   function drawInterpolant() {
     sketch.beginShape();
@@ -302,7 +331,11 @@ const s2 = ( sketch ) => {
 
 
   sketch.setup = () => {
+
     sketch.createCanvas(700,300);
+
+    sketch.textAlign(sketch.CENTER);
+
 
     sketch.background(250);
 
@@ -323,11 +356,37 @@ const s2 = ( sketch ) => {
     sketch.ellipse(0,0,0,0);
     sketch.line(value/100*sketch.width,0,value/100*sketch.width,sketch.height);
 
-
-
-
+    drawAxis();
 
   }
+
+
+    function drawAxis() {
+      var w = sketch.width;
+      var h = sketch.height;
+
+      sketch.fill(96);
+      sketch.noStroke();
+      sketch.text("1",6,22);
+      sketch.text("1",w-20,h-5);
+
+      sketch.stroke(96);
+      sketch.strokeWeight(1);
+
+
+
+
+      sketch.line(20,0,20,h);
+     sketch.line(16,20,24,20);
+    // sketch.line(13,22,10,17);
+
+      sketch.line(0, h-20, w, h-20);
+      sketch.line(w-20,h-16,w-20,h-24);
+      // sketch.line(w-20,h0-3,w-15, h0);
+      // sketch.line(w-20,h0+3,w-15, h0);
+
+    }
+
 
   function drawBasis() {
     var N = deg+1;
@@ -358,8 +417,8 @@ const s2 = ( sketch ) => {
             sketch.stroke('#000000');
 
           }
-          sketch.line((i-step)*sketch.width/(N-1), (1-prevSol[j])*sketch.height,
-                      i*sketch.width/(N-1),      (1-nextSol[j])*sketch.height);
+          sketch.line(20+(i-step)*(sketch.width-40)/(N-1), 20+(1-prevSol[j])*(sketch.height-40),
+                      20+i*(sketch.width-40)/(N-1),      20+(1-nextSol[j])*(sketch.height-40));
 
 
         }

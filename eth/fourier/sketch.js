@@ -156,6 +156,7 @@ const s2 = ( sketch ) => {
 
     sketch.stroke(0);
     sketch.strokeWeight(3);
+    sketch.ellipse(0,0,0,0);
     for(var i = 1; i < sketch.height/s2; i++) {
       sketch.line((i-1)*s2, values[i-1], i*s2, values[i]);
     }
@@ -174,6 +175,7 @@ const s2 = ( sketch ) => {
 
           if(!smallResolution && j % f != 0) continue;
           sketch.stroke((j*4/heights.length)%1,1,1);
+          sketch.ellipse(0,0,0,0);
 
           var x = i-sketch.width/s2/2;
           var f2 = 200/s; //+ shifts[i]*2*Math.PI
@@ -217,12 +219,14 @@ const s2 = ( sketch ) => {
 
       //draw helper functions
       sketch.stroke(255,0,128);
+      sketch.ellipse(0,0,0,0);
       if(displayMode == 2 || displayMode == 3) {
         for(var i = 1; i < sketch.height/s2; i++) {
           sketch.line((i-1)*s2, sampleValues1[i-1], i*s2, sampleValues1[i]);
         }
       }
       sketch.stroke(255,128,0);
+      sketch.ellipse(0,0,0,0);
       if(displayMode == 3) {
 
         for(var i = 1; i < sketch.height/s2; i++) {
@@ -235,12 +239,12 @@ const s2 = ( sketch ) => {
     if(displayMode == 2 || displayMode == 3) {
       sketch.fill(255,0,128);
       sketch.noStroke();
-      sketch.text("-- preview function", 10, 10);
+      sketch.text("---- preview function", 10, 15);
     }
     if(displayMode == 3) {
       sketch.fill(255,128,0);
       sketch.noStroke();
-      sketch.text("-- function without preview function", 120, 10);
+      sketch.text("---- function without preview function", 120, 15);
     }
   }
 

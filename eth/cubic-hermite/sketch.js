@@ -23,6 +23,8 @@ const s1 = ( sketch ) => {
 
   sketch.setup = () => {
 
+    sketch.textAlign(sketch.CENTER);
+
     sketch.createCanvas(700,500);
 
     dots = [
@@ -74,7 +76,10 @@ const s1 = ( sketch ) => {
     drawTangent(sketch, dots[1],dots[3]);
 
     sketch.stroke(0);
-    drawFunction2();
+
+    if(dots[1].mx-dots[0].mx > 25) {
+      drawFunction2();
+    }
     sketch.stroke(204);
 
     if(mouseInSketchB) {
@@ -89,6 +94,7 @@ const s1 = ( sketch ) => {
     sketch.ellipse(dots[1].mx, dots[1].my, 10, 10);
 
 
+    drawAxis();
 
     if(!mouseInSketch(sketch)) {return;}
 
@@ -132,6 +138,28 @@ const s1 = ( sketch ) => {
       //dots.push({mx: sketch.mouseX, my:sketch.mouseY});
       dragging = true;
     }
+  }
+
+  function drawAxis() {
+    var w = sketch.width;
+    var h = sketch.height;
+
+    sketch.fill(0);
+    sketch.noStroke();
+    sketch.text("f(x)",3,12);
+    sketch.text("x",w-11,h-7);
+
+    sketch.stroke(0);
+    sketch.strokeWeight(1);
+
+    sketch.line(10,17,10,h);
+    sketch.line(7,22,10,17);
+    sketch.line(13,22,10,17);
+
+    sketch.line(0,h-10, w-15, h-10);
+    sketch.line(w-20,h-13,w-15, h-10);
+    sketch.line(w-20,h-7,w-15, h-10);
+
   }
 
   function unpdateAngleMarkers() {
@@ -305,6 +333,8 @@ const s2 = ( sketch ) => {
 
     sketch.background(250);
 
+    sketch.textAlign(sketch.CENTER);
+
   };
 
   sketch.draw = () => {
@@ -348,9 +378,42 @@ const s2 = ( sketch ) => {
     drawFunction(x => (x*x*x-x*x));
     sketch.stroke(0);
     sketch.ellipse(0,0,0,0);
-    drawFunction(x => 0);
+    //drawFunction(x => 0);
+
+    drawAxis();
 
   }
+
+  function drawAxis() {
+    var w = sketch.width;
+    var h = sketch.height;
+
+    var h0 = h*0.8+10;
+
+    sketch.fill(0);
+    sketch.noStroke();
+    sketch.text("1",6,22);
+    sketch.text("1",w-10,h0+15);
+
+    sketch.stroke(0);
+    sketch.strokeWeight(1);
+
+
+
+
+    sketch.line(10,0,10,h);
+     sketch.line(6,10,14,10);
+    // sketch.line(13,22,10,17);
+
+    sketch.line(0,h0, w, h0);
+    sketch.line(w-10,h0-4,w-10,h0+4);
+    // sketch.line(w-20,h0-3,w-15, h0);
+    // sketch.line(w-20,h0+3,w-15, h0);
+
+  }
+
+
+
 
   function drawFunction(func) {
     var res = 100;
@@ -368,8 +431,8 @@ const s2 = ( sketch ) => {
 
 
       if(i != 0) {
-        sketch.line((i-step)*sketch.width, (1-prevSol)*sketch.height*0.8,
-                    i*sketch.width,      (1-nextSol)*sketch.height*0.8);
+        sketch.line(10+(i-step)*(sketch.width-20), 10+(1-prevSol)*sketch.height*0.8,
+                    10+i*(sketch.width-20),      10+(1-nextSol)*sketch.height*0.8);
       }
 
       prevSol = nextSol;

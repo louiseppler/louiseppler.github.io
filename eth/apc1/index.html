@@ -16,11 +16,24 @@
       <p> <div id="link-button1">Normal Scale</div>
       <a href="javascript:changeScale()">change</a></p>
       <button type="button" id="button1">Draw Random Line</button>
+      <button type="button" id="button2">Reset Drawing</button>
       <td><div id="p5sketch1">
       </div></td>
       <td><div id="p5sketch2">
       </div></td>
     </table>
+    <div id="infoLabel">ax+b = (a,b)</div>
+    <hr>
+    <div class="maxWidth">
+    <h3>Short Explanation</h3>
+    <p>Every line can be describle with 2 numbres. For example as f(x) = ax+b.
+    So can every point in a 2d plane, i.e p=(x,y). Thus for every point we can draw a line and vice versa.</p>
+    <p>If one draws several dots in a line (<a href="javascript:drawRandomLineHelper()">view example</a>) then all the new lines will meet in a point. If one hovers over that new point one can see how this corresponds to the line where all orignal dots were drawn. This methode can be used to do edge detection in images.</p>
+    <p>This Transform also has the property that the number of points above a line corresponds to the number of lines above the point in the transformed image. This fact is useful for some algorithms.</p>
+    <br>
+    <br>
+
+    </div>
 
 
   </center>

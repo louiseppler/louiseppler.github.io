@@ -108,9 +108,20 @@ const s2 = ( sketch ) => {
 
   var value = 0.0;
 
+  var button;
+
+  var showAxis = false;
+
 
   sketch.setup = () => {
     sketch.createCanvas(500,300);
+
+    button = document.getElementById("button1");
+    button.onclick = button1;
+
+    document.getElementById("button2").onclick = button2;
+
+    button1();
 
   };
 
@@ -123,6 +134,7 @@ const s2 = ( sketch ) => {
 
     sketch.stroke(0,32);
     sketch.strokeWeight(3);
+    sketch.ellipse(0,0,0,0);
     for(const dot of dots) {
       transfromDot(dot.mx, dot.my);
     }
@@ -131,6 +143,13 @@ const s2 = ( sketch ) => {
       sketch.stroke(128,0,128);
       transfromDot(mouseCoords.mx, mouseCoords.my);
     }
+
+
+    if(showAxis) {
+      drawAxis();
+      sketch.ellipse(0,0,0,0);
+    }
+
 
 
     angle2 = sketch.mouseX/sketch.width*Math.PI*2;
@@ -142,6 +161,41 @@ const s2 = ( sketch ) => {
     // sketch.strokeWeight(1);
     // sketch.line(0,sketch.height-10,sketch.width,sketch.height-10);
 
+  }
+
+  function button1() {
+    showAxis = !showAxis;
+    if(showAxis) {
+      button.value = "hide axis";
+    }
+    else {
+      button.value = "show axis";
+    }
+  }
+
+  function button2() {
+    dots = [];
+  }
+
+  function drawAxis() {
+    var w = sketch.width;
+    var h = sketch.height;
+
+    sketch.fill(0);
+    sketch.noStroke();
+    sketch.text("displasement",3,12);
+    sketch.text("angle",w-30,h-7);
+
+    sketch.stroke(0);
+    sketch.strokeWeight(1);
+
+    sketch.line(10,17,10,h);
+    sketch.line(7,22,10,17);
+    sketch.line(13,22,10,17);
+
+    sketch.line(0,h-10, w-35, h-10);
+    sketch.line(w-40,h-13,w-35, h-10);
+    sketch.line(w-40,h-7,w-35, h-10);
   }
 
   function transfromDot(x ,y) {

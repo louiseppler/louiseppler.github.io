@@ -14,8 +14,8 @@ body {
   /*align-items: center;*/
 }
 
-div.inputFields {
-
+div.maxWidth {
+  max-width: 700px;
 }
 
 p {
