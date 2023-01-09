@@ -1,0 +1,38 @@
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  // display: flex;
+
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+
+  /* This centers our sketch vertically. */
+  /*align-items: center;*/
+}
+
+div.maxWidth {
+  max-width: 700px;
+}
+
+p {
+  text-align: center;
+}
+h4 {
+  margin-bottom: 0px;
+}
+
+input {
+  text-align: center;
+}
+
+input {
+  align-content: center;
+  align: center;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+}

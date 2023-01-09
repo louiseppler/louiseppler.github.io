@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="algorithms.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <center>
+    <br>
+    <h1>Morphology</h1>
+    <hr>
+    Change pixels with your mouse.<br>
+    Small image on the right is the structure used in the transfomration.
+    Hold shift to set an ignor field in the structre. <br>
+    To apply an operation several times, press update image each iteration.
+    <hr>
+    <button type="button" name="button" id="button1">Dilation</button>
+    <button type="button" name="button" id="button2">Erosion</button>
+    <button type="button" name="button" id="button3">Opening</button>
+    <button type="button" name="button" id="button4">Closing</button>
+    <button type="button" name="button" id="button5">Hit And Miss</button>
+    <button type="button" name="button" id="button6">Thinning</button>
+    <button type="button" name="button" id="button7">Thickening</button>
+
+    <br>
+    <button type="button" name="button" id="buttonA">Update Image</button>
+    <button type="button" name="button" id="buttonB">Reset Image</button>
+    <button type="button" name="button" id="buttonC">Clear Image</button>
+
+
+    <table>
+      <td><div id="p5sketch1">
+      </div></td>
+      <td><div id="p5sketch2">
+      </div></td>
+    </table>
+    <br>
+    <input type="checkbox" name="" value="" id="rotateAll"> apply for all rotations (only for hit and miss, thnning and thickening)
+
+    <hr>
+    <div class="maxWidth">
+      <h3>Short Explanation</h3>
+      <h4>Dilation</h4>
+      E = I &oplus; S<br>
+      Here we iterate over every pixel and expand it according to the given structre.
+      <h4>Erosion</h4>
+      E = I &ominus; S <br>
+      We iterate again over every pixel. Then we check if the structre fits into the given image. If it does we keep the images, otherwise we remove it. <br> Thus we make every 'blob' smaller and removing individual pixels.
+      <h4>Opening</h4>
+      E = I &compfn; S = (I &ominus; S) &oplus; S <br>
+      For a opening we first apply an erosion and then an dilation. This will result in individual pixel getting removed while the rest stays more or less the same
+      <h4>Closing</h4>
+      E = I &#8729; S = (I &oplus; S) &ominus; S <br>
+      For a closing we first apply an dilation followed by an erosion. This will result in small holes being filled.
+      <h4>Hit and Miss</h4>
+      H = I &otimes; S <br>
+      Here we check weather the current pixel matches exactly what with the structure. If so the resulting pixel is filled. This can be used to detect corners when using <a href="javascript:setPreset1();">this structure</a>.
+      <h4>Thinning</h4>
+      I &osol; S = I &#92; (I &otimes; S) <br>
+      When using <a href="javascript:setPreset1();">this structure</a> and applied with all rotations, then the image gets thinner until its only a line.
+      <h4>Thickening</h4>
+      I &odot; S = I &cup; (I &otimes; S) <br>
+      Using <a href="javascript:setPreset2();">this structure</a> we can thicken the image.
+      <br>
+      <br>
+    </div>
+
+  </center>
+  </body>
+</html>
