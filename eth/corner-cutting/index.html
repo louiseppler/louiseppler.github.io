@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <center>
+    <br>
+    <h1>Corner Cutting</h1>
+    This sketch simulates a 2d version of the Boo-Sabin Subdivision. <br>
+    Press 'Run Iteration' to view demo. Draw your own shape with your mouse.
+    <hr>
+    <div id="inputFields">
+      <button type="button" id="button2">Run Iteration</button>
+      <button type="button" id="button1">Reset</button>
+      <input type="button" id="button3" value="draw shape">
+    </div>
+    <hr>
+    <div id="p5sketch1">
+    </div>
+    <hr>
+    <div class="maxWidth">
+      <h3>Short Explanation</h3>
+      This operation can be used to smoothen out objects. <br>
+      <br>
+      This is done by appling following rules each iteration: <br>
+      On every line draw a new point at 1/4 and 3/4 of its length. <br>
+      Remove the old points and connect the new ones. <br>
+      <br>
+      Repeating this several times gives a smooth curve. <br>
+      <br>
+      more on Boo-Sabin Subdivision: <a href="https://en.wikipedia.org/wiki/Doo–Sabin_subdivision_surface"> wikipedia</a>
+    </div>
+  </center>
+  </body>
+</html>
