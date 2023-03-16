@@ -1,8 +1,11 @@
 div.main-div {
     margin-left: 2rem;
     margin-right: 2rem;
-    width: 1000px;
+    max-width: 1000px;
     margin: auto;
+}
+div.outer-div {
+    margin: 20px;
 }
 
 a {
