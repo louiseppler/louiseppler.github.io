@@ -1,0 +1,31 @@
+div.main-div {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    width: 1000px;
+    margin: auto;
+}
+
+a {
+    color: #909090;
+    text-decoration: underline;
+}
+
+span.ac {
+    font-size: 1.5rem;
+    font-weight: 600;
+}   
+
+p {
+    /* border-top: 0px; */
+    margin-bottom: 5px;
+}
+
+p.des {
+    color: #909090;
+}
+
+p.cats {
+    margin-top: -2rem;
+    color: #909090;
+    text-align: right;
+}
