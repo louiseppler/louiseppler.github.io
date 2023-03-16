@@ -34,3 +34,15 @@ input {
   align-self: center;
   text-align: center;
 }
+
+p.footer {
+  color: gray;
+}
+
+a.footer {
+  color: gray;
+}
+
+.footer:visited {
+  color: gray;
+}

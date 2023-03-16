@@ -10,7 +10,7 @@
       <br>
       <h1>B&eacute;zier Curve</h1>
       <p>This sketch draw a b&eacute;zier curve to different degrees.
-      <br>Move dots by draging with mouse, change degree with buttons.</p>
+      <br>Move dots by dragging with mouse, change degree with buttons.</p>
       <div id="inputFields">
         <input type="range" min="0" max="100" id="slider1">
         <input type="button" id="button1" value="stop">
@@ -30,17 +30,17 @@
         <p>Let's start with <a href="javascript:deg = 1">degree 1</a>. Here we just do a linear interpolation between the two endpoints to get a new point.</p>
         <p>p<sub>0</sub>&#8729;t + p<sub>1</sub>&#8729;(1-t)</p>
         <p>Doing this for every t from 0 to 1 we get a line (our new curve). Change the value t with the slider above.</p>
-        <p>For <a href="javascript:deg = 2">degree 2</a> we do the same as for degree 1 (and also between the 2nd and 3rd point) to get the two pruple dots. Then we linearly interpolate again between the two new purple dots to get the final red point. Doing this again for every t in [0,1] we get the curve.</p>
-        <p>For every other degree we do the same thing just once more than before. (The linear interpolation is not displyed from degree 4 onwards).</p>
-        <p>To calculate the curve one can also use the basis functions given by the bernstein polynominals b<sub>i,n</sub>(x)
+        <p>For <a href="javascript:deg = 2">degree 2</a> we do the same as for degree 1 (and also between the 2nd and 3rd point) to get the two purple dots. Then we linearly interpolate again between the two new purple dots to get the final red point. Doing this again for every t in [0,1] we get the curve.</p>
+        <p>For every other degree we do the same thing just once more than before. (The linear interpolation is not displayed from degree 4 onwards).</p>
+        <p>To calculate the curve one can also use the basis functions given by the Bernstein polynomials b<sub>i,n</sub>(x)
         <br> b<sub>i,n</sub>(x) = <sup>n</sup>C<sub>i</sub> x<sup>i</sup>(1-x)<sup>n-i</sup>
-        <br>Where <sup>n</sup>C<sub>i</sub> is the binominal coefficient. These polynominals are displayed below.
+        <br>Where <sup>n</sup>C<sub>i</sub> is the binomial coefficient. These polynomials are displayed below.
         To get the curve we multiply each value of a point with its polynominal, i.e. p<sub>0</sub>&#8729;b<sub>0,n</sub> + p<sub>1</sub>&#8729;b<sub>1,n</sub> +...</p>
 
 
         <p>sources on:
-        <br>b&eacute;zier curve <a href="https://en.wikipedia.org/wiki/Bezier_curve">wikipdea</a>
-        <br>bernstein polynominals <a href="https://en.wikipedia.org/wiki/Bernstein_polynomial">wikipdea</a> </p>
+        <br>b&eacute;zier curve <a href="https://en.wikipedia.org/wiki/Bezier_curve">wikipedia</a>
+        <br>Bernstein polynomials <a href="https://en.wikipedia.org/wiki/Bernstein_polynomial"> wikipedia </a> </p>
 
         <br>
       </div>
