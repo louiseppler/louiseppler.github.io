@@ -22,6 +22,9 @@ function getFilters() {
     if(document.getElementById("checkbox-infsek").checked) {
         cats.push("infsek");
     }
+    if(document.getElementById("checkbox-ml").checked) {
+        cats.push("iml");
+    }
 
     return cats;
 }
