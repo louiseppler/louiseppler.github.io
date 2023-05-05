@@ -35,37 +35,19 @@
 
             <br>    
       <div class="outer-div">
-      <div class="main-div">
-      <input 
-        style="width: 400px;"
-        autofocus
-        type="text" 
-        name="" 
-        id="main-input"
-        placeholder="Search acronym"
-        onchange="textInputUpdate()"  
-        onkeypress = "this.onchange();"
-        onpaste    = "this.onchange();"
-        oninput    = "this.onchange();">
-        <br>
-        <br>
- 
-        Apply filters: &nbsp;
-        <span class="avoidwrap"> 
-          <input type="checkbox" id="checkbox-ca" onchange="textInputUpdate()"> Computer Architecture  &nbsp;&nbsp; 
-        </span>
-        <span class="avoidwrap"> 
-          <input type="checkbox" id="checkbox-cn" onchange="textInputUpdate()"> Computer Networks   &nbsp;&nbsp;
-        </span>
-        <span class="avoidwrap"> 
-          <input type="checkbox" id="checkbox-infsek" onchange="textInputUpdate()"> Information Security   &nbsp;&nbsp;
-        </span>
-        <span class="avoidwrap">  
-          <input type="checkbox" id="checkbox-ml" onchange="textInputUpdate()"> Machine Learning   &nbsp;&nbsp;
-        </span>
-        <p class="right"><a class="text" href="description.html">about the data</a></p>
-  
-        <hr class="first">
+        <div class="small-div">
+            <h1>About the Data</h1>
+            <p>Computer Scientist use a lot of acronyms. This list contains more than 500 of them. Some of them are very specific and are only used in certain context. <br>
+            I have started collecting and writing down the acronyms which were used in my university classes at <a class="text" href="index.html?search=eth">ETH</a>  Zürich. I create this list (and update) as I take the classes, so some description my be imprecise. </p>
+            <p>These Subjects are included:</p>
+            <ul>
+                <li>Digital Design of Computer Architecture (FS 2021)</li>
+                <li>System Programming and Computer Architecture (HS 2021)</li>
+                <li>Computer Networks (FS 2022)</li>
+                <li>Introduction to Machine Learning (FS 2023)</li>
+                <li>Information Security (FS 2023)</li>
+            </ul>
+            <p>Other subjects may also be included, but these do not use too many acronyms.</p>
         <div id="output-div"></div>
       </div>
     </div>

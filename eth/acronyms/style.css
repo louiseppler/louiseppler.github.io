@@ -8,8 +8,20 @@ div.outer-div {
     margin: 20px;
 }
 
+div.small-div {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    max-width: 600px;
+    margin: auto;
+}
+
 a {
     color: #909090;
+    text-decoration: underline;
+}
+
+.text {
+    color: black;
     text-decoration: underline;
 }
 
@@ -23,6 +35,10 @@ p {
     margin-bottom: 5px;
 }
 
+.right {
+    text-align: right;
+}
+
 p.des {
     color: #909090;
 }
@@ -31,6 +47,10 @@ p.cats {
     margin-top: -2rem;
     color: #909090;
     text-align: right;
+}
+
+hr.first {
+    margin-top: 0px;
 }
 
 span.avoidwrap { 
