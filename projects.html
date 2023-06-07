@@ -6,187 +6,74 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <html lang="en">
+  
+
+
+<html class="h-100">
   <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <title>Louloups - Experimental Programs</title>
-  <style>
-    p.date {
-      color: #a0a0a0;
-      /* font-weight: bold; */
-    }
-    p.projecttitle {
+    <link type="text/css" rel="stylesheet" href="style.css"/>
 
-    }
-  </style>
+  </head>
+  <body class="d-flex flex-column h-100">  
+    <div class="small-margin">
 
-  <!-- Bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="stylesheet.css"/>
-    </head>
-    <!-- check on http://getbootstrap.com/components/ -->
-    <!-- ============================================================================================ -->
-    <body>
-      <nav class="navbar navbar-dark bg-dark fixed-top">
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">&nbsp;Louis' Homepage</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav active">
+          <li class="nav-item active">
+              <a class="nav-link" href="projects.html">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="apps.html">Apps</a>
+              <a class="nav-link" href="eth/index.html">ETH</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://www.instagram.com/_louloups_/">Photography</a>
+              <a class="nav-link" href="photography.html">Photography</a>
           </li>
-        </ul>
-      </nav>
+          </ul>
+      </div>
+    </nav>
 
-    <div class="jumbotron maxWidth horizontal-center">
-        <hr class="my-4">
-        <p class="display-4 homelink"> Projects </p>
+    <div class="max-width">
+        <br>
+        <h1>Projects</h1>
+        <a href="projects-all.html"><h5>List of all Projects</h5></a>
+        <br>
+        <h3>Featured Projects</h3>
+        <a href="experiments/sonicBoom/index.html"> <h5>Sonic Boom</h5></a>
+        <p>Simulates an object flying around the speed of sound and animates the sound waves</p>
 
-        <hr>
-        <a href="meetingscheduler/index.html">
-        <p class="h2 projecttitle"> Meeting Scheduler</p>
+        <a href="meetingscheduler/index.html"> <h5>Meeting Scheduler</h5></a>
+        <p>Simulates an object flying around the speed of sound and animates the sound waves</p>
+
+        <a href="experiments/clock.html"> <h5>Geometric Clock</h5></a>
+        <p>Simulates an object flying around the speed of sound and animates the sound waves</p>
+
+        <a href="eth/radon-transform/index.html">
+        <h5>Radon Transform</h5>
         </a>
-        <p class="lead">A smart way to plan 1 on 1 meetings for a large group.</p>
-        <p class="date">Created: October 2022</p>
+        <p class="project-text">Visual of the radon transform which is used in medical imaging</p>
 
-        <hr>
-        <a href="experiments/unixTimestamp.html">
-        <p class="h2 projecttitle"> 2038 bit counter problem </p>
-        </a>
-        <p class="lead">Displays the current Unix Time in binary and showing when the next bit changes </p>
-        <p class="date">Created: February 2022</p>
 
-        <hr>
-        <a href="rondoo.html">
-        <p class="h2 projecttitle"> Rondoo 2</p>
-        </a>
-        <p class="lead">An iOS and Android puzzle Game</p>
-        <p class="date">Published: Juli 2021</p>
 
-        <hr>
-        <a href="experiments/negrellisteg/index.html">
-        <p class="h2 projecttitle"> Trainspotting Zürich HB (Negrellisteg)</p>
-        </a>
-        <p class="lead">Shows the departure of the trains from Zürich HB arranged to make it easier to spot form the brige negrellisteg</p>
-        <p class="date">Created: April 2021, Updated: February 2022</p>
-
-        <hr>
-        <a href="experiments/sizes/index.html">
-        <p class="h2 projecttitle"> Heights /  Distances (Beta)</p>
-        </a>
-        <p class="lead">Interactive drawing of different sizes from the height of mountains to distance of different planets down to the size of a proton</p>
-        <p class="date">Created: April 2021, Updated: June 2021</p>
-
-        <hr>
-        <a href="eth/lecture-relink/index.html">
-        <p class="h2 projecttitle"> Lecture Relink</p>
-        </a>
-        <p class="lead">Made for online school. Enter your video call links and get relinked automatically to the correct one based on what time it is.</p>
-        <p class="date">Created: February 2021</p>
-
-        <hr>
-        <a href="experiments/sonicBoom/index.html">
-        <p class="h2 projecttitle"> Sonic Boom Animation</p>
-        </a>
-        <p class="lead">A animation displaying the soonic boom effect</p>
-        <p class="date">Created: August 2020, Updated: May 2022</p>
-
-        <hr>
-        <a href="experiments/goldenRatio2/index.html">
-        <p class="h2 projecttitle"> Golden Ratio</p>
-        </a>
-        <p class="lead">A geometrical representation of numbers</p>
-        <p class="date">Created: March 2019, Updated: May 2022</p>
-
-        <hr>
-        <a href="vibro.html">
-        <p class="h2 projecttitle"> Vibro - The Game </p>
-        </a>
-        <p class="lead">An iOS and Android Game where you have to solve a maze that is not visible. Your only feed back are the vibrations</p>
-        <p class="date">Published June 2020</p>
-
-        <hr>
-        <a href="units.html">
-        <p class="h2 projecttitle"> Type to Convert </p>
-        </a>
-        <p class="lead">An iOS and Android App to convert units (i.e. inches to centimeters etc)</p>
-        <p class="date">Published June 2020</p>
-
-        <hr>
-        <a href="experiments/matrixloader.html">
-        <p class="h2 projecttitle"> Wolframalpha Matrix Entry Page </p>
-        </a>
-        <p class="lead">A small web applications that converts a sequence of numbers to the matrix format style that Wolframalpha requires</p>
-        <p class="date">Created: April 2020</p>
-
-        <hr>
-        <a href="kvadrata.html">
-        <p class="h2 projecttitle"> Kvadrata </p>
-        </a>
-        <p class="lead">An iOS and Android pattern matching Game</p>
-        <p class="date">Published: December 2019, Updated: February 2020</p>
-
-        <hr>
-        <a href="experiments/phOverview/index.html">
-        <p class="h2 projecttitle"> Physics Units (Beta) </p>
-        </a>
-        <p class="lead">An attempt to organise and make an overview of all physical units (i.e. velocity, newton, farad, ohm, etc) </p>
-        <p class="date">Created: October 2019</p>
-
-        <hr>
-        <a href="experiments/2dStatistics.html">
-        <p class="h2 projecttitle"> 2d Descriptive Statistics </p>
-        </a>
-        <p class="lead">Place points on a 2d plane and get Standart Deviation, Covariance, etc.</p>
-        <p class="date">Created: September 2019</p>
-
-        <hr>
-        <a href="experiments/binominalDistribution.html">
-        <p class="h2 projecttitle"> Binominal Distribution </p>
-        </a>
-        <p class="lead">Plots the binominal distribution for the given input</p>
-        <p class="date">Created: September 2019</p>
-
-        <hr>
-        <a href="contappqr.html">
-        <p class="h2 projecttitle"> Contapp QR </p>
-        </a>
-        <p class="lead">An iOS and Android App to share you contact details via a QR Code</p>
-        <p class="date">Published: November 2018, Updated: February 2019</p>
-
-        <hr>
-        <a href="rondoo.html">
-        <p class="h2 projecttitle"> Rondoo </p>
-        </a>
-        <p class="lead">My first published iOS App. <br> This App is currently not available anymore since it has been updated in the meen while (see Rondoo 2)</p>
-        <p class="date">Published April 2018</p>
-
-        <hr>
-        <a href="experiments/dice.html">
-        <p class="h2 projecttitle"> Dice </p>
-        </a>
-        <p class="lead">A very simple dice to genereate random rolls</p>
-        <p class="date">Created: December 2016</p>
-
-        <hr>
-        <a href="experiments/clock.html">
-        <p class="h2 projecttitle"> Geometric Clock</p>
-        </a>
-        <p class="lead">A unique clock design</p>
-        <p class="date">Created: December 2016</p>
+        <!-- <p><strong>About me:</strong> I'm Louis, studying computer science at ETH Zürich. I have started to code at a young age and still do a lot of it in my free time. Some of my projects can be found on this website.</p> -->
 
     </div>
+  </div>
 
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <footer class="footer mt-auto">
+        <img src="img/footers/footer3.JPG" alt="" class="footer-img">
+        <!-- <div class="container">
+        <span class="text-light">Place sticky footer content here.</span>
+      </div> -->
+    </footer>
+    
   </body>
 </html>

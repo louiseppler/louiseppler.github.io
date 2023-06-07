@@ -1,0 +1,85 @@
+.flex-grow {
+    flex: 1 0 auto;
+}
+
+/* ============== IMAGES ============== */
+
+img.footer-img {
+    width: 100%;
+}
+
+img.screenshot {
+    margin: auto;
+    padding: auto;
+    max-width: 300px;
+    width: 95%;
+    max-height: 95%;
+  }
+
+img.icon {
+    width: 64px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 1px gray;
+}
+
+img.maxsize {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 10px;
+}
+
+/* ============== DIVS ============== */
+
+div.max-width {
+    width: 100%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.small-margin {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+div.max-width-small {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* ============== TEXT ============== */
+
+
+h1.link {
+    color: black;
+    text-decoration: underline;
+}
+
+
+p.gray {
+    color: gray;
+}
+
+p.project-text {
+    margin-bottom: 0px;
+}
+
+p.date {
+    color: #bbb;
+}
+
+/* ============== OTHER ============== */
+
+
+
+span.avoidwrap { 
+    display:inline-block; 
+}
+
+td.apps {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    vertical-align: top;
+}

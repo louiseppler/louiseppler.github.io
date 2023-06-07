@@ -6,93 +6,112 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <html lang="en">
+  
+
+
+<html class="h-100">
   <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <title>Apps</title>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
 
-  <!-- Bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="stylesheet.css"/>
-    </head>
-    <!-- check on http://getbootstrap.com/components/ -->
-    <!-- ============================================================================================ -->
-    <body>
-      <nav class="navbar navbar-dark bg-dark fixed-top">
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="apps.html">Apps</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.instagram.com/_louloups_/">Photography</a>
-          </li>
-        </ul>
-      </nav>
+  </head>
+  <body class="d-flex flex-column h-100">  
+    <div class="small-margin">
 
-    <div class="jumbotron horizontal-center maxWidth">
-      <hr class="my-4">
-      <table>
-        <td>
-          <a href="rondoo.html"><p class="display-4"> Rondoo 2 </p></a>
-          <p> A simple Puzzle Game <p>
-        </td>
-        <td class="icon">
-          <img src="img/ro-icon.png" class="icon">
-        </td>
-      </table>
-      <hr class="my-4">
-      <table>
-        <td>
-          <a href="vibro.html"><p class="display-4"> Vibro </p></a>
-          <p> Navigate a maze with only vibrations</p>
-        </td>
-        <td class="icon">
-          <img src="img/mz-icon.png" class="icon">
-        </td>
-      </table>
-      <hr class="my-4">
-      <table>
-        <td>
-          <a href="kvadrata.html"><p class="display-4"> Kvadrata </p></a>
-          <p> A simple Pattern Recognition Puzzle Game</p>
-        </td>
-        <td class="icon">
-          <img src="img/kv-icon.png" class="icon">
-        </td>
-      </table>
-      <hr class="my-4">
-      <table>
-        <td>
-          <a href="units.html"><p class="display-4"> Type to Convert </p></a>
-          <p> Allows you to convert units by typing </p>
-        </td>
-        <td class="icon">
-          <img src="img/uc-icon.png" class="icon">
-        </td>
-      </table>
-      <hr class="my-4">
-      <table>
-        <td>
-          <a href="contappqr.html"><p class="display-4"> Contapp QR </p></a>
-          <p> Share your contact via QR-Code</p>
-        </td>
-        <td class="icon">
-          <img src="img/co-icon.png" class="icon">
-        </td>
-      </table>
-      <hr class="my-4">
-      <p class="grey">louisepplerdeveloper2@gmail.com</p>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">&nbsp;Louis' Homepage</a>
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="projects.html">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="eth/index.html">ETH</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="photography.html">Photography</a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="max-width">
+        <br>
+        <h1>Mobile Applications</h1>
+        <p>These are my published iOS/Android apps. Some of them have not been updated in a while and might not be available to download anymore.</p>
+        
+        <table class="apps">
+          <tr>
+            <td class="apps">
+              <img class="icon" src="img/apps/ro-icon.png" alt="">
+            </td>
+            <td class="apps">
+              <a href="rondoo.html"><h3>Rondoo 2</h3></a>
+              <p>A simple and challenging Puzzle Game</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="apps">
+              <img class="icon" src="img/apps/mz-icon.png" alt="">
+            </td>
+            <td class="apps">
+              <a href="vibro.html"><h3>Vibro</h3></a>
+              <p>Navigate a maze with only vibrations</p>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="apps">
+              <img class="icon" src="img/apps/kv-icon.png" alt="">
+            </td>
+            <td class="apps">
+              <a href="kvadrata.html"><h3>Kvadrata</h3></a>
+              <p>A simple Pattern Recognition Puzzle Game</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="apps">
+              <img class="icon" src="img/apps/co-icon.png" alt="">
+            </td>
+            <td class="apps">
+              <a href="contappqr.html"><h3>Contapp QR</h3></a>
+              <p>Share your contact via QR-Code</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="apps">
+              <img class="icon" src="img/apps/uc-icon.png" alt="">
+            </td>
+            <td class="apps">
+              <a href="units.html"><h3>Type to Convert</h3></a>
+              <p>Allows you to convert units by typing</p>
+            </td>
+          </tr>
+        </table>
+        
+        <!-- <br>
+        <p class="gray">Support: louisepplerdeveloper2@gmail.com</p>
+         -->
+        <!-- <p><strong>About me:</strong> I'm Louis, studying computer science at ETH Zürich. I have started to code at a young age and still do a lot of it in my free time. Some of my projects can be found on this website.</p> -->
+
     </div>
+  </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <footer class="footer mt-auto">
+        <img src="img/footers/footer.JPG" alt="" class="footer-img">
+        <!-- <div class="container">
+        <span class="text-light">Place sticky footer content here.</span>
+      </div> -->
+    </footer>
+    
   </body>
 </html>
