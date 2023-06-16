@@ -33,6 +33,7 @@ function clearFilters() {
     document.getElementById("checkbox-ca").checked = false;   
     document.getElementById("checkbox-cn").checked = false;   
     document.getElementById("checkbox-infsek").checked = false;   
+    document.getElementById("checkbox-ml").checked = false;   
 
     main();
 }
