@@ -42,7 +42,6 @@ div.small-margin {
     margin-right: 10px;
 }
 
-
 div.max-width-small {
     max-width: 900px;
     margin: auto;
@@ -67,6 +66,10 @@ p.project-text {
 
 p.date {
     color: #bbb;
+}
+
+a.margin {
+    margin: 5px;
 }
 
 /* ============== OTHER ============== */
