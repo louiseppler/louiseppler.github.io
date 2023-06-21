@@ -10,34 +10,45 @@
     <script src="data.js"></script>
     <script src="sketch.js"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+      div.topview {
+        padding: 10px;
+        padding-left: 20px;
+        background-color: #353a3f;
+      }
+      hr.topview {
+        margin: 0px;
+      }
+      a:hover {
+         color: lightgray;
+      }
+    </style>
 
   </head>
   <body>
 
     <body>
       <nav class="navbar navbar-dark bg-dark fixed-top">
-        <br>
-        <!-- <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="apps.html">Apps</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.instagram.com/_louloups_/">Photography</a>
+      <br>
+<!-- 
+
+        <ul class="nav justify-content-center">
+          <li class="">
           </li>
         </ul> -->
       </nav>
 
     <!-- <div class="jumbotron horizontal-center maxWidth"> -->
-      <hr class="my-4">
-
-            <br>    
+      <div class="topview">
+        <br>
+        <a class="topview" href="../../index.html">Home</a> &nbsp;|&nbsp; <a class="topview" href="../index.html">ETH Projects</a>
+      </div>
+      <hr class="topview">
+      <br>    
       <div class="outer-div">
       <div class="main-div">
       <input 
-        style="width: 400px;"
+        style="width: 100%;"
         autofocus
         type="text" 
         name="" 
@@ -64,7 +75,6 @@
           <input type="checkbox" id="checkbox-ml" onchange="textInputUpdate()"> Machine Learning   &nbsp;&nbsp;
         </span>
         <p class="right"><a class="text" href="description.html">about the data</a></p>
-  
         <hr class="first">
         <div id="output-div"></div>
       </div>
