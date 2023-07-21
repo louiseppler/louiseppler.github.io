@@ -7,6 +7,7 @@ const redColor = "#04508e" //not the color red, but color for Red(f)
 var nodeCoords = []
 var nodeFunc = [];
 var edges = [];
+var showRemovedEdgeWarning = 0; //0 don't show, >0, amounts of seconds to be displayed
 
 var editMode = 2; //0 - move nodes, 1- delete nodes?, 2 - make connections/add nodses, 3 - set function
 var moveingNode = false;
@@ -35,6 +36,10 @@ function changeEditMode(mode) {
 
 }
 
+function reset() {
+  window.location.reload();
+}
+
 const s1 = ( sketch ) => {
 
   function setupButtons() {
@@ -42,11 +47,13 @@ const s1 = ( sketch ) => {
     btn1 = document.getElementById("button1");
     btn2 = document.getElementById("button2");
     btn3 = document.getElementById("button3");
+    btnR = document.getElementById("buttonR");
 
     btn0.onclick = () => {changeEditMode(0);};
     btn1.onclick = () => {changeEditMode(1);};
     btn2.onclick = () => {changeEditMode(2);};
     btn3.onclick = () => {changeEditMode(3);};
+    btnR.onclick = () => {reset();}
 
     changeEditMode(2);
   }
@@ -87,6 +94,14 @@ const s1 = ( sketch ) => {
     drawLines();
     drawNodes();
     drawInfo();
+
+    if(showRemovedEdgeWarning > 0) {
+      showRemovedEdgeWarning -= 4;
+      sketch.textAlign(sketch.CENTER);
+      sketch.fill(200,0,0,showRemovedEdgeWarning);
+      sketch.textSize(20);
+      sketch.text("Removed Edges that violate anti-symmetry",sketch.width/2,50)
+    }
   };
 
   function prepareDelete() {

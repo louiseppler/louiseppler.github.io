@@ -105,6 +105,8 @@ function isGreatest(node) {
 }
 
 function cleanEdges() {
+    var removedEdge = false;
+
     //ensures edge.a is always lower than edge.b
     for(var i = 0; i < edges.length; i++) {
         if(nodeCoords[edges[i].a].y > 1+nodeCoords[edges[i].b].y) {}
@@ -114,11 +116,16 @@ function cleanEdges() {
             edges[i].b = temp;
         }
         else {
+            removedEdge = true;
             edges.splice(i,1);
             i = i-1;
         }
     }
     console.log(edges);
+
+    if(removedEdge) {
+        showRemovedEdgeWarning = 500;
+    }
 }
 
 function computeIsLower() {

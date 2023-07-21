@@ -11,10 +11,11 @@
       <br>
       <h1>Posets - RSE</h1>
       <hr>
-      Click to add nodes, drag from node to add edge.
+      Click to add nodes, connect nodes to add edge.
       <br>
-      Functions from a node to itself are not displayed.
+      Drag from node to change function (in edit function mode).
       <hr>
+      <button id="buttonR">Reset Poset</button>
       <button id="button0">Move Nodes</button>
       <button id="button1">Delete Nodes</button>
       <button id="button2">Add Edges</button>
@@ -25,7 +26,21 @@
       </div>
       <hr>
       <div class="maxWidth">
-      <!-- <h3>Short Explanation</h3> -->
+      <h3>Short Explanation</h3>
+      This partially ordered set (poset) is displayed as a <a href="https://en.wikipedia.org/wiki/Hasse_diagram">Hasse Diagram</a>.
+      <br>
+      In Addition a function f: A&#8594;A for the poset (A,&#8828;) is defined. If a function from a node goes to itself, the arrow is not displayed. (To begin with f = id, thus no arrows are drawn.)
+      <br>
+      <br>
+      The function f is monotone if
+      <br>
+      &#8704; a,b &#8712; A : a &#8829; b => f(a) &#8828; f(b)
+      <br>
+      <br>
+      A node a is a fixed point if f(a) = a and a post-fixed point if f(a) &#8828; a.
+      <br>
+      The fix(f) is the set of all fixed points and red(f) is the set of all post-fixed points.
+
     
       <br>
       <br>
