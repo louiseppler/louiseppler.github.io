@@ -29,12 +29,18 @@ var getJSON = function(url, callback) {
     xhr.send();
 };
 
+function addMinutes(date, minutes) {
+  return new Date(date.getTime() + minutes*60000);
+}
+
 //var d = new Date();
 datatimeString = ""
 
 var today = new Date();
+today = addMinutes(today, -1);
+
 var dd = today.getDate();
-var mm = today.getMonth()+1;//January is 0!`
+var mm = today.getMonth()+1;//January is 0!
 var hh = today.getHours();
 var min = today.getMinutes();
 
@@ -94,7 +100,7 @@ function processData(data, arrival) {
     console.log(s);
     console.log(train);
 
-    trains.push(new Train(train, s, train.stop.departureTimestamp, train.stop.platform ?? getPlatform(trainType)));
+    trains.push(new Train(train, s, train.stop.departureTimestamp*1000, train.stop.platform ?? getPlatform(trainType)));
   }
 
   if(arrival) {
@@ -168,9 +174,22 @@ function addItems(data) {
 }
 
 function getTime(time) {
-  var t = time / 60;
-  var t1 = t % 60;
-  var t2 = Math.floor(t / 60 ) % 24;
+  console.log(time)
+
+
+  var date = new Date(time)
+  console.log(typeof date);
+  console.log(date);
+  
+  var t1 = date.getMinutes();
+  var t2 = date.getHours();
+
+  // var t = time / 60;
+  // var t1 = t % 60;
+  // var t2 = Math.floor(t / 60 ) % 24;
+
+  // t1 = time.getHours()
+  // t2 = time.getMinutes()
 
   if(t1 < 10) {
     return ""+t2 + ":0" + t1;
