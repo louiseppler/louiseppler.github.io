@@ -47,6 +47,11 @@ div.max-width-small {
     margin: auto;
 }
 
+div.welcome-text {
+    max-width: 650px;
+    color: darkgray;
+}
+
 div.footer {
     width: 100%;
     background-color: #a58e71;
