@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <center>
+    <br>
+    <h1>ROC / Binary Classification</h1>
+    <hr>
+    Draw points on the left canvas and move the threshold. <br>
+    View the ROC-Curve or loss functions on the right canvas.
+    <hr>
+
+    <table>
+      <!-- <p> <div id="link-button1">Normal Scale</div> -->
+      <!-- <a href="javascript:changeScale()">change</a></p> -->
+      <!-- <button type="button" id="button1">Draw Random Line</button> -->
+      <td class="noborder">
+        <button id="button0">Change Threshold</button>
+        <button id="button1">Add Positives</button>
+        <button id="button2">Add Negatives</button>
+        &nbsp;
+        |
+        &nbsp;
+
+        <button id="button3">Clear Points</button>
+        <!-- <select id="points-select">
+          <option value="volvo">Datasets</option>
+          <option value="saab">Small Sample</option>
+          <option value="mercedes">Big Sample</option>
+          <option value="audi">Clear Points</option>
+        </select> -->
+        <br>
+        <br>
+        <div id="p5sketch1">
+      </div></td>
+      <td class="noborder">
+        <select id="display-mode">
+          <option value="modeROC">ROC</option>
+          <option value="mode01">0-1 Loss</option>
+          <option value="modeLog">Logistical Loss</option>
+        </select>
+        <br>
+        <br>
+        <div id="p5sketch2">
+      </div></td>
+    </table>
+      <div id="outputText"></div>
+    <br>
+      <div id="outputVals""></div>
+
+    <br>
+    <hr>
+
+    <div class="maxWidth"> 
+    <h4>Short Explanation</h4>
+    P stand for Positives (Red) and N stand for Negatives (Blue). <br>
+
+    <span class="gray">TP: True Positive, FP: False positive, FN: False Negative, TN: True Negative.</span>
+    <br>
+    <br>
+    The goal of this program is to separate the data into its correct class (red and blue) by changing the threshold. <br>
+    On the right canvas different metrics are shown to evaluate how good the classification can be. 
+    <br>
+    <br>
+    <strong>ROC</strong><br>
+    The receiver operating characteristic (ROC) curve plots the true positive rate (TPR) against the false positive rate (FPR). If the curve is very flat, then there is no good way to classify the data.
+    <br>
+    <br>
+    <strong>Loss Functions</strong><br>
+    The 0-1-Loss counts the number of points which are wrongly classified.
+    <br>
+    The Logistical Loss uses following formula: <br>
+    log(1+exp(-yf(x))) <br>
+    where f(x) is the distance to the threshold and y is either +1 or -1 (depending on the class).
+
+    <p>source: <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">wiki</a></p>
+    </div>
+    <br>
+    <br>
+  </center>
+  </body>
+</html>

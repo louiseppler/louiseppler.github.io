@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="imageNumbers.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <center>
+    <br>
+    <h1>SVD Image Compression</h1>
+    <hr>
+    Shows an k-rank matrix of an image computed with an svd.
+    <br>
+    <br>
+    <div id="inputFields">
+      <button type="button" id="button1">Decrease</button>
+      <input type="range" min="1" max="1000" id="slider1">
+      <button type="button" id="button2">Increase</button>
+      <p></p>
+      <div id="outText">
+      </div>
+      <p></p>
+    </div>
+    <hr>
+    <div id="p5sketch1">
+    </div>
+    <hr>
+    <div class="maxWidth">
+      <h4>Short Explanation</h4>
+      An image can be represented with a matrix with each pixel value corresponding to an entry.
+      We can then compute a singular value decomposition (svd) of this matrix A = U&Sigma;V<sup>T</sup>.
+      <br>
+      If we only keep the first k columns of U and the first k columns of V<sup>T</sup>, we approximate the matrix A (displayed in gray below).<br> Since the values in &Sigma; are sorted by size, we only discard the rows with a small value, thus not loosing too much information. This can be seen in the image above. If we discard <a href="javascript:func()">half the entries</a> the image is still recognisable. (Note: the effectiveness depends on the image)
+      <br>
+      <br>
+      
+    </div>
+    <img src="img.png" alt="showing dimensions of an svd" style="width: 30%;">
+    <br>
+    <br>
+  </center>
+  </body>
+</html>

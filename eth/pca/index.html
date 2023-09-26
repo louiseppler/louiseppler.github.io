@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <center>
+      <p>.</p>
+      <h1>PCA</h1>
+      <hr>
+      Add dots to the canvas with your mouse.
+      <br>
+      View the transform from 2d to 1d.
+      <hr>
+      <button id="buttonR">Clear Canvas</button>
+      <br><br>
+      <div id="p5sketch1">
+      </div>
+      <br>
+      <div id="p5sketch2">
+      </div>
+
+      <hr>
+      <div class="maxWidth">
+      <h4>Short Explanation</h4>
+      In the principle component analysis (PCA) the goal is to reduce the data to a lower dimension. In this sketch this is done from 2d (upper canvas) to 1d (lower canvas). 
+      <br>
+      This is done by computing the eigenvectors (displayed in red) of the covariance matrix of the data. Then all the points get projected on to the red line defined by the first eigenvectors.
+      </div>
+      <br>
+      <br>
+
+
+
+
+
+
+  </center>
+
+  </body>
+</html>
