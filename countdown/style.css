@@ -1,0 +1,14 @@
+div.main-div {
+    max-width: 1000px;
+    margin: auto;
+    padding: 16px;
+}
+div.target {
+    font-size: 96px;
+}
+h3.numbers {
+    font-size: 48px;
+}
+a.info {
+    color: black;
+}
