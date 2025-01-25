@@ -15,6 +15,7 @@ function getFilters() {
     if(document.getElementById("checkbox-ca").checked) {
         cats.push("spca");
         cats.push("ddca");
+        cats.push("compsys");
     }
     if(document.getElementById("checkbox-cn").checked) {
         cats.push("cn");
@@ -60,7 +61,7 @@ function main() {
     secondList = [];
     for(word of data) {
 
-        if(word.acronym.toUpperCase().replace("-","").replace(".","").includes(input.toUpperCase().replace("-","").replace(".",""))) {
+        if(word.acronymFiltered.includes(input.toUpperCase().replace(/[^0-9a-z]/gi, ''))) {
             if(cats.length == 0|| checkCats(word.cats, cats)) {
                 currList.push(word);
             }
@@ -114,3 +115,8 @@ if(params.get('search') != null) {
 }
 
 textInputUpdate()
+
+//do uppercasing at beginning for slightly better performance
+for(word of data) {
+    word.acronymFiltered = word.acronym.toUpperCase().replace(/[^0-9a-z]/gi, '')
+}
