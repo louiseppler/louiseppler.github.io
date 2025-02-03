@@ -128,7 +128,7 @@ function getTrainDescription(train) {
   if(train.category == "S") {
     return "S" + train.number;
   }
-  if(train.number.length < 3) {
+  if(train.number && train.number.length < 3) {
     return train.category + " " + train.number;
   }
   else {
