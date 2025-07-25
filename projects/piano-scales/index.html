@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script src="canvasHelper.js"></script>
+        <script src="main.js"></script>
+       
+        <title>Canvas Sample Program</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+            <div class="main-div">
+                <br>
+                <h1 id="title", class="center">Piano Chords & Scales</h1>
+                
+                <div class="center">
+                    <button onclick="changeKeyStart(-7, true);">decrease fifth</button>
+
+                    <button onclick="changeKeyStart(-1);">decrease</button>
+                    &nbsp; | &nbsp;
+                    <button onclick="changeKeyStart(+1);">increase</button>
+                    <button onclick="changeKeyStart(+7, true);">increase fith</button>
+                </div>
+                <hr>
+                
+                <canvas id="canvas"></canvas>
+                <p class="sub-label" style="margin-bottom: 5px;">press piano to change base key</p>
+                <div class="right" id="sharp-flat-div"><button id="sharp-flat-button" onclick="toggleSharpFlat()"></button></div>
+                
+                <div class="buttons-div">
+                    
+                    <h2>Chords</h2>
+                    <table class="buttons" id="table-chords"></table>
+                    <table class="buttons" id="table-chords-2"></table>
+
+
+                    <hr class="buttons">
+                    <h2>Scales</h2>
+
+                    <table class="buttons"  id="table-scales"></table>
+                    
+                    <table class="buttons"  id="table-scales-2"></table>
+                    <table  class="buttons" id="table-scales-3"></table>
+
+                    <p class="sub-title">Modes</p>
+                    <table class="buttons" id="table-scales-4"></table>
+                    <hr class="buttons">
+
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+
+
+        <script>setupCanvases(); setup();</script>
+    </body>
+</html>
+
+
+
+
+
+

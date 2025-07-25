@@ -1,0 +1,63 @@
+div.main-div {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1.center {
+  text-align: center;
+}
+
+p.sub-label {
+  text-align: right;
+  margin-top: 0px;
+}
+
+div.center {
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
+div.right {
+  text-align: right;
+}
+
+div.button {
+  margin: 5px;
+  padding: 10px;
+  background-color: #0c397c;
+  border-radius: 3px;
+  min-width: 30px;
+  text-align: center;
+}
+
+a.button {
+  color: #bac9e0;
+  text-decoration: none;
+}
+
+table.buttons {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.buttons-div {
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+  margin-bottom: -32px;
+}
+
+p.sub-title {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+hr.buttons {
+  margin: 0px;
+}
