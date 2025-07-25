@@ -497,7 +497,9 @@
             <div class="col-12 col-sm-auto mb-3">
                 <a href="experiments/dice.html" style="text-decoration: inherit;">
                     <div class="card" style="max-width: 24rem">
-                        <img src="img/projects/dice.png" class="card-img-top">
+                        <div id="image-dice">
+                            <img src="img/projects/dice.png" class="card-img-top">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title" style="text-decoration: underline;"> Dice </h5>
                             <p class="card-text" style="color: black; text-decoration: none;"> A very simple dice to generate random rolls <br><br> </p>
@@ -532,4 +534,12 @@
     </footer>
     
   </body>
+
+  <script>
+
+    var r = Math.ceil(Math.random()*6);
+
+    document.getElementById("image-dice").innerHTML = '<img src="img/projects/dice/dice-'+ r + '.png" class="card-img-top">'
+  
+  </script>
 </html>
