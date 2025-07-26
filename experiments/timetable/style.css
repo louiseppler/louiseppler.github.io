@@ -1,0 +1,70 @@
+div.main-div {
+    max-width: 1000px;
+    margin: auto;
+    padding: 16px;
+}
+div.target {
+    font-size: 96px;
+}
+
+h3.numbers {
+    font-size: 48px;
+}
+a.info {
+    color: black;
+}
+
+th {
+    min-width: 150px;
+}
+
+div.container {
+    position: relative;
+    width: max-content;
+    margin: 50px;
+}
+svg {
+    position: absolute;
+    top: -20px; /* adjust based on where you want the line */
+    left: 0;
+}
+
+canvas {
+    position: absolute;
+}
+
+td {
+    vertical-align: top;
+}
+h3 {
+    color: black;
+}
+h5 {
+    color: black;
+}
+h6 {
+    color: black;
+}
+p {
+    color: black;
+}
+
+td.graphic {
+    width: 150px;
+}
+th.graphic {
+    width: 150px;
+    max-height: 60px;
+    height: 75px;
+}
+
+p.time {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+table.main-table {
+    z-index: 1;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* for momentum scroll on iOS */
+}
