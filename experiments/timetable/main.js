@@ -26,7 +26,7 @@ async function loadConnections() {
     console.log(stationTo);
     
     
-    var link = `http://transport.opendata.ch/v1/connections?from=${stationFrom}}&to=${stationTo}&limit=4&time=${time}&date=${date}`
+    var link = `https://transport.opendata.ch/v1/connections?from=${stationFrom}&to=${stationTo}&limit=4&time=${time}&date=${date}`
 
     document.getElementById("loading").style.display = "block";
 
