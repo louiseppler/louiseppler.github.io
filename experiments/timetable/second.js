@@ -82,7 +82,7 @@ async function loadSubConnections(ids) {
     var responses = [];
 
     for(var idPair of ids) {
-        var link = `http://transport.opendata.ch/v1/connections?from=${idPair.fromStationId}}&to=${idPair.toStationId}&limit=10&date=${idPair.date}&time=${idPair.time}`
+        var link = `https://transport.opendata.ch/v1/connections?from=${idPair.fromStationId}&to=${idPair.toStationId}&limit=10&date=${idPair.date}&time=${idPair.time}`
 
         console.log(link);
         
