@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <style>
+            div.main-div {
+                margin-left: 2rem;
+                margin-right: 2rem;
+                max-width: 1000px;
+                margin: auto;
+            }
+            div.small-div {
+                margin-left: 2rem;
+                margin-right: 2rem;
+                max-width: 600px;
+                margin: auto;
+            }
+        </style>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> <!-- jQuery-->
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script> <!-- D3 -->
+
+        <script src="canvasHelper.js"></script>
+        <script src="gameCanvas.js"></script>
+
+        <title>Delaunay Triangulation</title>
+    </head>
+    <body>
+        <center>
+        <div class="main-div">
+
+        <h1>Delaunay Triangulation</h1>
+        <hr>
+
+        <p>Add and move points on canvas with your mouse</p>
+
+        <button id="showCircles"></button>
+        <button id="showCenters"></button>
+        <br><br>
+        <div id="container">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="small-div">
+<h4>Short Explanation</h4>
+        <p>The Delaunay Triangulation triangulates a pointset in a way such that every triangle's circumcircle does not intersect any other points <br>
+        This definition leads to various properties, such as maximising the smallest angle and it's the dual of the Voronoi Diagram, which can be used to solve the post office problem. </p>
+
+            <br><br>
+            <a href="../voronoi/index.html">Voronoi Diagram Animation</a> <br>
+            <a href="https://en.wikipedia.org/wiki/Delaunay_triangulation">Delaunay on Wikipedia</a>
+
+            <br><br><br>
+        </div>
+        </div>
+        </center>
+
+       
+        <script src="main.js"></script>
+
+    </body>
+</html>
+
+
+
+
+
+
