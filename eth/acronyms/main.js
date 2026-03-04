@@ -16,12 +16,14 @@ function getFilters() {
         cats.push("spca");
         cats.push("ddca");
         cats.push("compsys");
+        cats.push("asl")
     }
     if(document.getElementById("checkbox-cn").checked) {
         cats.push("cn");
     }
     if(document.getElementById("checkbox-infsek").checked) {
         cats.push("infsek");
+        cats.push("dsig")
     }
     if(document.getElementById("checkbox-ml").checked) {
         cats.push("iml");
@@ -51,6 +53,7 @@ function checkCats(catsA, catsB) {
 
 function main() {
     var input = document.getElementById("main-input").value;
+    var inputCleaned = input.toUpperCase().replace(/[^0-9a-z]/gi, '')
 
     var cats = getFilters();
 
@@ -61,15 +64,27 @@ function main() {
     secondList = [];
     for(word of data) {
 
-        if(word.acronymFiltered.includes(input.toUpperCase().replace(/[^0-9a-z]/gi, ''))) {
+        if(word.acronymFiltered.includes(inputCleaned)) {
             if(cats.length == 0|| checkCats(word.cats, cats)) {
+                if(word.acronymFiltered.startsWith(inputCleaned)) {
+                    word.priority = 1;
+                }
+                else {
+                    word.priority = 0;
+                }
                 currList.push(word);
             }
             else {
+                word.priority = 0;
                 secondList.push(word);
             }
         }
 
+    }
+
+    if(inputCleaned != "") {
+        currList.sort((a, b) => a.acronym.length - b.acronym.length);
+        currList.sort((a, b) => b.priority - a.priority);
     }
 
     document.getElementById("output-div").innerHTML = "";
@@ -79,7 +94,7 @@ function main() {
     for(word of currList) {
         temp = "";
         temp += "<div>";
-        temp += "<p><span class=\"ac\">" + word.acronym + "</span> " + word.name +"</p>";
+        temp += "<p><span class=\"ac\">" + word.acronym + "</span> " + word.name + "</p>";
         temp += "<p class=\"cats\">" + word.cats + "</p>";
         temp += "<p class=\"des\">" + word.description + "</p>";
         temp += "<hr>";
