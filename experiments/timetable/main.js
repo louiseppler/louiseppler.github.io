@@ -112,7 +112,7 @@ async function loadOverviewConnections(stationFrom, stationTo, time, date) {
 
     var data = null;
     try {
-        var link = `http://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stationFrom)}}&to=${encodeURIComponent(stationTo)}&limit=4&time=${time}&date=${date}`
+        var link = `https://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stationFrom)}&to=${encodeURIComponent(stationTo)}&limit=4&time=${time}&date=${date}`
 
         showLoading();
 

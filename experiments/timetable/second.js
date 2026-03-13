@@ -129,7 +129,7 @@ async function loadSubConnectionsAdvanced(stations, reverse, date, timeInput, se
         for(var i = 0; i < stations.length-1; i++) {
             if(reverse[i]) {
 
-                var link = `http://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stations[i+1])}&to=${encodeURIComponent(stations[i])}&isArrivalTime=1&limit=10&date=${date}&time=${time}`
+                var link = `https://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stations[i+1])}&to=${encodeURIComponent(stations[i])}&isArrivalTime=1&limit=10&date=${date}&time=${time}`
                 console.log("fetching from: " + link);
             
                 var data = await fetchData(link);
@@ -140,7 +140,7 @@ async function loadSubConnectionsAdvanced(stations, reverse, date, timeInput, se
                 var departureTime = data.connections[0].from.departure.substring(11,16);
             }
             else {
-                var link = `http://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stations[i])}&to=${encodeURIComponent(stations[i+1])}&isArrivalTime=1&limit=10&date=${date}&time=${time}`
+                var link = `https://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stations[i])}&to=${encodeURIComponent(stations[i+1])}&isArrivalTime=1&limit=10&date=${date}&time=${time}`
                 console.log("fetching from: " + link);
             
                 var data = await fetchData(link);
@@ -157,7 +157,7 @@ async function loadSubConnectionsAdvanced(stations, reverse, date, timeInput, se
         var time = timeInput;
 
         for(var i = 0; i < stations.length-1; i++) {  
-            var link = `http://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stations[i])}}&to=${encodeURIComponent(stations[i+1])}&limit=10&date=${date}&time=${time}`
+            var link = `https://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stations[i])}}&to=${encodeURIComponent(stations[i+1])}&limit=10&date=${date}&time=${time}`
             console.log("fetching from: " + link);
         
             var data = await fetchData(link);
@@ -183,7 +183,7 @@ async function loadSubConnections(ids) {
     var responses = [];
 
     for(var idPair of ids) {
-        var link = `http://transport.opendata.ch/v1/connections?from=${idPair.fromStationId}}&to=${idPair.toStationId}&limit=10&date=${idPair.date}&time=${idPair.time}`
+        var link = `https://transport.opendata.ch/v1/connections?from=${idPair.fromStationId}}&to=${idPair.toStationId}&limit=10&date=${idPair.date}&time=${idPair.time}`
 
         console.log(link);
 
