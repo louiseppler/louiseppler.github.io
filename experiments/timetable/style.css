@@ -68,3 +68,15 @@ table.main-table {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch; /* for momentum scroll on iOS */
 }
+
+.segment-control .btn {
+  background: #fff;
+  border-color: #dee2e6;
+  color: #6c757d; 
+}
+
+.segment-control .btn-check:checked + .btn {
+  background: #6E757C;
+  color: #fff;
+  border-color: #6E757C;
+}

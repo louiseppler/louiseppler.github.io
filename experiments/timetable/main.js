@@ -1,41 +1,140 @@
 function setupSizes() {
-    var width = window.screen.width;
+    var width = window.innerWidth / mainCanvas.dpi;
 
-    globalColumnWith = Math.min(width*0.8, 200);
+    globalColumnWith = 180 + 0*Math.min(width*0.6, 180);
     globalOverviewWidth = Math.min(width*0.9, 750); //for the selection screen
 
     console.log("Sizes of " + width + " -> " + globalColumnWith + " " + globalOverviewWidth); 
 }
 
 function setup() {
+    setupViews();
+    setupSearch();
     stationSearchSetup();
     setupScrolling();
 }
 
+function getCurrentTime() {
+  const now = new Date();
 
-async function loadConnections() {   
-    var stationFrom = document.getElementById("station-input-from").value
-    var stationTo = document.getElementById("station-input-to").value
-    var time = document.getElementById("input-time").value
-    var date = document.getElementById("input-date").value
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
 
-    if(stationFrom == "") stationFrom = "Winterthur"
-    if(stationTo == "") stationTo = "Eth Honggerberg"
-
-    console.log(stationFrom);
-    console.log(stationTo);
-    
-    
-    var link = `https://transport.opendata.ch/v1/connections?from=${stationFrom}&to=${stationTo}&limit=4&time=${time}&date=${date}`
-
-    document.getElementById("loading").style.display = "block";
-
-    var data = await fetchData(link);
-    console.log(data);
-    
-    processStationOverviewResponse(data); 
+  return `${hours}:${minutes}`;
 }
 
+function getCurrentDate() {
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+
+async function loadConnections() {   
+    if(searchType == 0) {
+
+        var stationFrom = document.getElementById("station-input-from").value
+        var stationTo = document.getElementById("station-input-to").value
+        var time = document.getElementById("input-time").value
+        var date = document.getElementById("input-date").value
+
+        if(stationFrom == "") stationFrom = "Winterthur"
+        if(stationTo == "") stationTo = "Eth Honggerberg"
+        if(time == "") time = getCurrentTime();
+        if(date == "") date = getCurrentDate();
+
+        console.log(stationFrom);
+        console.log(stationTo);
+        
+        
+        
+        loadOverviewConnections(stationFrom, stationTo, time, date);
+    }
+    else {
+        console.log("Starting search");
+        
+        var stations = [];
+        var reverse = [];
+        var do_overview = false;
+
+        var stationFrom = document.getElementById("station-input-from").value
+        var stationTo = document.getElementById("station-input-to").value
+        if(stationFrom == "") stationFrom = "Winterthur"
+        if(stationTo == "") stationTo = "Eth Honggerberg"
+
+        var time = document.getElementById("input-time").value
+        var date = document.getElementById("input-date").value
+        if(time == "" && searchType != 1) time = getCurrentTime();
+        if(date == "") date = getCurrentDate();
+
+        if(searchType == 1) {
+            stations.push(stationFrom);
+            var stationFrom2 = document.getElementById("station-input-from2").value;
+            if(stationFrom2 == "") {
+                alert("Please Enter a valid second departure station");
+                return;
+            }
+            if(time == "") {
+                alert("Please enter an arrival time")
+                return;
+            }
+            
+            stations.push(stationTo);
+            stations.push(stationFrom2);
+            reverse.push(false);
+            reverse.push(true);
+        }
+        else if(searchType == 3) {
+            stations.push(stationFrom);
+            var stationVia1 = document.getElementById("station-input-via").value;
+            if(stationVia1 == "") {
+                alert("Please enter a valid via station");
+                return; 
+            }
+            stations.push(stationVia1)
+            stations.push(stationTo);
+            reverse.push(false);
+            reverse.push(false);
+        }
+
+        console.log(stations);
+        
+        createGraphicAdvanced(stations, reverse, date, time, searchType);
+    }
+}
+
+
+async function loadOverviewConnections(stationFrom, stationTo, time, date) {
+
+    var data = null;
+    try {
+        var link = `http://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stationFrom)}}&to=${encodeURIComponent(stationTo)}&limit=4&time=${time}&date=${date}`
+
+        showLoading();
+
+        data = await fetchData(link);
+        console.log(data);
+    }
+    catch(error) {
+        console.log(error);
+        
+        showError("Request Failed");
+        return;
+    }
+
+
+    try {
+        processStationOverviewResponse(data); 
+    }
+    catch(error) {
+        showError("Failed Rendering Data");
+        return;
+    }
+}
 
 function processStationOverviewResponse(data) {
     console.log("Processing Station Overview Response");
@@ -118,9 +217,7 @@ function processStationOverviewResponse(data) {
     }
 
     document.getElementById("overview").innerHTML = htmlString;
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("overview").style.display = "block";
-
+    showOverview();
 
     for(var j = 0; j < data.connections.length; j++) {
         var canvas = new CanvasHelper(`overview-${j}`, globalOverviewWidth*0.9, 50, () => {}, () => {}, drawFunctions[j], true)
@@ -131,7 +228,7 @@ function processStationOverviewResponse(data) {
 }
 
 function loadSample2() {
-    var responses = savedRepsonses2;
+    var responses = savedRepsonses4;
 
     processStationOverviewResponse(savedRepsonses2);
 }

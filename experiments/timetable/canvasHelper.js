@@ -17,6 +17,7 @@ class CanvasHelper {
         this.draw = draw
 
         var scaleFactor = 2; //change dpi
+        this.dpi = scaleFactor;
 
         var canvas = document.getElementById(id);
 
@@ -63,8 +64,10 @@ class CanvasHelper {
 
         this.count += 1;
         if(this.mouseIsPressed || this.count % 20 == 0) {
-            this.draw(this);
+            
         }
+
+        this.draw(this);
 
         if(this.drawOnce) return;
         window.requestAnimationFrame(() => {this.drawHandler()});
@@ -124,7 +127,7 @@ class CanvasHelper {
         this.ctx.fillStyle = "#fff"
         this.ctx.fillRect(0,0,200,20);
         this.ctx.fillStyle = "#000"
-        this.ctx.fillText(text, 15, 15);
+        this.ctx.fillText(text, 200, 15);
     }
 }
 

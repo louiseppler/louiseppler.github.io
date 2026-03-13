@@ -23,7 +23,7 @@ function textFieldOnChange(id) {
 
     stations.forEach(station => station.priority = prioritiseStation(input, station.stop_name_lower));
 
-    stations = stations.sort((a,b) => a.stop_name.length-b.stop_name.length)
+    stations = stations.sort((a,b) => a.stop_name_lower.length-b.stop_name_lower.length)
     stations = stations.sort((a,b) => b.priority - a.priority);
 
     console.log("Input changed: " + input);
@@ -50,12 +50,6 @@ function textFieldOnChange(id) {
 
 function prioritiseStation(input, stationName) {
     var parts = stationName.split(", ")
-
-    if(stationName.includes("hbf")) {
-        //International Stations (e.g. "Berlin Hbf")
-        if(stationName.startsWith(input)) return 3.5;
-        return 0;
-    }
 
     if(parts.length == 1) {
         //Train station (no area given e.g. "Bern Wankdorf")
@@ -86,5 +80,44 @@ function decode_utf8(s) {
 }
 
 function stationSearchSetup() {
-    //stations.push({"stop_id":8503000, stop_name:"HB", display_name:"Zürich HB"})
+    stations.push({"stop_id":8503000, stop_name:"HB", display_name:"Zürich HB"})
+}
+
+//todo: use typescript + file bundler to make project easier to work with xD
+//================================================================================================
+
+function setupSearch() {
+    document.getElementById("search-input-departure").innerHTML 
+        += addStationSearchBox("Departure", "Winterthur", "from");
+    document.getElementById("search-input-departure2").innerHTML 
+        += addStationSearchBox("Departure 2", "", "from2");
+    document.getElementById("search-input-via").innerHTML 
+        += addStationSearchBox("Via", "", "via");
+    document.getElementById("search-input-via2").innerHTML 
+        += addStationSearchBox("Via", "", "via2");
+    document.getElementById("search-input-arrival").innerHTML 
+        += addStationSearchBox("Destination", "ETH Hönggerberg", "to");
+    
+    changeSearchType(0);
+}
+
+function addStationSearchBox(displayName, placeholder, id) {
+    htmlString = `
+            <div class="form-group">
+                <label for="station-input-${id}">${displayName}</label> <br>
+                <input    
+                    type="text" 
+                    class="form-control" 
+                    id="station-input-${id}" 
+                    placeholder="${placeholder}" 
+                    onchange="textFieldOnChange('${id}')"
+                    onkeydown="textFieldOnChange('${id}')"
+                    oninput="textFieldOnChange('${id}')"
+                    onpaste="textFieldOnChange('${id}')">
+                <div style="position: absolute;" id="station-suggestions-${id}">
+                </div>
+            </div>
+    `
+
+    return htmlString;
 }

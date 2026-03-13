@@ -19,6 +19,7 @@
     <script src="main.js"></script>
     <script src="helpers.js"></script>
     <script src="stationSuggestion.js"></script>
+    <script src="navigation.js"></script>
     <script>
         setupSizes();
     </script>
@@ -28,50 +29,82 @@
     <br><br><br>
     <div class="main-div" id="main-div">
        <h1>Timetable</h1>
-        <div class="form-group">
-          <label for="station-input-from">Departure</label>
-          <input    
-            type="text" 
-            class="form-control" 
-            id="station-input-from" 
-            placeholder="Winterthur" 
-            onchange="textFieldOnChange('from')"
-            onkeydown="textFieldOnChange('from')"
-            oninput="textFieldOnChange('from')"
-            onpaste="textFieldOnChange('from')">
-          <div style="position: absolute;" id="station-suggestions-from">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="stations-input-to">Destination</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            id="station-input-to" 
-            placeholder="ETH Honggerberg"
-            onchange="textFieldOnChange('to')"
-            onkeydown="textFieldOnChange('to')"
-            oninput="textFieldOnChange('to')"
-            onpaste="textFieldOnChange('to')">
-            <div style="position: absolute;" id="station-suggestions-to">
+       <div id="view-back-button">
+            <a href="javascript:navigateBack()">back</a>
+       </div>
+       <div id="view-basic-search">
+        <br>
+            <div class="btn-group btn-group-sm segment-control" role="group" style="padding-bottom: 10px; padding-top: 0;">
+            
+            <input type="radio" class="btn-check" name="segment" id="basic" checked oninput="changeSearchType(0)">
+            <label class="btn" for="basic">Basic</label>
+
+            <input type="radio" class="btn-check" name="segment" id="duo" oninput="changeSearchType(1)">
+            <label class="btn" for="duo">2 Departures</label>
+
+            <input type="radio" class="btn-check" name="segment" id="advanced" oninput="changeSearchType(3)">
+            <label class="btn" for="advanced">Via</label>
+
             </div>
-        </div>
-        <div class="d-flex justify-content-start align-items-center mb-2"> 
-            <div class="form-group" style="padding-right: 20px;">
-            <label for="input-time">Time</label>
-            <input type="time" class="form-control" id="input-time">
+
+
+            <div id="search-input-departure"></div>
+            <div id="invert1-view">
+                <div class="d-flex justify-content-end align-items-center">
+                    <label class="form-check-label" style="padding-right: 5px; margin-bottom: -20px;" for="invert1">Reverse</label>
+                    <input class="form-check-input" type="checkbox" id="invert1" style="margin-bottom: -20px;">
+                </div>
             </div>
-            <div class="form-group">
-            <label for="input-date">Date</label>
-            <input type="date" class="form-control" id="input-date" style="width: 150;">
+            
+            <div id="search-input-departure2"></div>
+            
+            <div id="search-input-via"></div>
+
+            <div id="invert2-view">
+                <div class="d-flex justify-content-end align-items-center">
+                    <label class="form-check-label" style="padding-right: 5px; margin-bottom: -20px;" for="invert2">Reverse</label>
+                    <input class="form-check-input" type="checkbox" id="invert2" style="margin-bottom: -20px;">
+                </div>
             </div>
-        </div>
-        <div class="d-flex justify-content-end align-items-center"> 
-            <button type="submit" class="btn btn-primary" onclick="loadConnections()" style="width: 150px;">Submit</button>
+            
+            <div id="search-input-via2"></div>
+            
+          <div id="invert3-view">
+                <div class="d-flex justify-content-end align-items-center">
+                    <label class="form-check-label" style="padding-right: 5px; margin-bottom: -20px;" for="invert3">Reverse</label>
+                    <input class="form-check-input" type="checkbox" id="invert3" style="margin-bottom: -20px;">
+                </div>
+            </div>
+           
+           <div id="search-input-arrival"></div>
+           
+            <div class="d-flex justify-content-start align-items-center mb-2"> 
+                <div class="form-group" style="padding-right: 20px;">
+                <label for="input-time">Time</label>
+                <input type="time" class="form-control" id="input-time">
+                </div>
+                <div class="form-group">
+                <label for="input-date">Date</label>
+                <input type="date" class="form-control" id="input-date" style="width: 150;">
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end align-items-center"> 
+                <button type="submit" class="btn btn-primary" onclick="loadConnections()" style="width: 150px;">Submit</button>
+            </div>
+
         </div>
 
+
         <br>
+        <div id="view-error" style="display: none;">
+            <div class="alert alert-danger" role="alert">
+                <div id="error-message"></div>
+            </div>
+        </div>
         <br><br>
+
+
         <div id="loading" style="display: none;">
             <div class="spinner-border" role="status"></div>
         </div>
@@ -96,7 +129,6 @@
 
 </body>
 <script>
-    //loadSample();
     setup();
 </script>
 </html>

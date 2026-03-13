@@ -14,14 +14,12 @@ function convertTimeStamp(timestamp) {
 }
 
 async function fetchData(link) {
-    try {
-        let response = await fetch(link);
-        let buffer = await response.arrayBuffer();
-        let decoder = new TextDecoder('utf-8');
-        let text = decoder.decode(buffer);
-        let data = JSON.parse(text);
-        return data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
+    //try, catch for outer loop
+
+    let response = await fetch(link);
+    let buffer = await response.arrayBuffer();
+    let decoder = new TextDecoder('utf-8');
+    let text = decoder.decode(buffer);
+    let data = JSON.parse(text);
+    return data;
   }
