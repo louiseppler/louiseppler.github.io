@@ -16,8 +16,13 @@ div.small-div {
 }
 
 a {
-    color: #909090;
+    color: inherit;
     text-decoration: underline;
+}
+
+a.gray {
+       color: #909090;
+    text-decoration: underline; 
 }
 
 .text {
