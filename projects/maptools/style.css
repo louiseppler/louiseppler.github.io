@@ -1,0 +1,37 @@
+div.overlay {
+    position: absolute;
+    background-color: #888;
+}
+
+div.bla {
+    background-color: red;
+}
+
+div.popup {
+    background-color: #fff;
+    top: 0;
+    position: absolute;
+    z-index: 1;
+    margin-top: 1em;
+    padding: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 8px;
+}
+
+div.snackbar {
+    background-color: #888;
+    color: #fff;
+    position: absolute;
+    z-index: 1;
+    margin-top: 1em;
+    padding: 0.5em;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 80%;
+    border-radius: 8px;
+}
+
+div.shape {
+    padding: 1em;
+}

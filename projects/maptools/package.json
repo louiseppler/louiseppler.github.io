@@ -1,0 +1,24 @@
+{
+  "name": "js2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node esbuild.config.js",
+    "build:watch": "node esbuild.config.js --watch",
+    "start" : "http-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "http-server": "^14.1.1",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "ol": "^10.9.0"
+  }
+}
