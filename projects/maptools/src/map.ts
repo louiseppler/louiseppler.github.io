@@ -22,240 +22,293 @@ import type { ShapeData } from "./shapeData";
 import { debounce, distanceToText } from "./helpers";
 import { updateShapeUI } from ".";
 
-var shapeData: ShapeData;
+export class MapHelper {
 
-var polygonFeatures: Feature<Polygon>[] = []
 
-var pointFeaturesLists: any[][] = [[]]
-var selectedIndex = -1;
-var n = 0;
-var pointsToAdd = 0;
+    shapeData: ShapeData;
 
-const debouncedGeometryUpdated = debounce(geometryUpdated, 250);
-const debouncedHideSnackbar = debounce(() => {hideSnackbar()}, 1500);
+    polygonFeatures: Feature<Polygon>[] = []
 
-const vectorSource = new VectorSource();
+    pointFeaturesLists: any[][] = [[]]
+    selectedIndex = -1;
+    n = 0;
+    pointsToAdd = 0;
 
-const map = new Map({
-    target: 'map',
-    layers: [
-        new TileLayer({ source: new OSM() }),
-        new VectorLayer({ 
-            source: vectorSource,
-            style: new Style({
-                fill: new Fill({ color: 'rgba(51, 153, 204, 0.2)' }),
-                stroke: new Stroke({ color: '#3399CC', width: 2 }),
-                image: new CircleStyle({
-                    radius: 7,
-                    fill: new Fill({ color: '#3399CC' })
+    readonly vectorSource = new VectorSource();
+    readonly map: Map;
+    readonly modify: Modify
+
+
+    readonly debouncedGeometryUpdated = debounce(this.geometryUpdated, 250);
+    readonly debouncedHideSnackbar = debounce(() => {hideSnackbar()}, 1500);
+
+
+    constructor(shapeData: ShapeData) {
+        this.shapeData = shapeData;
+
+        this.map = new Map({
+            target: 'map',
+            layers: [
+                new TileLayer({ source: new OSM() }),
+                new VectorLayer({ 
+                    source: this.vectorSource,
+                    style: new Style({
+                        fill: new Fill({ color: 'rgba(51, 153, 204, 0.2)' }),
+                        stroke: new Stroke({ color: '#3399CC', width: 2 }),
+                        image: new CircleStyle({
+                            radius: 7,
+                            fill: new Fill({ color: '#3399CC' })
+                        })
+                    })
                 })
-            })
-        })
-    ],
-    view: new View({
-        center: fromLonLat([8.5383, 47.3784]),
-        zoom: 13,
-    }),
-});
+            ],
+            view: new View({
+                center: fromLonLat([8.5383, 47.3784]),
+                zoom: 13,
+            }),
+        });
 
-const modify = new Modify({
-    source: vectorSource,
-    filter: (feature) => {
-        if(selectedIndex == -1) return false;
+        this.modify = new Modify({
+            source: this.vectorSource,
+            filter: (feature) => {
+                if(this.selectedIndex == -1) return false;
 
-        // Get the polygon and points that SHOULD be editable
-        const activePolygon = polygonFeatures[selectedIndex*2];
-        const activePoints = pointFeaturesLists[selectedIndex*2];
+                // Get the polygon and points that SHOULD be editable
+                const activePolygon = this.polygonFeatures[this.selectedIndex*2];
+                const activePoints = this.pointFeaturesLists[this.selectedIndex*2];
 
-        // Only allow modification if the feature is the active polygon 
-        // OR one of the active points
-        return feature === activePolygon || activePoints.includes(feature);
-    }
-});
+                // Only allow modification if the feature is the active polygon 
+                // OR one of the active points
+                return feature === activePolygon || activePoints.includes(feature);
+            }
+        });
 
-map.addInteraction(modify);
+        this.map.addInteraction(this.modify);
 
-const updatePolygon = () => {
-    console.log(selectedIndex);
+        this.map.on("click", (event) => {
 
-    if(selectedIndex == -1) return;
-    var pointFeatures = pointFeaturesLists[selectedIndex*2];
-    console.log("number of points in features " + pointFeatures.length);
-    
-    if (pointFeatures.length < 1) return;
+            console.log("Resistered a click");
+            
+            if(this.pointsToAdd > 0) {
+                this.pointsToAdd -= 1;
+                this.updateSnackBar();
+                this.addNewPoint(event);
+            }
 
-    const firstCord = pointFeatures[0].getGeometry().getCoordinates();
-    const secondCord = (pointFeatures.length >= 2)? pointFeatures[1].getGeometry().getCoordinates() : null;
-    
-    
-    var points: number[][] = [];
+        });
 
-    console.log("Rendering shape of type " + shapeData.shapeTypes[selectedIndex]);
-    
-
-    if(shapeData.shapeTypes[selectedIndex] == ShapeType.CustomPath) {
-        const coords = pointFeatures.map(f => f.getGeometry().getCoordinates());
-        points = [...coords, ...coords.reverse()];
-    }
-    if(shapeData.shapeTypes[selectedIndex] == ShapeType.Radar) {
-
-        const distance = parseInt(shapeData.shapeFeatures[selectedIndex]);
-
-        console.log(distance);
-        if(shapeData.answers[selectedIndex]) {
-            points = generateCirclePoints(firstCord, distance);
-        }
-        else {
-            var pointsA = generateCirclePoints(firstCord, distance);
-            var pointsB = generateCirclePoints(firstCord, 100*1000);
-            points = [...pointsA, ...pointsB.reverse()];
-        }    }
-    else if(shapeData.shapeTypes[selectedIndex] == ShapeType.CustomRadar && pointFeatures.length >= 2) {
-        const distance = computeDistance(firstCord, secondCord);
-
-        if(shapeData.answers[selectedIndex]) {
-            points = generateCirclePoints(firstCord, distance);
-        }
-        else {
-            var pointsA = generateCirclePoints(firstCord, distance);
-            var pointsB = generateCirclePoints(firstCord, 100*1000);
-            points = [...pointsA, ...pointsB.reverse()];
-        }
-
-        showSnackbar(distanceToText(""+distance))
-        debouncedHideSnackbar()
-        shapeData.shapeFeatures[selectedIndex] = ""+distance
-    }
-    else if(shapeData.shapeTypes[selectedIndex] == ShapeType.Thermometer && pointFeatures.length >= 2) {
-        const distance = computeDistance(firstCord, secondCord);
-
-        if(shapeData.answers[selectedIndex]) { 
-            points = generateThermometerPoints(firstCord, secondCord);
-
-        }
-        else {
-            points = generateThermometerPoints(secondCord, firstCord);
-        }
-
-        showSnackbar(distanceToText(""+distance))
-        debouncedHideSnackbar()
-        shapeData.shapeFeatures[selectedIndex] = ""+distance
     }
 
-    polygonFeatures[selectedIndex*2+1]
-        .getGeometry()!
-        .setCoordinates([points]);
+    updatePolygon = () => {
+        console.log("Updating Polygon");
+        
+        console.log(this.selectedIndex);
 
-    debouncedGeometryUpdated();
-};
+        if(this.selectedIndex == -1) return;
+        var pointFeatures = this.pointFeaturesLists[this.selectedIndex*2];
+        console.log("number of points in features " + pointFeatures.length);
+        
+        if (pointFeatures.length < 1) return;
 
-function updateFeatures() {
-    vectorSource.clear();
-    vectorSource.addFeatures(polygonFeatures)
-    vectorSource.addFeatures(pointFeaturesLists[selectedIndex*2])
-}
+        const firstCord = pointFeatures[0].getGeometry().getCoordinates();
+        const secondCord = (pointFeatures.length >= 2)? pointFeatures[1].getGeometry().getCoordinates() : null;
+        
+        
+        var points: number[][] = [];
 
-function addNewPoint(event: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>) {
-    const newPoint = new Feature({
+        console.log("Rendering shape of type " + this.shapeData.shapeTypes[this.selectedIndex]);
+        
+
+        if(this.shapeData.shapeTypes[this.selectedIndex] == ShapeType.CustomPath) {
+            const coords = pointFeatures.map(f => f.getGeometry().getCoordinates());
+            points = [...coords, ...coords.reverse()];
+        }
+        if(this.shapeData.shapeTypes[this.selectedIndex] == ShapeType.Radar) {
+
+            const distance = parseInt(this.shapeData.shapeFeatures[this.selectedIndex]);
+
+            console.log(distance);
+            if(this.shapeData.answers[this.selectedIndex]) {
+                points = generateCirclePoints(firstCord, distance);
+            }
+            else {
+                var pointsA = generateCirclePoints(firstCord, distance);
+                var pointsB = generateCirclePoints(firstCord, 100*1000);
+                points = [...pointsA, ...pointsB.reverse()];
+            }    }
+        else if(this.shapeData.shapeTypes[this.selectedIndex] == ShapeType.CustomRadar && pointFeatures.length >= 2) {
+            const distance = computeDistance(firstCord, secondCord);
+
+            if(this.shapeData.answers[this.selectedIndex]) {
+                points = generateCirclePoints(firstCord, distance);
+            }
+            else {
+                var pointsA = generateCirclePoints(firstCord, distance);
+                var pointsB = generateCirclePoints(firstCord, 100*1000);
+                points = [...pointsA, ...pointsB.reverse()];
+            }
+
+            showSnackbar(distanceToText(""+distance))
+            this.debouncedHideSnackbar()
+            this.shapeData.shapeFeatures[this.selectedIndex] = ""+distance
+        }
+        else if(this.shapeData.shapeTypes[this.selectedIndex] == ShapeType.Thermometer && pointFeatures.length >= 2) {
+            const distance = computeDistance(firstCord, secondCord);
+
+            if(this.shapeData.answers[this.selectedIndex]) { 
+                points = generateThermometerPoints(firstCord, secondCord);
+
+            }
+            else {
+                points = generateThermometerPoints(secondCord, firstCord);
+            }
+
+            showSnackbar(distanceToText(""+distance))
+            this.debouncedHideSnackbar()
+            this.shapeData.shapeFeatures[this.selectedIndex] = ""+distance
+        }
+
+        this.polygonFeatures[this.selectedIndex*2+1]
+            .getGeometry()!
+            .setCoordinates([points]);
+
+        this.debouncedGeometryUpdated();
+    };
+
+    private updateFeatures() {
+        console.log("updating features");
+        
+        this.vectorSource.clear();
+        this.vectorSource.addFeatures(this.polygonFeatures)
+        if(this.selectedIndex != -1) {
+            this.vectorSource.addFeatures(this.pointFeaturesLists[this.selectedIndex*2])
+        }
+    }
+
+    private addNewPoint(event: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>) {
+        const newPoint = new Feature({
             geometry: new Point(event.coordinate)
         });
 
         newPoint.getGeometry()!.on('change', () => {
-            updatePolygon();
+            this.updatePolygon();
         });
 
+        console.log(newPoint);
         
-        pointFeaturesLists[selectedIndex*2].push(newPoint);
-        vectorSource.addFeature(newPoint);
-        updatePolygon();
-}
-
-function updateSnackBar() {
-        console.log("points to add " + pointsToAdd);
-
-    console.log("Updating Snackbar");
-    
-    if(pointsToAdd == 0) {
-        hideSnackbar();
+        this.pointFeaturesLists[this.selectedIndex*2].push(newPoint);
+        this.vectorSource.addFeature(newPoint);
+        this.updatePolygon();
     }
-    else {
-        var messages = getMessages(shapeData.shapeTypes[selectedIndex]);
-        showSnackbar(messages[messages.length-pointsToAdd])
-    }
-}
 
-export function setupMap(shapeDataLocal: ShapeData) {
-
-    shapeData = shapeDataLocal;
-
-    map.on("click", (event) => {
-
-        if(pointsToAdd > 0) {
-            pointsToAdd -= 1;
-            addNewPoint(event);
+    private updateSnackBar() {
+        console.log("Updating Snackbar");
+        
+        if(this.pointsToAdd == 0) {
+            hideSnackbar();
         }
+        else {
+            var messages = getMessages(this.shapeData.shapeTypes[this.selectedIndex]);
+            showSnackbar(messages[messages.length-this.pointsToAdd])
+        }
+    }
 
-        updateSnackBar();
-    });
+    public editShape(index: number) {
+        this.selectedIndex = index;
+        this.updatePolygon();
+        console.log("Setting selection index to " + index);
+        this.updateFeatures();
+    }
 
-    document.getElementById("prev-polygon")!.onclick = () => {
-    console.log("prev");
+    public addShapesToMap(points: any[][]) {
+        console.log("Adding Shapes to Map");
+        
+        for(var i = 0; i < points.length; i++) {
+            this.selectedIndex = i;
+            this.n += 2;
+            this.addEmptyFeatures();
+            for(const point of points[i]) {
+                const newPoint = new Feature({
+                    geometry: new Point(point)
+                });
+                this.pointFeaturesLists[this.selectedIndex*2].push(newPoint);
+                newPoint.getGeometry()!.on('change', () => {
+                    this.updatePolygon();
+                });
+                this.vectorSource.addFeature(newPoint);
 
-    selectedIndex = Math.max(0, selectedIndex - 1);
+            }
+            this.updatePolygon();
+        }
+        this.updateFeatures();
+    }
 
-    updateFeatures();
-}
-document.getElementById("next-polygon")!.onclick = () => {
-    console.log("next");
+    private addEmptyFeatures() {
+        //one for the interaction, one for rendering
+        const newPolygonFeature1 = new Feature({
+            geometry: new Polygon([])
+        });
+        const newPolygonFeature2 = new Feature({
+            geometry: new Polygon([])
+        });
+        this.pointFeaturesLists.push([])
+        this.polygonFeatures.push(newPolygonFeature1);
+        this.pointFeaturesLists.push([])
+        this.polygonFeatures.push(newPolygonFeature2);
+    }
 
-    selectedIndex = Math.min(n-1, selectedIndex + 1);
+    public addNewShapeToMap(type: ShapeType, feature: string) {
+        console.log(`Adding New Shape of type ${type} ${feature}`);
 
-    updateFeatures();
-}
-document.getElementById("new-polygon")!.onclick = () => {
+        this.selectedIndex = this.n/2;
+        this.n += 2;
 
-   
-}
-}
+        this.shapeData.shapeTypes.push(type);
+        this.shapeData.answers.push(true);
+        this.shapeData.shapeFeatures.push(feature);
 
-export function editShape(index: number) {
-    selectedIndex = index;
-    updatePolygon();
-    console.log("Setting selection index to " + index);
-    updateFeatures();
-}
+        this.addEmptyFeatures();
 
-export function addNewShapeToMap(type: ShapeType, feature: string) {
-    selectedIndex = n/2;
-    n += 2;
+        console.log(this.shapeData.shapeTypes);
+        
+        this.pointsToAdd = getMessages(type).length;
+        
+        this.updateFeatures();
+        this.updateSnackBar();
 
-    shapeData.shapeTypes.push(type);
-    shapeData.answers.push(true);
-    shapeData.shapeFeatures.push(feature);
-
-    console.log(`Adding New Shape of type ${type} ${feature}`);
+        console.log("point to add: " + this.pointsToAdd);
+        
+    }
 
 
-    //one for the interaction, one for rendering
-    const newPolygonFeature1 = new Feature({
-        geometry: new Polygon([])
-    });
-    const newPolygonFeature2 = new Feature({
-        geometry: new Polygon([])
-    });
-    pointFeaturesLists.push([])
-    polygonFeatures.push(newPolygonFeature1);
-    pointFeaturesLists.push([])
-    polygonFeatures.push(newPolygonFeature2);
+    public deleteShape(index: number) {
+        console.log("Removing Shape");
 
-    console.log(shapeData.shapeTypes);
-    
-    pointsToAdd = getMessages(type).length;
-    
-    updateFeatures();
-    updateSnackBar();
-}
+        this.selectedIndex = -1;
+        this.n -= 2;
+        this.vectorSource.clear();
+        
+        this.pointFeaturesLists.splice(index*2, 2);
+        this.polygonFeatures.splice(index*2, 2);
+        this.shapeData.answers.splice(index, 1);
+        this.shapeData.shapeFeatures.splice(index, 1);
+        this.shapeData.shapeTypes.splice(index, 1);
+       
+        this.updateFeatures();
+        updateShapeUI();
+    }
 
-function geometryUpdated() {
-    updateShapeUI();
+    private geometryUpdated() {
+        updateShapeUI();
+    }
+
+    public getPointData() : any[][] {
+        var pointList = [];
+        for(var i = 0; i < this.n; i += 2) {
+            var points = this.pointFeaturesLists[i].map((x) => x.getGeometry().getCoordinates());
+            pointList.push(points);
+        }
+        return pointList;
+    }
+
 }

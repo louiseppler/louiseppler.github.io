@@ -57,6 +57,37 @@
     return "" + Math.round(d / 100) / 10 + "\u202Fkm";
   }
 
+  // src/localStorage.ts
+  function saveData(map2) {
+    console.log("Saving Data");
+    var pointsData = map2.getPointData();
+    localStorage.setItem("points-data", JSON.stringify(pointsData));
+    localStorage.setItem("shape-data", JSON.stringify(map2.shapeData));
+  }
+  function restoreData() {
+    console.log("Restoring Data");
+    const data1 = localStorage.getItem("points-data");
+    const pointsData = data1 ? JSON.parse(data1) : null;
+    const data2 = localStorage.getItem("shape-data");
+    const shapeData2 = data2 ? JSON.parse(data2) : null;
+    if (data1 == null || data1 == null) {
+      console.log("No Data Found");
+      return;
+    }
+    if (shapeData2 == null || pointsData == null) {
+      console.log("Failed to parse data");
+      return;
+    }
+    ;
+    var n = pointsData.length;
+    if (shapeData2.answers.length != n) return null;
+    if (shapeData2.shapeFeatures.length != n) return null;
+    if (shapeData2.shapeTypes.length != n) return null;
+    console.log(shapeData2);
+    console.log(pointsData);
+    return [shapeData2, pointsData];
+  }
+
   // node_modules/ol/CollectionEventType.js
   var CollectionEventType_default = {
     /**
@@ -209,12 +240,12 @@
     if (arr[0] <= target) {
       return 0;
     }
-    const n2 = arr.length;
-    if (target <= arr[n2 - 1]) {
-      return n2 - 1;
+    const n = arr.length;
+    if (target <= arr[n - 1]) {
+      return n - 1;
     }
     if (typeof direction === "function") {
-      for (let i = 1; i < n2; ++i) {
+      for (let i = 1; i < n; ++i) {
         const candidate = arr[i];
         if (candidate === target) {
           return i;
@@ -226,25 +257,25 @@
           return i;
         }
       }
-      return n2 - 1;
+      return n - 1;
     }
     if (direction > 0) {
-      for (let i = 1; i < n2; ++i) {
+      for (let i = 1; i < n; ++i) {
         if (arr[i] < target) {
           return i - 1;
         }
       }
-      return n2 - 1;
+      return n - 1;
     }
     if (direction < 0) {
-      for (let i = 1; i < n2; ++i) {
+      for (let i = 1; i < n; ++i) {
         if (arr[i] <= target) {
           return i;
         }
       }
-      return n2 - 1;
+      return n - 1;
     }
-    for (let i = 1; i < n2; ++i) {
+    for (let i = 1; i < n; ++i) {
       if (arr[i] == target) {
         return i;
       }
@@ -255,7 +286,7 @@
         return i;
       }
     }
-    return n2 - 1;
+    return n - 1;
   }
   function reverseSubArray(arr, begin, end) {
     while (begin < end) {
@@ -925,8 +956,8 @@
      * @api
      */
     push(elem) {
-      const n2 = this.getLength();
-      this.insertAt(n2, elem);
+      const n = this.getLength();
+      this.insertAt(n, elem);
       return this.getLength();
     }
     /**
@@ -971,8 +1002,8 @@
      * @api
      */
     setAt(index, elem) {
-      const n2 = this.getLength();
-      if (index >= n2) {
+      const n = this.getLength();
+      if (index >= n) {
         this.insertAt(index, elem);
         return;
       }
@@ -1706,9 +1737,9 @@
       const elements = this.elements_;
       const priorities = this.priorities_;
       let index = 0;
-      const n2 = elements.length;
+      const n = elements.length;
       let element, i, priority;
-      for (i = 0; i < n2; ++i) {
+      for (i = 0; i < n; ++i) {
         element = elements[i];
         priority = priorityFunction(element);
         if (priority == DROP) {
@@ -1853,11 +1884,11 @@
     return dx * dx + dy * dy;
   }
   function solveLinearSystem(mat) {
-    const n2 = mat.length;
-    for (let i = 0; i < n2; i++) {
+    const n = mat.length;
+    for (let i = 0; i < n; i++) {
       let maxRow = i;
       let maxEl = Math.abs(mat[i][i]);
-      for (let r = i + 1; r < n2; r++) {
+      for (let r = i + 1; r < n; r++) {
         const absValue = Math.abs(mat[r][i]);
         if (absValue > maxEl) {
           maxEl = absValue;
@@ -1870,9 +1901,9 @@
       const tmp = mat[maxRow];
       mat[maxRow] = mat[i];
       mat[i] = tmp;
-      for (let j = i + 1; j < n2; j++) {
+      for (let j = i + 1; j < n; j++) {
         const coef = -mat[j][i] / mat[i][i];
-        for (let k = i; k < n2 + 1; k++) {
+        for (let k = i; k < n + 1; k++) {
           if (i == k) {
             mat[j][k] = 0;
           } else {
@@ -1881,11 +1912,11 @@
         }
       }
     }
-    const x = new Array(n2);
-    for (let l = n2 - 1; l >= 0; l--) {
-      x[l] = mat[l][n2] / mat[l][l];
+    const x = new Array(n);
+    for (let l = n - 1; l >= 0; l--) {
+      x[l] = mat[l][n] / mat[l][l];
       for (let m = l - 1; m >= 0; m--) {
-        mat[m][n2] -= mat[m][l] * x[l];
+        mat[m][n] -= mat[m][l] * x[l];
       }
     }
     return x;
@@ -1903,22 +1934,22 @@
   function lerp(a, b, x) {
     return a + x * (b - a);
   }
-  function toFixed(n2, decimals) {
+  function toFixed(n, decimals) {
     const factor = Math.pow(10, decimals);
-    return Math.round(n2 * factor) / factor;
+    return Math.round(n * factor) / factor;
   }
-  function floor(n2, decimals) {
-    return Math.floor(toFixed(n2, decimals));
+  function floor(n, decimals) {
+    return Math.floor(toFixed(n, decimals));
   }
-  function ceil(n2, decimals) {
-    return Math.ceil(toFixed(n2, decimals));
+  function ceil(n, decimals) {
+    return Math.ceil(toFixed(n, decimals));
   }
-  function wrap(n2, min, max) {
-    if (n2 >= min && n2 < max) {
-      return n2;
+  function wrap(n, min, max) {
+    if (n >= min && n < max) {
+      return n;
     }
     const range = max - min;
-    return ((n2 - min) % range + range) % range + min;
+    return ((n - min) % range + range) % range + min;
   }
 
   // node_modules/ol/centerconstraint.js
@@ -2870,11 +2901,11 @@
     const pTan4 = pTan2 * pTan2;
     const epSin = 1 - E * pSin2;
     const epSinSqrt = Math.sqrt(1 - E * pSin2);
-    const n2 = R / epSinSqrt;
+    const n = R / epSinSqrt;
     const r = (1 - E) / epSin;
     const c = E_P2 * pCos ** 2;
     const c2 = c * c;
-    const d = x / (n2 * K0);
+    const d = x / (n * K0);
     const d2 = d * d;
     const d3 = d2 * d;
     const d4 = d3 * d;
@@ -2909,7 +2940,7 @@
     const lonRad = toRadians(longitude);
     const centralLon = zoneToCentralLongitude(zone.number);
     const centralLonRad = toRadians(centralLon);
-    const n2 = R / Math.sqrt(1 - E * latSin ** 2);
+    const n = R / Math.sqrt(1 - E * latSin ** 2);
     const c = E_P2 * latCos ** 2;
     const a = latCos * wrap(lonRad - centralLonRad, -Math.PI, Math.PI);
     const a22 = a * a;
@@ -2918,8 +2949,8 @@
     const a5 = a4 * a;
     const a6 = a5 * a;
     const m = R * (M1 * latRad - M2 * Math.sin(2 * latRad) + M3 * Math.sin(4 * latRad) - M4 * Math.sin(6 * latRad));
-    const easting = K0 * n2 * (a + a3 / 6 * (1 - latTan2 + c) + a5 / 120 * (5 - 18 * latTan2 + latTan4 + 72 * c - 58 * E_P2)) + 5e5;
-    let northing = K0 * (m + n2 * latTan * (a22 / 2 + a4 / 24 * (5 - latTan2 + 9 * c + 4 * c ** 2) + a6 / 720 * (61 - 58 * latTan2 + latTan4 + 600 * c - 330 * E_P2)));
+    const easting = K0 * n * (a + a3 / 6 * (1 - latTan2 + c) + a5 / 120 * (5 - 18 * latTan2 + latTan4 + 72 * c - 58 * E_P2)) + 5e5;
+    let northing = K0 * (m + n * latTan * (a22 / 2 + a4 / 24 * (5 - latTan2 + 9 * c + 4 * c ** 2) + a6 / 720 * (61 - 58 * latTan2 + latTan4 + 600 * c - 330 * E_P2)));
     if (!zone.north) {
       northing += 1e7;
     }
@@ -4297,17 +4328,17 @@
 
   // node_modules/ol/geom/flat/simplify.js
   function douglasPeucker(flatCoordinates, offset, end, stride, squaredTolerance, simplifiedFlatCoordinates, simplifiedOffset) {
-    const n2 = (end - offset) / stride;
-    if (n2 < 3) {
+    const n = (end - offset) / stride;
+    if (n < 3) {
       for (; offset < end; offset += stride) {
         simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset];
         simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset + 1];
       }
       return simplifiedOffset;
     }
-    const markers = new Array(n2);
+    const markers = new Array(n);
     markers[0] = 1;
-    markers[n2 - 1] = 1;
+    markers[n - 1] = 1;
     const stack = [offset, end - stride];
     let index = 0;
     while (stack.length > 0) {
@@ -4337,7 +4368,7 @@
         }
       }
     }
-    for (let i = 0; i < n2; ++i) {
+    for (let i = 0; i < n; ++i) {
       if (markers[i]) {
         simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset + i * stride];
         simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset + i * stride + 1];
@@ -5643,8 +5674,8 @@
     }
     return void 0;
   }
-  function createSnapToN(n2) {
-    const theta = 2 * Math.PI / n2;
+  function createSnapToN(n) {
+    const theta = 2 * Math.PI / n;
     return (
       /**
        * @param {number|undefined} rotation Rotation.
@@ -10407,13 +10438,13 @@
   function quickselect(arr, k, left = 0, right = arr.length - 1, compare = defaultCompare) {
     while (right > left) {
       if (right - left > 600) {
-        const n2 = right - left + 1;
+        const n = right - left + 1;
         const m = k - left + 1;
-        const z = Math.log(n2);
+        const z = Math.log(n);
         const s = 0.5 * Math.exp(2 * z / 3);
-        const sd = 0.5 * Math.sqrt(z * s * (n2 - s) / n2) * (m - n2 / 2 < 0 ? -1 : 1);
-        const newLeft = Math.max(left, Math.floor(k - m * s / n2 + sd));
-        const newRight = Math.min(right, Math.floor(k + (n2 - m) * s / n2 + sd));
+        const sd = 0.5 * Math.sqrt(z * s * (n - s) / n) * (m - n / 2 < 0 ? -1 : 1);
+        const newLeft = Math.max(left, Math.floor(k - m * s / n + sd));
+        const newRight = Math.min(right, Math.floor(k + (n - m) * s / n + sd));
         quickselect(arr, k, newLeft, newRight, compare);
       }
       const t = arr[k];
@@ -10810,13 +10841,13 @@
       maxY: -Infinity
     };
   }
-  function multiSelect(arr, left, right, n2, compare) {
+  function multiSelect(arr, left, right, n, compare) {
     const stack = [left, right];
     while (stack.length) {
       right = stack.pop();
       left = stack.pop();
-      if (right - left <= n2) continue;
-      const mid = left + Math.ceil((right - left) / n2 / 2) * n2;
+      if (right - left <= n) continue;
+      const mid = left + Math.ceil((right - left) / n / 2) * n;
       quickselect(arr, mid, left, right, compare);
       stack.push(left, mid, mid, right);
     }
@@ -21435,11 +21466,11 @@
       const hitDetectionInstructions = this.hitDetectionInstructions;
       hitDetectionInstructions.reverse();
       let i;
-      const n2 = hitDetectionInstructions.length;
+      const n = hitDetectionInstructions.length;
       let instruction;
       let type;
       let begin = -1;
-      for (i = 0; i < n2; ++i) {
+      for (i = 0; i < n; ++i) {
         instruction = hitDetectionInstructions[i];
         type = /** @type {import("./Instruction.js").default} */
         instruction[0];
@@ -25387,7 +25418,7 @@
         const strokeOffset = strokeStyle.getOffset();
         this.strokeState_ = {
           lineCap: strokeStyleLineCap !== void 0 ? strokeStyleLineCap : defaultLineCap,
-          lineDash: this.pixelRatio_ === 1 ? lineDash : lineDash.map((n2) => n2 * this.pixelRatio_),
+          lineDash: this.pixelRatio_ === 1 ? lineDash : lineDash.map((n) => n * this.pixelRatio_),
           lineDashOffset: (strokeStyleLineDashOffset ? strokeStyleLineDashOffset : defaultLineDashOffset) * this.pixelRatio_,
           lineJoin: strokeStyleLineJoin !== void 0 ? strokeStyleLineJoin : defaultLineJoin,
           lineWidth: (strokeStyleWidth !== void 0 ? strokeStyleWidth : defaultLineWidth) * this.pixelRatio_,
@@ -25929,7 +25960,7 @@
       const projection2 = viewState.projection;
       const rotation = viewState.rotation;
       const projectionExtent = projection2.getExtent();
-      const vectorSource2 = this.getLayer().getSource();
+      const vectorSource = this.getLayer().getSource();
       const declutter = this.getLayer().getDeclutter();
       const pixelRatio = frameState.pixelRatio;
       const viewHints = frameState.viewHints;
@@ -25937,7 +25968,7 @@
       const context = this.context;
       const width = Math.round(getWidth(extent) / resolution * pixelRatio);
       const height = Math.round(getHeight(extent) / resolution * pixelRatio);
-      const multiWorld = vectorSource2.getWrapX() && projection2.canWrapX();
+      const multiWorld = vectorSource.getWrapX() && projection2.canWrapX();
       const worldWidth = multiWorld ? getWidth(projectionExtent) : null;
       const endWorld = multiWorld ? Math.ceil((extent[2] - projectionExtent[2]) / worldWidth) + (this.extendX_ ? 2 : 1) : 1;
       let world = multiWorld ? Math.floor((extent[0] - projectionExtent[0]) / worldWidth) - (this.extendX_ ? 1 : 0) : 0;
@@ -26255,8 +26286,8 @@
      */
     prepareFrame(frameState) {
       const vectorLayer = this.getLayer();
-      const vectorSource2 = vectorLayer.getSource();
-      if (!vectorSource2) {
+      const vectorSource = vectorLayer.getSource();
+      if (!vectorSource) {
         return false;
       }
       const animating = frameState.viewHints[ViewHint_default.ANIMATING];
@@ -26287,10 +26318,10 @@
       const renderedExtent = extent.slice();
       const loadExtents = [extent.slice()];
       const projectionExtent = projection2.getExtent();
-      const canWrapX = vectorSource2.getWrapX() && projection2.canWrapX();
+      const canWrapX = vectorSource.getWrapX() && projection2.canWrapX();
       this.extendX_ = false;
       if (canWrapX) {
-        const sourceExtent = vectorSource2.getExtent();
+        const sourceExtent = vectorSource.getExtent();
         if (sourceExtent && !isEmpty2(sourceExtent)) {
           this.extendX_ = sourceExtent[0] < projectionExtent[0] || sourceExtent[2] > projectionExtent[2];
         }
@@ -26346,7 +26377,7 @@
         for (let i = 0, ii = loadExtents.length; i < ii; ++i) {
           const extent2 = loadExtents[i];
           const userExtent2 = toUserExtent(extent2, projection2);
-          vectorSource2.loadFeatures(
+          vectorSource.loadFeatures(
             userExtent2,
             toUserResolution(resolution, projection2),
             userProjection2
@@ -26355,7 +26386,7 @@
         userTransform = getTransformFromProjections(userProjection2, projection2);
       } else {
         for (let i = 0, ii = loadExtents.length; i < ii; ++i) {
-          vectorSource2.loadFeatures(loadExtents[i], resolution, projection2);
+          vectorSource.loadFeatures(loadExtents[i], resolution, projection2);
         }
       }
       const squaredTolerance = getSquaredTolerance(resolution, pixelRatio);
@@ -26386,7 +26417,7 @@
         }
       );
       const userExtent = toUserExtent(extent, projection2);
-      const features = vectorSource2.getFeaturesInExtent(userExtent);
+      const features = vectorSource.getFeaturesInExtent(userExtent);
       if (vectorLayerRenderOrder) {
         features.sort(vectorLayerRenderOrder);
       }
@@ -26400,7 +26431,7 @@
         extent,
         resolution,
         pixelRatio,
-        vectorSource2.getOverlaps(),
+        vectorSource.getOverlaps(),
         replayGroupInstructions,
         vectorLayer.getRenderBuffer(),
         !!frameState.declutter
@@ -26785,13 +26816,13 @@
   // node_modules/ol/geom/flat/interpolate.js
   function interpolatePoint(flatCoordinates, offset, end, stride, fraction, dest, dimension) {
     let o, t;
-    const n2 = (end - offset) / stride;
-    if (n2 === 1) {
+    const n = (end - offset) / stride;
+    if (n === 1) {
       o = offset;
-    } else if (n2 === 2) {
+    } else if (n === 2) {
       o = offset;
       t = fraction;
-    } else if (n2 !== 0) {
+    } else if (n !== 0) {
       let x1 = flatCoordinates[offset];
       let y1 = flatCoordinates[offset + 1];
       let length = 0;
@@ -27608,8 +27639,8 @@
      * @api
      */
     getPoint(index) {
-      const n2 = this.flatCoordinates.length / this.stride;
-      if (index < 0 || n2 <= index) {
+      const n = this.flatCoordinates.length / this.stride;
+      if (index < 0 || n <= index) {
         return null;
       }
       return new Point_default(
@@ -33376,177 +33407,219 @@
   }
 
   // src/map.ts
-  var shapeData;
-  var polygonFeatures = [];
-  var pointFeaturesLists = [[]];
-  var selectedIndex = -1;
-  var n = 0;
-  var pointsToAdd = 0;
-  var debouncedGeometryUpdated = debounce(geometryUpdated, 250);
-  var debouncedHideSnackbar = debounce(() => {
-    hideSnackbar();
-  }, 1500);
-  var vectorSource = new Vector_default2();
-  var map = new Map_default2({
-    target: "map",
-    layers: [
-      new Tile_default3({ source: new OSM_default() }),
-      new Vector_default({
-        source: vectorSource,
-        style: new Style_default({
-          fill: new Fill_default({ color: "rgba(51, 153, 204, 0.2)" }),
-          stroke: new Stroke_default({ color: "#3399CC", width: 2 }),
-          image: new Circle_default({
-            radius: 7,
-            fill: new Fill_default({ color: "#3399CC" })
+  var MapHelper = class {
+    constructor(shapeData2) {
+      __publicField(this, "shapeData");
+      __publicField(this, "polygonFeatures", []);
+      __publicField(this, "pointFeaturesLists", [[]]);
+      __publicField(this, "selectedIndex", -1);
+      __publicField(this, "n", 0);
+      __publicField(this, "pointsToAdd", 0);
+      __publicField(this, "vectorSource", new Vector_default2());
+      __publicField(this, "map");
+      __publicField(this, "modify");
+      __publicField(this, "debouncedGeometryUpdated", debounce(this.geometryUpdated, 250));
+      __publicField(this, "debouncedHideSnackbar", debounce(() => {
+        hideSnackbar();
+      }, 1500));
+      __publicField(this, "updatePolygon", () => {
+        console.log("Updating Polygon");
+        console.log(this.selectedIndex);
+        if (this.selectedIndex == -1) return;
+        var pointFeatures = this.pointFeaturesLists[this.selectedIndex * 2];
+        console.log("number of points in features " + pointFeatures.length);
+        if (pointFeatures.length < 1) return;
+        const firstCord = pointFeatures[0].getGeometry().getCoordinates();
+        const secondCord = pointFeatures.length >= 2 ? pointFeatures[1].getGeometry().getCoordinates() : null;
+        var points = [];
+        console.log("Rendering shape of type " + this.shapeData.shapeTypes[this.selectedIndex]);
+        if (this.shapeData.shapeTypes[this.selectedIndex] == 3 /* CustomPath */) {
+          const coords = pointFeatures.map((f) => f.getGeometry().getCoordinates());
+          points = [...coords, ...coords.reverse()];
+        }
+        if (this.shapeData.shapeTypes[this.selectedIndex] == 1 /* Radar */) {
+          const distance2 = parseInt(this.shapeData.shapeFeatures[this.selectedIndex]);
+          console.log(distance2);
+          if (this.shapeData.answers[this.selectedIndex]) {
+            points = generateCirclePoints(firstCord, distance2);
+          } else {
+            var pointsA = generateCirclePoints(firstCord, distance2);
+            var pointsB = generateCirclePoints(firstCord, 100 * 1e3);
+            points = [...pointsA, ...pointsB.reverse()];
+          }
+        } else if (this.shapeData.shapeTypes[this.selectedIndex] == 2 /* CustomRadar */ && pointFeatures.length >= 2) {
+          const distance2 = computeDistance(firstCord, secondCord);
+          if (this.shapeData.answers[this.selectedIndex]) {
+            points = generateCirclePoints(firstCord, distance2);
+          } else {
+            var pointsA = generateCirclePoints(firstCord, distance2);
+            var pointsB = generateCirclePoints(firstCord, 100 * 1e3);
+            points = [...pointsA, ...pointsB.reverse()];
+          }
+          showSnackbar(distanceToText("" + distance2));
+          this.debouncedHideSnackbar();
+          this.shapeData.shapeFeatures[this.selectedIndex] = "" + distance2;
+        } else if (this.shapeData.shapeTypes[this.selectedIndex] == 0 /* Thermometer */ && pointFeatures.length >= 2) {
+          const distance2 = computeDistance(firstCord, secondCord);
+          if (this.shapeData.answers[this.selectedIndex]) {
+            points = generateThermometerPoints(firstCord, secondCord);
+          } else {
+            points = generateThermometerPoints(secondCord, firstCord);
+          }
+          showSnackbar(distanceToText("" + distance2));
+          this.debouncedHideSnackbar();
+          this.shapeData.shapeFeatures[this.selectedIndex] = "" + distance2;
+        }
+        this.polygonFeatures[this.selectedIndex * 2 + 1].getGeometry().setCoordinates([points]);
+        this.debouncedGeometryUpdated();
+      });
+      this.shapeData = shapeData2;
+      this.map = new Map_default2({
+        target: "map",
+        layers: [
+          new Tile_default3({ source: new OSM_default() }),
+          new Vector_default({
+            source: this.vectorSource,
+            style: new Style_default({
+              fill: new Fill_default({ color: "rgba(51, 153, 204, 0.2)" }),
+              stroke: new Stroke_default({ color: "#3399CC", width: 2 }),
+              image: new Circle_default({
+                radius: 7,
+                fill: new Fill_default({ color: "#3399CC" })
+              })
+            })
           })
+        ],
+        view: new View_default({
+          center: fromLonLat2([8.5383, 47.3784]),
+          zoom: 13
         })
-      })
-    ],
-    view: new View_default({
-      center: fromLonLat2([8.5383, 47.3784]),
-      zoom: 13
-    })
-  });
-  var modify = new Modify_default({
-    source: vectorSource,
-    filter: (feature) => {
-      if (selectedIndex == -1) return false;
-      const activePolygon = polygonFeatures[selectedIndex * 2];
-      const activePoints = pointFeaturesLists[selectedIndex * 2];
-      return feature === activePolygon || activePoints.includes(feature);
+      });
+      this.modify = new Modify_default({
+        source: this.vectorSource,
+        filter: (feature) => {
+          if (this.selectedIndex == -1) return false;
+          const activePolygon = this.polygonFeatures[this.selectedIndex * 2];
+          const activePoints = this.pointFeaturesLists[this.selectedIndex * 2];
+          return feature === activePolygon || activePoints.includes(feature);
+        }
+      });
+      this.map.addInteraction(this.modify);
+      this.map.on("click", (event) => {
+        console.log("Resistered a click");
+        if (this.pointsToAdd > 0) {
+          this.pointsToAdd -= 1;
+          this.updateSnackBar();
+          this.addNewPoint(event);
+        }
+      });
     }
-  });
-  map.addInteraction(modify);
-  var updatePolygon = () => {
-    console.log(selectedIndex);
-    if (selectedIndex == -1) return;
-    var pointFeatures = pointFeaturesLists[selectedIndex * 2];
-    console.log("number of points in features " + pointFeatures.length);
-    if (pointFeatures.length < 1) return;
-    const firstCord = pointFeatures[0].getGeometry().getCoordinates();
-    const secondCord = pointFeatures.length >= 2 ? pointFeatures[1].getGeometry().getCoordinates() : null;
-    var points = [];
-    console.log("Rendering shape of type " + shapeData.shapeTypes[selectedIndex]);
-    if (shapeData.shapeTypes[selectedIndex] == 3 /* CustomPath */) {
-      const coords = pointFeatures.map((f) => f.getGeometry().getCoordinates());
-      points = [...coords, ...coords.reverse()];
+    updateFeatures() {
+      console.log("updating features");
+      this.vectorSource.clear();
+      this.vectorSource.addFeatures(this.polygonFeatures);
+      if (this.selectedIndex != -1) {
+        this.vectorSource.addFeatures(this.pointFeaturesLists[this.selectedIndex * 2]);
+      }
     }
-    if (shapeData.shapeTypes[selectedIndex] == 1 /* Radar */) {
-      const distance2 = parseInt(shapeData.shapeFeatures[selectedIndex]);
-      console.log(distance2);
-      if (shapeData.answers[selectedIndex]) {
-        points = generateCirclePoints(firstCord, distance2);
-      } else {
-        var pointsA = generateCirclePoints(firstCord, distance2);
-        var pointsB = generateCirclePoints(firstCord, 100 * 1e3);
-        points = [...pointsA, ...pointsB.reverse()];
-      }
-    } else if (shapeData.shapeTypes[selectedIndex] == 2 /* CustomRadar */ && pointFeatures.length >= 2) {
-      const distance2 = computeDistance(firstCord, secondCord);
-      if (shapeData.answers[selectedIndex]) {
-        points = generateCirclePoints(firstCord, distance2);
-      } else {
-        var pointsA = generateCirclePoints(firstCord, distance2);
-        var pointsB = generateCirclePoints(firstCord, 100 * 1e3);
-        points = [...pointsA, ...pointsB.reverse()];
-      }
-      showSnackbar(distanceToText("" + distance2));
-      debouncedHideSnackbar();
-      shapeData.shapeFeatures[selectedIndex] = "" + distance2;
-    } else if (shapeData.shapeTypes[selectedIndex] == 0 /* Thermometer */ && pointFeatures.length >= 2) {
-      const distance2 = computeDistance(firstCord, secondCord);
-      if (shapeData.answers[selectedIndex]) {
-        points = generateThermometerPoints(firstCord, secondCord);
-      } else {
-        points = generateThermometerPoints(secondCord, firstCord);
-      }
-      showSnackbar(distanceToText("" + distance2));
-      debouncedHideSnackbar();
-      shapeData.shapeFeatures[selectedIndex] = "" + distance2;
+    addNewPoint(event) {
+      const newPoint = new Feature_default({
+        geometry: new Point_default(event.coordinate)
+      });
+      newPoint.getGeometry().on("change", () => {
+        this.updatePolygon();
+      });
+      console.log(newPoint);
+      this.pointFeaturesLists[this.selectedIndex * 2].push(newPoint);
+      this.vectorSource.addFeature(newPoint);
+      this.updatePolygon();
     }
-    polygonFeatures[selectedIndex * 2 + 1].getGeometry().setCoordinates([points]);
-    debouncedGeometryUpdated();
+    updateSnackBar() {
+      console.log("Updating Snackbar");
+      if (this.pointsToAdd == 0) {
+        hideSnackbar();
+      } else {
+        var messages = getMessages(this.shapeData.shapeTypes[this.selectedIndex]);
+        showSnackbar(messages[messages.length - this.pointsToAdd]);
+      }
+    }
+    editShape(index) {
+      this.selectedIndex = index;
+      this.updatePolygon();
+      console.log("Setting selection index to " + index);
+      this.updateFeatures();
+    }
+    addShapesToMap(points) {
+      console.log("Adding Shapes to Map");
+      for (var i = 0; i < points.length; i++) {
+        this.selectedIndex = i;
+        this.n += 2;
+        this.addEmptyFeatures();
+        for (const point of points[i]) {
+          const newPoint = new Feature_default({
+            geometry: new Point_default(point)
+          });
+          this.pointFeaturesLists[this.selectedIndex * 2].push(newPoint);
+          newPoint.getGeometry().on("change", () => {
+            this.updatePolygon();
+          });
+          this.vectorSource.addFeature(newPoint);
+        }
+        this.updatePolygon();
+      }
+      this.updateFeatures();
+    }
+    addEmptyFeatures() {
+      const newPolygonFeature1 = new Feature_default({
+        geometry: new Polygon_default([])
+      });
+      const newPolygonFeature2 = new Feature_default({
+        geometry: new Polygon_default([])
+      });
+      this.pointFeaturesLists.push([]);
+      this.polygonFeatures.push(newPolygonFeature1);
+      this.pointFeaturesLists.push([]);
+      this.polygonFeatures.push(newPolygonFeature2);
+    }
+    addNewShapeToMap(type, feature) {
+      console.log(`Adding New Shape of type ${type} ${feature}`);
+      this.selectedIndex = this.n / 2;
+      this.n += 2;
+      this.shapeData.shapeTypes.push(type);
+      this.shapeData.answers.push(true);
+      this.shapeData.shapeFeatures.push(feature);
+      this.addEmptyFeatures();
+      console.log(this.shapeData.shapeTypes);
+      this.pointsToAdd = getMessages(type).length;
+      this.updateFeatures();
+      this.updateSnackBar();
+      console.log("point to add: " + this.pointsToAdd);
+    }
+    deleteShape(index) {
+      console.log("Removing Shape");
+      this.selectedIndex = -1;
+      this.n -= 2;
+      this.vectorSource.clear();
+      this.pointFeaturesLists.splice(index * 2, 2);
+      this.polygonFeatures.splice(index * 2, 2);
+      this.shapeData.answers.splice(index, 1);
+      this.shapeData.shapeFeatures.splice(index, 1);
+      this.shapeData.shapeTypes.splice(index, 1);
+      this.updateFeatures();
+      updateShapeUI();
+    }
+    geometryUpdated() {
+      updateShapeUI();
+    }
+    getPointData() {
+      var pointList = [];
+      for (var i = 0; i < this.n; i += 2) {
+        var points = this.pointFeaturesLists[i].map((x) => x.getGeometry().getCoordinates());
+        pointList.push(points);
+      }
+      return pointList;
+    }
   };
-  function updateFeatures() {
-    vectorSource.clear();
-    vectorSource.addFeatures(polygonFeatures);
-    vectorSource.addFeatures(pointFeaturesLists[selectedIndex * 2]);
-  }
-  function addNewPoint(event) {
-    const newPoint = new Feature_default({
-      geometry: new Point_default(event.coordinate)
-    });
-    newPoint.getGeometry().on("change", () => {
-      updatePolygon();
-    });
-    pointFeaturesLists[selectedIndex * 2].push(newPoint);
-    vectorSource.addFeature(newPoint);
-    updatePolygon();
-  }
-  function updateSnackBar() {
-    console.log("points to add " + pointsToAdd);
-    console.log("Updating Snackbar");
-    if (pointsToAdd == 0) {
-      hideSnackbar();
-    } else {
-      var messages = getMessages(shapeData.shapeTypes[selectedIndex]);
-      showSnackbar(messages[messages.length - pointsToAdd]);
-    }
-  }
-  function setupMap(shapeDataLocal) {
-    shapeData = shapeDataLocal;
-    map.on("click", (event) => {
-      if (pointsToAdd > 0) {
-        pointsToAdd -= 1;
-        addNewPoint(event);
-      }
-      updateSnackBar();
-    });
-    document.getElementById("prev-polygon").onclick = () => {
-      console.log("prev");
-      selectedIndex = Math.max(0, selectedIndex - 1);
-      updateFeatures();
-    };
-    document.getElementById("next-polygon").onclick = () => {
-      console.log("next");
-      selectedIndex = Math.min(n - 1, selectedIndex + 1);
-      updateFeatures();
-    };
-    document.getElementById("new-polygon").onclick = () => {
-    };
-  }
-  function editShape(index) {
-    selectedIndex = index;
-    updatePolygon();
-    console.log("Setting selection index to " + index);
-    updateFeatures();
-  }
-  function addNewShapeToMap(type, feature) {
-    selectedIndex = n / 2;
-    n += 2;
-    shapeData.shapeTypes.push(type);
-    shapeData.answers.push(true);
-    shapeData.shapeFeatures.push(feature);
-    console.log(`Adding New Shape of type ${type} ${feature}`);
-    const newPolygonFeature1 = new Feature_default({
-      geometry: new Polygon_default([])
-    });
-    const newPolygonFeature2 = new Feature_default({
-      geometry: new Polygon_default([])
-    });
-    pointFeaturesLists.push([]);
-    polygonFeatures.push(newPolygonFeature1);
-    pointFeaturesLists.push([]);
-    polygonFeatures.push(newPolygonFeature2);
-    console.log(shapeData.shapeTypes);
-    pointsToAdd = getMessages(type).length;
-    updateFeatures();
-    updateSnackBar();
-  }
-  function geometryUpdated() {
-    updateShapeUI();
-  }
 
   // src/shapeData.ts
   var ShapeData = class {
@@ -33558,9 +33631,20 @@
   };
 
   // src/index.ts
-  var shapeData2 = new ShapeData();
-  setupMap(shapeData2);
+  var shapeData = new ShapeData();
+  var map;
   var button = document.getElementById("add-question");
+  function setup() {
+    var data = restoreData();
+    if (data != null) {
+      shapeData = data[0];
+      map = new MapHelper(shapeData);
+      map.addShapesToMap(data[1]);
+    } else {
+      map = new MapHelper(shapeData);
+    }
+  }
+  setup();
   button.onclick = async () => {
     console.log("Button Pressed");
     addNewShape();
@@ -33571,9 +33655,9 @@
     if (choice == "Radar") {
       addNewRadar();
     } else if (choice == "Custom Path") {
-      addNewShapeToMap(3 /* CustomPath */, "");
+      map.addNewShapeToMap(3 /* CustomPath */, "");
     } else if (choice == "Thermometer") {
-      addNewShapeToMap(0 /* Thermometer */, "");
+      map.addNewShapeToMap(0 /* Thermometer */, "");
       updateShapeUI();
     }
   }
@@ -33589,9 +33673,9 @@
   async function addNewRadar() {
     const choice = await showAlert("Choose Type", Object.keys(radarTypes));
     if (choice == "Custom") {
-      addNewShapeToMap(2 /* CustomRadar */, "");
+      map.addNewShapeToMap(2 /* CustomRadar */, "");
     } else if (choice && radarTypes[choice]) {
-      addNewShapeToMap(1 /* Radar */, radarTypes[choice]);
+      map.addNewShapeToMap(1 /* Radar */, radarTypes[choice]);
     }
     updateShapeUI();
   }
@@ -33599,8 +33683,8 @@
     const container = document.getElementById("shapeList");
     if (!container) return;
     container.innerHTML = "";
-    shapeData2.shapeTypes.forEach((type, index) => {
-      const feature = shapeData2.shapeFeatures[index];
+    shapeData.shapeTypes.forEach((type, index) => {
+      const feature = shapeData.shapeFeatures[index];
       const div = document.createElement("div");
       div.className = "shape";
       const title = document.createElement("h4");
@@ -33626,13 +33710,14 @@
       div.appendChild(deleteBtn);
       container.appendChild(div);
     });
+    saveData(map);
   }
   function getLabel(type, feature) {
     if (type == 2 /* CustomRadar */) {
       return "Custom Radar of " + distanceToText(feature);
     }
     if (type == 1 /* Radar */) {
-      return "Radar of" + distanceToText(feature);
+      return "Radar of " + distanceToText(feature);
     }
     if (type == 0 /* Thermometer */) {
       return "Thermometer of " + distanceToText(feature);
@@ -33643,16 +33728,27 @@
     return "no data";
   }
   function editShapePressed(index) {
-    editShape(index);
+    map.editShape(index);
     window.scrollTo(0, 0);
   }
   function invertShape(index) {
     console.log("inverting shape");
-    shapeData2.answers[index] = !shapeData2.answers[index];
-    editShape(index);
+    shapeData.answers[index] = !shapeData.answers[index];
+    map.editShape(index);
     window.scrollTo(0, 0);
   }
-  function deleteShape(index) {
+  async function deleteShape(index) {
+    window.scrollTo(0, 0);
+    var title = "Delete " + getLabel(shapeData.shapeTypes[index], shapeData.shapeFeatures[index]) + " ?";
+    const choice = await showAlert(title, ["Yes", "No"]);
+    if (choice == "Yes") {
+      map.deleteShape(index);
+    }
   }
+  document.getElementById("debug-button1").onclick = () => {
+  };
+  document.getElementById("debug-button2").onclick = () => {
+    restoreData();
+  };
 })();
 //# sourceMappingURL=bundle.js.map

@@ -1,14 +1,29 @@
 import { hideSnackbar, showAlert, showSnackbar } from "./alert";
 import { distanceToText } from "./helpers";
-import { addNewShapeToMap, editShape, setupMap } from "./map";
+import { restoreData, saveData } from "./localStorage";
+import { MapHelper } from "./map";
 import { ShapeData } from "./shapeData";
 import { ShapeType } from "./shapeTypes";
 
 var shapeData = new ShapeData();
-
-setupMap(shapeData);
-
+var map: MapHelper 
 var button = document.getElementById("add-question") as HTMLButtonElement
+
+function setup() {
+    var data = restoreData();
+    //data = null;
+
+    if(data != null) {
+        shapeData = data[0];
+        map = new MapHelper(shapeData)
+        map.addShapesToMap(data[1]);
+    }
+    else {
+        map = new MapHelper(shapeData);
+    }
+}
+
+setup();
 
 button.onclick = async () => {
     console.log("Button Pressed");
@@ -25,10 +40,10 @@ async function addNewShape()  {
         addNewRadar();
     }
     else if(choice == 'Custom Path') {
-        addNewShapeToMap(ShapeType.CustomPath, "");
+        map.addNewShapeToMap(ShapeType.CustomPath, "");
     }
     else if(choice == 'Thermometer') {
-        addNewShapeToMap(ShapeType.Thermometer, "");
+        map.addNewShapeToMap(ShapeType.Thermometer, "");
         updateShapeUI();
     }
 }
@@ -50,10 +65,10 @@ async function addNewRadar() {
     const choice = await showAlert('Choose Type', Object.keys(radarTypes));
 
     if(choice == "Custom") {
-        addNewShapeToMap(ShapeType.CustomRadar, "");
+        map.addNewShapeToMap(ShapeType.CustomRadar, "");
     }
     else if (choice && radarTypes[choice]) {
-        addNewShapeToMap(ShapeType.Radar, radarTypes[choice]);
+        map.addNewShapeToMap(ShapeType.Radar, radarTypes[choice]);
     }
 
     updateShapeUI();
@@ -100,6 +115,8 @@ export function updateShapeUI() {
 
         container.appendChild(div);
     });
+
+    saveData(map);
 }
 
 function getLabel(type: ShapeType, feature: string) : string {
@@ -107,7 +124,7 @@ function getLabel(type: ShapeType, feature: string) : string {
          return "Custom Radar of " + distanceToText(feature);
     }
     if(type == ShapeType.Radar) {
-        return "Radar of" + distanceToText(feature);
+        return "Radar of " + distanceToText(feature);
     }
     if(type == ShapeType.Thermometer) {
         return "Thermometer of " + distanceToText(feature);
@@ -120,7 +137,7 @@ function getLabel(type: ShapeType, feature: string) : string {
 }
 
 function editShapePressed(index: number) {
-    editShape(index);
+    map.editShape(index);
     window.scrollTo(0,0);
 }
 
@@ -128,10 +145,24 @@ function invertShape(index: number) {
     console.log("inverting shape");
     
     shapeData.answers[index] = !shapeData.answers[index];
-    editShape(index);
+    map.editShape(index);
     window.scrollTo(0,0);
 }
 
-function deleteShape(index: number) {
+async function deleteShape(index: number) {
+    window.scrollTo(0,0);
+    var title = "Delete " + getLabel(shapeData.shapeTypes[index], shapeData.shapeFeatures[index]) + " ?";
+    const choice = await showAlert(title, ['Yes', 'No']);
 
+    if(choice == "Yes") {
+        map.deleteShape(index);
+    }
+}
+
+document.getElementById("debug-button1")!.onclick = () => {
+
+}
+
+document.getElementById("debug-button2")!.onclick = () => {
+    restoreData();
 }
