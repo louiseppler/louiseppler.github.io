@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Hello World</title>
+ 
+</head>
+<body>
+
+    <br><br><br>
+    <div class="d-flex justify-content-center">
+        <p class="display" id="counter-display">8</p>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-danger big-button m-1" id="btn-2">-1</button>
+        <button type="button" class="btn btn-danger big-button m-1" id="btn-1">+1</button>      
+    </div>
+    <div id="custom-buttons" class="d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary small-button m-1" id="btn-2">5</button>
+        <button type="button" class="btn btn-secondary small-button m-1" id="btn-1">10</button> 
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+        <p><a href="javascript:adjustButtons()">Adjust Buttons</a></p>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p>
+            <a href="javascript:setNumber()">Set Custom Number</a>
+        </p>
+    </div>
+
+</body>
+<script src="main.js"></script>
+</html>

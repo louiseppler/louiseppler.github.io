@@ -1,0 +1,12 @@
+p.display {
+    font-size: 5em;
+}
+
+div.home-container {
+    align-items: center;
+    max-width: 1000px;
+}
+
+button.big-button {
+    font-size: 2em;
+}
