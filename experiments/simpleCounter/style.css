@@ -9,4 +9,5 @@ div.home-container {
 
 button.big-button {
     font-size: 2em;
+    touch-action: manipulation;
 }
