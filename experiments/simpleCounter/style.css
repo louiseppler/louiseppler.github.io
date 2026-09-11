@@ -11,3 +11,7 @@ button.big-button {
     font-size: 2em;
     touch-action: manipulation;
 }
+
+button.small-button {
+    touch-action: manipulation;
+}
