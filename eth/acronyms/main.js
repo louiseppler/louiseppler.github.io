@@ -16,14 +16,17 @@ function getFilters() {
         cats.push("spca");
         cats.push("ddca");
         cats.push("compsys");
-        cats.push("asl")
+        cats.push("asl");
+        cats.push("data");
     }
     if(document.getElementById("checkbox-cn").checked) {
         cats.push("cn");
+        cats.push("data");
     }
     if(document.getElementById("checkbox-infsek").checked) {
         cats.push("infsek");
-        cats.push("dsig")
+        cats.push("dsig");
+        cats.push("sec");
     }
     if(document.getElementById("checkbox-ml").checked) {
         cats.push("iml");
