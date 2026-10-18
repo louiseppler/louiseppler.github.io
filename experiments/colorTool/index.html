@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>       
+        <title>Canvas Sample Program</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <center>
+            <div class="main-div">
+                <br><br>
+                <h1>Color Palette Tool</h1>
+                <hr>
+                <br>
+                <br>
+                <div class="segment2">
+                    <button class="icon-button" id="undo-button"> <img class="icon" src="images/undo.png"> </button>
+                    <button class="icon-button" id="redo-button"> <img class="icon" src="images/redo.png"> </button>
+                </div>
+
+                <div class="segment" style="margin-left: 10px; margin-right: 10px;">
+                    <button data-value="rgb">RGB</button>
+                    <button data-value="hsv">HSV</button>
+                    <button data-value="mono">Mono</button>
+                    <button data-value="circle" class="active">Circle</button>
+                </div>
+                <button id="add-color-btn" class="button1">Add Color</button>
+                <br>
+                <br>
+                <canvas id="canvas"></canvas>
+                <h3>Custom Data</h3>
+                <form id="textForm">
+                    <textarea id="text-color-input" rows="8" cols="40" style="font-family: monospace;"></textarea>
+                </form>
+                <button id="update-color-textinput">Update Colors</button>
+            </div>
+            <br><br><br><br><br>
+        </center>
+    </body>
+    <script src="dist/bundle.js"> </script>
+</html>
