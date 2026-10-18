@@ -65,6 +65,8 @@ async function createGraphicAdvanced(stations, reverse, date, timeInput, searchT
    
     try {
         showGraphic();
+        console.log("show graphic succeeded");
+        
         fillTable(responses, reverse);
     }
     catch(error) {
@@ -88,6 +90,7 @@ var responses;
    
     try {
         showGraphic();
+        console.log("show graphic succeeded");
 
         const reverse = new Array(responses.length).fill(false);
         fillTable(responses, reverse);   
@@ -157,7 +160,7 @@ async function loadSubConnectionsAdvanced(stations, reverse, date, timeInput, se
         var time = timeInput;
 
         for(var i = 0; i < stations.length-1; i++) {  
-            var link = `https://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stations[i])}}&to=${encodeURIComponent(stations[i+1])}&limit=10&date=${date}&time=${time}`
+            var link = `https://transport.opendata.ch/v1/connections?from=${encodeURIComponent(stations[i])}&to=${encodeURIComponent(stations[i+1])}&limit=10&date=${date}&time=${time}`
             console.log("fetching from: " + link);
         
             var data = await fetchData(link);
@@ -178,12 +181,12 @@ async function loadSubConnectionsAdvanced(stations, reverse, date, timeInput, se
 }
 
 async function loadSubConnections(ids) {
-    console.log("Loading connection for ids " + ids.join(","));
+    console.log("Loading connection for ids " + ids.map(x => x.fromStationId).join(","));
     
     var responses = [];
 
     for(var idPair of ids) {
-        var link = `https://transport.opendata.ch/v1/connections?from=${idPair.fromStationId}}&to=${idPair.toStationId}&limit=10&date=${idPair.date}&time=${idPair.time}`
+        var link = `https://transport.opendata.ch/v1/connections?from=${idPair.fromStationId}&to=${idPair.toStationId}&limit=10&date=${idPair.date}&time=${idPair.time}`
 
         console.log(link);
 
@@ -239,6 +242,8 @@ function fillTable(responses, reverse) {
 
     var lineData = computeLineData(responses, columnTimes);
 
+    console.log("populating HTML");
+    
     // POPULATE HTML
 
     populateHtmlTable(columnTimes, columnTitles);
