@@ -1,0 +1,27 @@
+div.display {
+    margin: 0.5em;
+    text-align: center;
+}
+
+.button-container {
+    position: fixed;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+}
+
+#main-button {
+    width: 100%;
+    padding: 12px;
+    height: 5em;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .button-container {
+        top: auto;
+        bottom: 20px;
+        width: calc(100% - 30px);
+    }
+}

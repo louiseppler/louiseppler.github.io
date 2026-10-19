@@ -1,0 +1,21 @@
+{
+  "name": "learnertool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server",
+    "build": "node esbuild.config.js",
+    "build:watch": "node esbuild.config.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "http-server": "^14.1.1",
+    "typescript": "^7.0.2"
+  }
+}
