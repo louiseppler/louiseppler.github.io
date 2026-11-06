@@ -15,6 +15,7 @@ TODOs
         - Divide by 12 stuff
 
     - Big number maths?
+    - which us state borders which ones
 
 
 

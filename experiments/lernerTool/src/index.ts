@@ -2,10 +2,17 @@ import { BinaryGenerator } from "./generators/binary";
 import { CapitalDistances } from "./generators/capitalDistances";
 import { EquationsGenerator } from "./generators/equations";
 import { SimpleMathGenerator } from "./generators/simpleMath";
+import { SinCosGenerator } from "./generators/sincos";
 import { VelocityGenerator } from "./generators/velocity";
 
-var generators = [new SimpleMathGenerator(), new BinaryGenerator(), new VelocityGenerator(), new EquationsGenerator()];
-//var generators = [new CapitalDistances()];
+var generators = [
+    new SimpleMathGenerator(), 
+    new BinaryGenerator(), 
+    new VelocityGenerator(), 
+    new EquationsGenerator(), 
+    new CapitalDistances(), 
+    new SinCosGenerator()];
+//var generators = [new VelocityGenerator()];
 
 var backSide = "";
 
